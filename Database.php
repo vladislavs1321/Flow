@@ -6,7 +6,7 @@ class Database
     private $hostname      = 'localhost';
     private $username      = 'root';
     private $password      = '13chaos';
-    private $databaseName  = 'flow';
+    public $databaseName  = 'flow';
     public $error;
     
     function connect()

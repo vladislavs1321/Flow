@@ -2,6 +2,7 @@
 
 require_once 'Molecules.php';
 require_once 'gauss.php';
+require_once 'Database.php';
 
 /**
  * Description of Flow
@@ -24,6 +25,9 @@ class Flow {
     public $Veff;
     public $intensity;
     public $invIntensity;
+    
+    
+    public $fileUploadDir = 'S:\web\flow.locals';
    
     function __construct($w0, $z0, $startTime, $endTime, $F, $diffusion, $brightness, $Neff) {
         $this->w0           = $w0;
@@ -48,20 +52,46 @@ class Flow {
         $this->invIntensity = 1/( (1+$F)*$brightness);
     }
     
-    function simu() {
-        
-        function Bfunction($X, $Y, $Z, $w0, $z0){
-            $a=-2/($w0*$w0);
-            $b=-2/($z0*$z0);
-            return exp( $a*($X*$X + $Y*$Y) + $b*$Z*$Z );
+    /**
+     * 
+     * 
+     * @param type $X
+     * @param type $Y
+     * @param type $Z
+     * @param type $w0
+     * @param type $z0
+     * @return type
+     */
+    public function Bfunction($X, $Y, $Z, $w0, $z0)
+    {
+        $a=-2/($w0*$w0);
+        $b=-2/($z0*$z0);
+        return exp( $a*($X*$X + $Y*$Y) + $b*$Z*$Z );
+    }
+
+    /**
+     * 
+     * @param type $X
+     * @param type $L
+     * @return type
+     */
+    public function periodicBoundTest($X, $L)
+    {
+        if( abs($X) > $L ){
+            $X=$X - 2*$L*floor( ($X + $L)/(2*$L) );
         }
-        
-        function periodicBoundTest($X, $L)
-        {
-            if( abs($X) > $L ){
-                $X=$X - 2*$L*floor( ($X + $L)/(2*$L) );
-            }
-            return $X;
+        return $X;
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    function simu() {
+        $db= new Database();
+        if (false === $db->connect()){
+            var_dump($db->error);
+            return fasle;    
         }
         
         $events=array();
@@ -89,8 +119,8 @@ class Flow {
                         break;
                     }
                     
-                    if(rand()*$this->intensity < (1+$this->F)*$this->molecules->brightness
-                          *Bfunction(
+                    if(rand(1,10000)*0.0001*$this->intensity < (1+$this->F)*$this->molecules->brightness
+                          *$this->Bfunction(
                                     $this->molecules->X,
                                     $this->molecules->Y,
                                     $this->molecules->Z,
@@ -109,14 +139,24 @@ class Flow {
                     $this->molecules->Y= gauss_ms($this->molecules->Y, $sigma);
                     $this->molecules->Y= gauss_ms($this->molecules->Z, $sigma);
                     
-                    $this->molecules->X=periodicBoundTest($this->molecules->X,  $this->RXb);
-                    $this->molecules->Y=periodicBoundTest($this->molecules->Y,  $this->RYb);
-                    $this->molecules->Z=periodicBoundTest($this->molecules->Z,  $this->RZb);
+                    $this->molecules->X=$this->periodicBoundTest($this->molecules->X,  $this->RXb);
+                    $this->molecules->Y=$this->periodicBoundTest($this->molecules->Y,  $this->RYb);
+                    $this->molecules->Z=$this->periodicBoundTest($this->molecules->Z,  $this->RZb);
                 }
             }
-        } 
-        var_dump($events);exit;
+        }
+        
+        var_dump($events);
         fclose($fp);
+        $query = sprintf("INSERT INTO %s (data, user_id  ) VALUES ('%s', %d)",
+            $db->databaseName,
+            __DIR__ . '\f1.txt',
+            1
+        );
+        if(false===$db->unselect($query)){
+            var_dump($db->error);
+        };
+        var_dump($query);exit;
     }
     
     function simu2(){
@@ -149,10 +189,4 @@ class Flow {
     //        var_dump($events);exit;
       fclose($fp);
     }
-    
 }
-$f = new Flow(0.3e-6, 0.9e-6, 0, 0.1, 0.4,  0.0000000028, 100000, 0.01);
-$f->simu();
-var_dump($f);
-//var_dump($f->simu2());
-//var_dump(rand(1,10000)*0.0001);
