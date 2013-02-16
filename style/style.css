@@ -1,13 +1,39 @@
-/*body{
-    background: gray;
+@font-face {
+    font-family: sw;
+    src: url(sidewalk.ttf);
+}
+
+@font-face {
+    font-family: neu;
+    src: url(neu.ttf);
+}
+
+body{
+    background: url(bg.png);
     height: auto;
     width: auto;
 }
-.bg-image{
-    background: url(bg1.png);
-    position: relative;
-    height:500px;
-    width: 1000px;
-}*/
 
+.header{
+    text-align: right;
+    font-family: sw, jokerman;
+    font-size: 110px;
+    width: auto;
+    height: 200px;   
+}
+
+.option-button{
+    opacity: 0.3;
+    margin-left: 200px;
+    font-family: neu, jokerman;
+    font-size: 40px;
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+.option-button:hover{
+    -webkit-transition: opacity 1s linear;
+    opacity: 1;
+    cursor: pointer;
+}
 

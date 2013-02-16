@@ -148,15 +148,15 @@ class Flow {
         
         var_dump($events);
         fclose($fp);
-        $query = sprintf("INSERT INTO %s (data, user_id  ) VALUES ('%s', %d)",
-            $db->databaseName,
-            __DIR__ . '\f1.txt',
-            1
-        );
-        if(false===$db->unselect($query)){
-            var_dump($db->error);
-        };
-        var_dump($query);exit;
+//        $query = sprintf("INSERT INTO %s (data, user_id  ) VALUES ('%s', %d)",
+//            $db->databaseName,
+//            __DIR__ . '\f1.txt',
+//            1
+//        );
+//        if(false===$db->unselect($query)){
+//            var_dump($db->error);
+//        };
+//        var_dump($query);exit;
     }
     
     function simu2(){
