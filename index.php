@@ -3,19 +3,21 @@
         <title></title>
         <link rel='stylesheet' href='style/style.css'/> 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
     </head>
     
     <body>
-<!--        <div class="bg-image">
-            
-            <h1><?php echo 'HELLO'?></h1>
-        
-        </div>-->
         <div class="header">
             Flow Generation
         </div>
-        
+                
         <div class="content">
+            
+            <div class="login">
+                <!--<button style="border: none;padding:0;"><img src="images/login.png"><div>LOG IN</div></button>-->
+                <a href="#"> <img src="images/login.png"> <div>LOG IN</div></a>
+            </div>
         
             <div class="option-button">
                 START
@@ -26,12 +28,22 @@
             </div>
             
             <div class="option-button">  
-                UPLOAD
+                DOWNLOAD
             </div>
-        
+<!--            
+            <div class="vars" >
+                <input type="text" name="w0" value="" placeholder="w0">
+                <input type="text" name="z0" value="" placeholder="z0">
+                <input type="text" name="startTime" value="" placeholder="Start time">
+                <input type="text" name="endTime" value="" placeholder="End time">
+                <input type="text" name="F" value="" placeholder="F">
+                <input type="text" name="diffusion" value="" placeholder="diffusion">
+                <input type="text" name="brightness" value="" placeholder="brightness">
+                <input type="text" name="Neff" value="" placeholder="Neff">
+                </div>
             
         
-        </div>
+        </div>-->
         <div class="footer">
         </div>
         
