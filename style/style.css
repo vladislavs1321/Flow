@@ -8,11 +8,16 @@
     src: url(neu.ttf);
 }
 
-button {background-color: #ffffff;}
+a {
+   text-decoration: none;
+}
+
+
 body{
     background: url(bg.png);
     height: auto;
     width: auto;
+    min-width: 1000px;
 }
 
 .header{
@@ -22,20 +27,14 @@ body{
     font-family: sw, jokerman;
     font-size: 110px;
     width: auto;
-    height: 200px;   
+    height: 200px;
 }
+
 .login{
-    border: none!important;
-    text-align: right;
-}
-.login div{
-    color: #ffffff;
-    font-size: 20px;
-    font-weight:bold;
-    display: inline;
-    width: 50px!important;
-    height: 32px!important;
-    background-color: #F18103;
+    padding-right: 0px;
+    margin: 0;
+    float: right;
+    display: inline-block;
 }
 
 .option-button{

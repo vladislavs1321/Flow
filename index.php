@@ -2,57 +2,75 @@
     <head>
         <title></title>
         <link rel='stylesheet' href='style/style.css'/> 
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-
+        <link rel='stylesheet' href='style/jquery.pageslide.css'/> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     </head>
-    
+
     <body>
         <div class="header">
             Flow Generation
         </div>
-                
+
         <div class="content">
-            
             <div class="login">
-                <!--<button style="border: none;padding:0;"><img src="images/login.png"><div>LOG IN</div></button>-->
-                <a href="#"> <img src="images/login.png"> <div>LOG IN</div></a>
+                <a href="#sing-in-modal" class="show-sign-in" title="Log In"> <img src="images/login.png"/></a>
+                <a href="#" title="Sign Up"> <img src="images/sign_up.png"/></a>
             </div>
-        
+
             <div class="option-button">
                 START
             </div>
-            
+
             <div class="option-button">
                 DISCRIPTION
             </div>
-            
+
             <div class="option-button">  
                 DOWNLOAD
             </div>
-<!--            
-            <div class="vars" >
-                <input type="text" name="w0" value="" placeholder="w0">
-                <input type="text" name="z0" value="" placeholder="z0">
-                <input type="text" name="startTime" value="" placeholder="Start time">
-                <input type="text" name="endTime" value="" placeholder="End time">
-                <input type="text" name="F" value="" placeholder="F">
-                <input type="text" name="diffusion" value="" placeholder="diffusion">
-                <input type="text" name="brightness" value="" placeholder="brightness">
-                <input type="text" name="Neff" value="" placeholder="Neff">
-                </div>
-            
+            <!--            
+                        <div class="vars" >
+                            <input type="text" name="w0" value="" placeholder="w0">
+                            <input type="text" name="z0" value="" placeholder="z0">
+                            <input type="text" name="startTime" value="" placeholder="Start time">
+                            <input type="text" name="endTime" value="" placeholder="End time">
+                            <input type="text" name="F" value="" placeholder="F">
+                            <input type="text" name="diffusion" value="" placeholder="diffusion">
+                            <input type="text" name="brightness" value="" placeholder="brightness">
+                            <input type="text" name="Neff" value="" placeholder="Neff">
+                            </div>
+                        
+                    
+                    </div>-->
+        </div>
         
-        </div>-->
+        
+        <!-- SI modal -->
+        <div id="sing-in-modal" style="display: none;">
+            <form method="post">
+                <div id="login-box-name" style="margin-top:20px;">Email:</div>
+                <div id="login-box-field" style="margin-top:20px;">
+                    <input name="q" class="form-login" title="Username" value="" size="30" maxlength="2048" />
+                </div>
+
+                <div id="login-box-name">Password:</div>
+                <div id="login-box-field"><input name="q" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" />
+                </div>
+            </form>
+            <a href="javascript:$.pageslide.close()">Close</a>
+        </div>
+        
         <div class="footer">
         </div>
         
+        <script type="text/javascript" src="js/jquery.pageslide.min.js"></script>
+        <script>$(".show-sign-in").pageslide({ direction: "left", modal: true});</script>
     </body>
 </html>
 
 
 <?php
-
 require_once 'Database.php';
 require_once 'Flow.php';
 
@@ -62,6 +80,4 @@ require_once 'Flow.php';
 //var_dump($f);
 //var_dump($f->simu2());
 //var_dump(rand(1,10000)*0.0001);
-
-
 ?>
