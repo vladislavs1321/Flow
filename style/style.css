@@ -15,9 +15,11 @@ a {
 
 body{
     background: url(bg.png);
-    height: auto;
-    width: auto;
+    height: 100%;
+    width: 100%;
     min-width: 1000px;
+    margin: 0;
+    padding: 0;
 }
 
 .header{
@@ -30,6 +32,11 @@ body{
     height: 200px;
 }
 
+.main-menu{
+    position: absolute;
+    padding-left: 200px;
+}
+
 .login{
     padding-right: 0px;
     margin: 0;
@@ -39,11 +46,9 @@ body{
 
 .option-button{
     opacity: 0.3;
-    margin-left: 200px;
     font-family: neu, jokerman;
     font-size: 40px;
     display: block;
-    width: 100px;
     height: 100px;
 }
 .option-button:hover{

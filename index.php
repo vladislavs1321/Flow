@@ -13,21 +13,19 @@
         </div>
 
         <div class="content">
-            <div class="login">
-                <a href="#sing-in-modal" class="show-sign-in" title="Log In"> <img src="images/login.png"/></a>
-                <a href="#" title="Sign Up"> <img src="images/sign_up.png"/></a>
-            </div>
 
-            <div class="option-button">
-                START
-            </div>
+            <div class="main-menu">
+                <div class="option-button">
+                    START
+                </div>
 
-            <div class="option-button">
-                DISCRIPTION
-            </div>
+                <div class="option-button">
+                    DISCRIPTION
+                </div>
 
-            <div class="option-button">  
-                DOWNLOAD
+                <div class="option-button">  
+                    DOWNLOAD
+                </div>
             </div>
             <!--            
                         <div class="vars" >
@@ -43,29 +41,32 @@
                         
                     
                     </div>-->
-        </div>
-        
-        
-        <!-- SI modal -->
-        <div id="sing-in-modal" style="display: none;">
-            <form method="post">
-                <div id="login-box-name" style="margin-top:20px;">Email:</div>
-                <div id="login-box-field" style="margin-top:20px;">
-                    <input name="q" class="form-login" title="Username" value="" size="30" maxlength="2048" />
-                </div>
+            
+            <div class="login">
+                <a href="#sing-in-modal" class="show-sign-in" title="Log In"> <img src="images/login.png"/></a>
+                <a href="#" title="Sign Up"> <img src="images/sign_up.png"/></a>
+            </div>
+            
+            <!-- SI modal -->
+            <div id="sing-in-modal" style="display: none;">
+                <form method="post">
+                    <div id="login-box-name" style="margin-top:20px;">Email:</div>
+                    <div id="login-box-field" style="margin-top:20px;">
+                        <input name="q" class="form-login" title="Username" value="" size="30" maxlength="2048" />
+                    </div>
 
-                <div id="login-box-name">Password:</div>
-                <div id="login-box-field"><input name="q" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" />
-                </div>
-            </form>
-            <a href="javascript:$.pageslide.close()">Close</a>
+                    <div id="login-box-name">Password:</div>
+                    <div id="login-box-field"><input name="q" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" />
+                    </div>
+                </form>
+            </div>
         </div>
         
         <div class="footer">
         </div>
         
         <script type="text/javascript" src="js/jquery.pageslide.min.js"></script>
-        <script>$(".show-sign-in").pageslide({ direction: "left", modal: true});</script>
+        <script>$(".show-sign-in").pageslide({ direction: "left"});</script>
     </body>
 </html>
 
