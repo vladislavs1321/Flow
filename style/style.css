@@ -22,6 +22,44 @@ body{
     padding: 0;
 }
 
+ input[type="text"]:focus {
+   border: 1px solid #b2d1ff;
+}
+
+#login-box-name{
+    margin-top:20px;
+}
+
+#login-box-field{
+    margin-top:10px;   
+}
+
+input{
+    
+}
+input:focus{
+    outline: 2px solid darkorange;
+}
+.btn{
+    display: inline-block;
+    padding: 4px 10px 4px;
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 18px;
+    color: #333333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border: 1px solid #ccc;
+    border-bottom-color: #bbb;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
 .header{
     text-align: right;
     padding: 45px 45px 0px 45px;

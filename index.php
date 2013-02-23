@@ -50,17 +50,25 @@
             <!-- SI modal -->
             <div id="sing-in-modal" style="display: none;">
                 <form method="post">
-                    <div id="login-box-name" style="margin-top:20px;">Email:</div>
-                    <div id="login-box-field" style="margin-top:20px;">
-                        <input name="q" class="form-login" title="Username" value="" size="30" maxlength="2048" />
+                    <div ><h1>LOG IN</h1></div>
+                    <div id="login-box-name" >Username or Email:</div>
+                    <div id="login-box-field">
+                        <input name="q" class="form-login" title="Username" value="" size="30" maxlength="2048" placeholder="Username" />
                     </div>
 
                     <div id="login-box-name">Password:</div>
-                    <div id="login-box-field"><input name="q" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" />
+                    <div id="login-box-field"><input name="q" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
+                    </div>
+                    <div id="login-box-name">
+                        <a class="btn" href="javascript:$.pageslide.close()">Enter</a>
                     </div>
                 </form>
             </div>
+            <!-- end SI modal -->
+            
         </div>
+        
+        
         
         <div class="footer">
         </div>
