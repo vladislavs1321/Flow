@@ -16,7 +16,7 @@
         <link rel='stylesheet' href='style/jquery.pageslide.css'/> 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
         <script type="text/javascript" src="js/script.js"></script>
     </head>
 
@@ -62,7 +62,7 @@
             
             <!-- SI modal -->
             <div id="sing-in-modal" style="display: none;">
-                <form id="myform"method="post" action='user/user.php'>
+                <form id="login-form" method="post" action='user/User.php'>
                     <div ><h1>LOG IN</h1></div>
                     <div id="login-box-name" >Username or Email:</div>
                     <div id="login-box-field">
@@ -73,7 +73,7 @@
                         <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
                     </div>
                     <div id="login-box-name">
-                           <input type="submit" name="q" class="form-login" value="Enter"/>
+                           <input id="entr" type="submit" name="sbmt" class="form-login" value="Enter"/>
                            
                     </div>
                 </form>
