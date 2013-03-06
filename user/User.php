@@ -11,7 +11,7 @@ require_once "../Database.php";
  *
  * @author vladislav
  */
-class User {
+ class User {
     
     protected $username;
     protected $password;

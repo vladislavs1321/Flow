@@ -85,6 +85,12 @@ input:focus{
 .btn:hover {
     background: #F18103;
 }
+.rgstr{
+    float: right;
+    margin-top: 10px;
+    margin-right: 7px;
+    color: #ffffff;
+}
 .header{
     text-align: right;
     padding: 45px 45px 0px 45px;

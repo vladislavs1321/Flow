@@ -16,6 +16,7 @@ $(document).ready(function() {
             $(that).parents('form').serialize(),
             function(responce){
                 alert(responce);
+//                document.writeln('Hello World!');
             }
         )
        

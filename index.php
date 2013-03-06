@@ -56,12 +56,12 @@
                     </div>-->
             
             <div class="login">
-                <a href="#sing-in-modal" class="show-sign-in" title="Log In"> <img src="images/login.png"/></a>
-                <a href="#" title="Sign Up"> <img src="images/sign_up.png"/></a>
+                <a href="#sing-in-modal-l" class="show-sign-in" title="Log In"> <img src="images/login.png"/></a>
+                <a href="#sing-in-modal-r" class="show-sign-in" title="Sign Up"> <img src="images/sign_up.png"/></a>
             </div>
             
-            <!-- SI modal -->
-            <div id="sing-in-modal" style="display: none;">
+            <!-- SI modal login -->
+            <div id="sing-in-modal-l" style="display: none;">
                 <form id="login-form" method="post" action='user/User.php'>
                     <div ><h1>LOG IN</h1></div>
                     <div id="login-box-name" >Username or Email:</div>
@@ -73,13 +73,36 @@
                         <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
                     </div>
                     <div id="login-box-name">
-                           <input id="entr" type="submit" name="sbmt" class="form-login" value="Enter"/>
-                           
+                           <input id="entr" type="submit" name="sbmt" class="form-login" value="Log In"/>
+                           <a class="rgstr show-sign-in" href="#sing-in-modal-r" style="text-decoration: underline;">Registration</a>
                     </div>
-                </form>
+            </form>
             </div>
-            <!-- end SI modal -->
+            <!-- end SI modal login-->
             
+            
+             <!-- SI modal registration -->
+            <div id="sing-in-modal-r" style="display: none;">
+                <form id="login-form" method="post" action='user/User.php'>
+                    <div ><h1>REGISTRATION</h1></div>
+                    <div id="login-box-name" >Username or Email:</div>
+                    <div id="login-box-field">
+                        <input name="username" class="form-login" title="Username" value="" size="30" maxlength="2048" placeholder="Username" />
+                    </div>
+                    <div id="login-box-name">Password:</div>
+                    <div id="login-box-field">
+                        <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
+                    </div>
+                    <div id="login-box-name">Confirm Password:</div>
+                    <div id="login-box-field">
+                        <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
+                    </div>
+                    <div id="login-box-name">
+                           <input id="entr" type="submit" name="sbmt" class="form-login" value="Sign Up"/>
+                    </div>
+            </form>
+            </div>
+            <!-- end SI modal registration -->
         </div>
         
         
