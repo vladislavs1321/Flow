@@ -1,23 +1,19 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.5.14 - MySQL Community Server (GPL)
--- Server OS:                    Win32
--- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2012-11-20 17:44:38
--- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
-
--- Dumping database structure for flow
-CREATE DATABASE IF NOT EXISTS `flow` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE IF NOT EXISTS `flow`;
 USE `flow`;
 
--- Data exporting was unselected.
+CREATE TABLE IF NOT EXISTS `user` (
+    `id` int(11) NOT NULL,
+    `username` varchar(256),
+    `password` int(50),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
-
--- Data exporting was unselected.
-/*!40014 SET FOREIGN_KEY_CHECKS=1 */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+CREATE TABLE IF NOT EXISTS `flow_data` (
+    `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `data_url` varchar(256) default NULL,
+    `user_id` int(11) default NULL,
+    `description` varchar(2048) default NULL,
+    INDEX (user_id),
+    CONSTRAINT FOREIGN KEY (user_id) REFERENCES user(id)
+        ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
