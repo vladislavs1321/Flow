@@ -15,6 +15,20 @@ class User extends AbstractUser {
     protected $password; 
     protected $database;
     //put your code here
+    
+    public function __construct($username,$password,$database) {
+        $this->username=$username;
+        $this->password=$password;
+        $this->database=$database;
+    }
+    public function getUsername(){
+        return $this->username;
+    }
+    public function setUsername($username){
+        $this->username=$username;
+    }
+    
+   
 }
 
 ?>

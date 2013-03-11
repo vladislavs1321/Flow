@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once "../Database.php";
+require_once "./User.php";
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -11,7 +13,7 @@ require_once "../Database.php";
  *
  * @author vladislav
  */
- class AbstractUser {
+abstract class AbstractUser {
     
     protected $personalData = array();  
     
@@ -30,15 +32,13 @@ require_once "../Database.php";
             return false;
         }
         
-        if(false === self::ifUserExist($username, $password, $database)) {
+        if(false === self::ifUserExist($username, $password, $database)){
             return false;
+        }else{    
+                
+                return new User($username, $password, $database);
         }
-        
-        if(false === self::isBoss($username, $password, $database) ){
-            return new User($username, $password, $database);
-        } else {
-            return new Boss($username, $password, $database);
-        }
+       
     }
     
     
@@ -166,7 +166,7 @@ require_once "../Database.php";
         session_start();
         $_SESSION['username'] = $this->personalData['username'];
         $_SESSION['password'] = $this->personalData['password'];
-        $_SESSION['is_boss'] = $this->getIsBoss();
+        
     }
     
     protected function setPersonalData($username, $password)

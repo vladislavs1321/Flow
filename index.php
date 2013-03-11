@@ -1,4 +1,5 @@
 <?php
+   
     session_start();   
     
     if(null !== $_SESSION['auto_error']) {
@@ -6,7 +7,7 @@
         var_dump($error);
     } else {
         echo("session in progress");
-        var_dump($S_SESSION);
+        var_dump($_SESSION);
     }
 ?>
 <html>
@@ -56,13 +57,16 @@
                     </div>-->
             
             <div class="login">
-                <a href="#sing-in-modal-l" class="show-sign-in" title="Log In"> <img src="images/login.png"/></a>
-                <a href="#sing-in-modal-r" class="show-sign-in" title="Sign Up"> <img src="images/sign_up.png"/></a>
+                <span>
+                    <span class="username"></span>
+                    <a href="#sing-in-modal-l" class="show-sign-in" title="Log In"> <img src="images/login.png"/></a>
+                    <a href="#sing-in-modal-r" class="show-sign-in" title="Sign Up"> <img src="images/sign_up.png"/></a>
+                </span>
             </div>
             
             <!-- SI modal login -->
             <div id="sing-in-modal-l" style="display: none;">
-                <form id="login-form" method="post" action='user/User.php'>
+                <form id="login-form" method="post" action='user/autorization.php'>
                     <div ><h1>LOG IN</h1></div>
                     <div id="login-box-name" >Username or Email:</div>
                     <div id="login-box-field">
