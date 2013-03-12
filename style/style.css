@@ -40,7 +40,10 @@ input[type="text"]:focus {
 #login-box-field{
     margin-top:10px;   
 }
-
+.error-message{
+    font-size: 22px;
+    color: #ff0059;
+}
 input[type=submit]{ 
     background: red;
     display: inline-block;

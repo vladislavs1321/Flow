@@ -17,8 +17,9 @@
         <link rel='stylesheet' href='style/jquery.pageslide.css'/> 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript" src="js/jquery.animateshadow.min.js"></script>
     </head>
 
     <body>
@@ -80,6 +81,7 @@
                            <input id="entr" type="submit" name="sbmt" class="form-login" value="Log In"/>
                            <a class="rgstr show-sign-in" href="#sing-in-modal-r" style="text-decoration: underline;">Registration</a>
                     </div>
+                    <div id="login-box-name" class="error-message"></div>
             </form>
             </div>
             <!-- end SI modal login-->

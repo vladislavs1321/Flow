@@ -18,32 +18,31 @@ $(document).ready(function() {
                 if (true === responce.success) {
                     $('.login span>span').html(responce.username);
                 } else{
-                    switch (responce.error.code){
-                        //no username and password
-                        case 1:{
-                                $('#login-box-field > input').css("outline", "2px solid red");
-                        }
-                        
-//                        case 2:
-//                        case 3:
-//                        case 4:
-//                        case 5:
-//                        case 6:
-//                        case 7:
-//                        case 8:
-//                        case 9:
-//                        case 10:
-//                        case 11:
-                            
-                        
-                    }
+                        $('#pageslide').css({
+                            boxShadow :  "rgba(255, 0, 0, 0) 0px 0px 60px 5px inset",
+                        });
+                        $('#pageslide').animate({
+                            boxShadow :  "rgba(255, 0, 0, 1) 0px 0px 60px 5px inset",
+                        },500).addClass('errored');
+                        $('.error-message').html(responce.error.message);
                 }
-                
-
             },
             'json'
         );
-       
+    });
+    
+    $('.form-login').on('focus',function(){
+        if ($('#pageslide').hasClass('errored')) {
+            $('.error-message').empty();
+            $('#pageslide').animate({
+                boxShadow :  '#ff0000 0 0 0'
+                },500, function() {
+                    $(this).css({
+                        boxShadow : "#222 0 0 5px 5px inset" 
+                    });
+                }
+            ).removeClass('errored');
+        }
     });
     
 });
