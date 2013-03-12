@@ -61,7 +61,7 @@
                 <span>
                     <span class="username"></span>
                     <a href="#sing-in-modal-l" class="show-sign-in" title="Log In"> <img src="images/login.png"/></a>
-                    <a href="#sing-in-modal-r" class="show-sign-in" title="Sign Up"> <img src="images/sign_up.png"/></a>
+                    <a href="#sing-in-modal-r" class="show-sign-in reg" title="Sign Up"> <img src="images/sign_up.png"/></a>
                 </span>
             </div>
             
@@ -79,7 +79,7 @@
                     </div>
                     <div id="login-box-name">
                            <input id="entr" type="submit" name="sbmt" class="form-login" value="Log In"/>
-                           <a class="rgstr show-sign-in" href="#sing-in-modal-r" style="text-decoration: underline;">Registration</a>
+                           <a class="rgstr reg show-sign-in" href="#sing-in-modal-r" style="text-decoration: underline;">Registration</a>
                     </div>
                     <div id="login-box-name" class="error-message"></div>
             </form>

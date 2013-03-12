@@ -103,12 +103,13 @@ input:focus{
 }
 .header{
     text-align: right;
-    padding: 45px 45px 0px 45px;
+    padding: 45px 45px 0px 530px;
     vertical-align: middle;
     font-family: sw, jokerman;
     font-size: 110px;
     width: auto;
     height: 200px;
+    min-width: 1161px;
 }
 
 .main-menu{

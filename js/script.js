@@ -19,10 +19,10 @@ $(document).ready(function() {
                     $('.login span>span').html(responce.username);
                 } else{
                         $('#pageslide').css({
-                            boxShadow :  "rgba(255, 0, 0, 0) 0px 0px 60px 5px inset",
+                            boxShadow :  "rgba(255, 0, 0, 0) 0px 0px 60px 5px inset"
                         });
                         $('#pageslide').animate({
-                            boxShadow :  "rgba(255, 0, 0, 1) 0px 0px 60px 5px inset",
+                            boxShadow :  "rgba(255, 0, 0, 1) 0px 0px 60px 5px inset"
                         },500).addClass('errored');
                         $('.error-message').html(responce.error.message);
                 }
@@ -45,4 +45,8 @@ $(document).ready(function() {
         }
     });
     
+    $('.reg').on('click',function(){
+        $('#pageslide').removeClass('show-sign-in');
+        alert('ff');
+    });
 });
