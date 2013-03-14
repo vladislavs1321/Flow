@@ -79,7 +79,7 @@
                     </div>
                     <div id="login-box-name">
                            <input id="entr" type="submit" name="sbmt" class="form-login" value="Log In"/>
-                           <a class="rgstr reg show-sign-in" href="#sing-in-modal-r" style="text-decoration: underline;">Registration</a>
+                           <a class="rgstr reg show-sign-in" href="#" style="text-decoration: underline;">Registration</a>
                     </div>
                     <div id="login-box-name" class="error-message"></div>
             </form>
@@ -89,7 +89,7 @@
             
              <!-- SI modal registration -->
             <div id="sing-in-modal-r" style="display: none;">
-                <form id="login-form" method="post" action='user/User.php'>
+                <form id="login-form" method="post" action='#'>
                     <div ><h1>REGISTRATION</h1></div>
                     <div id="login-box-name" >Username or Email:</div>
                     <div id="login-box-field">
@@ -118,6 +118,7 @@
         
         <script type="text/javascript" src="js/jquery.pageslide.min.js"></script>
         <script>$(".show-sign-in").pageslide({ direction: "left"});</script>
+       
     </body>
 </html>
 

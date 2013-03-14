@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function() {
-    
+$(".show-sign-in").pageslide({ direction: "left"});    
 //          ***    SUBMITTING FORM  ***
 
     $('#entr').on('click', function(e) {
@@ -45,8 +45,12 @@ $(document).ready(function() {
         }
     });
     
-    $('.reg').on('click',function(){
-        $('#pageslide').removeClass('show-sign-in');
+    $('a.reg .show-sign-in').on('click',function(){
         alert('ff');
+        
+        $.pageslide.close();
+    
+        alert('ff');
+     
     });
 });
