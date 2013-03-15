@@ -18,7 +18,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
         <script type="text/javascript" src="js/jquery.animateshadow.min.js"></script>
     </head>
 
@@ -30,95 +29,89 @@
         <div class="content">
 
             <div class="main-menu">
-                <div class="option-button">
-                    START
-                </div>
-
-                <div class="option-button">
-                    DISCRIPTION
-                </div>
-
-                <div class="option-button">  
-                    DOWNLOAD
-                </div>
+                <div class="option-button">START</div>
+                <div class="option-button">DESCRIPTION</div>
+                <div class="option-button">DOWNLOAD</div>
             </div>
-            <!--            
-                        <div class="vars" >
-                            <input type="text" name="w0" value="" placeholder="w0">
-                            <input type="text" name="z0" value="" placeholder="z0">
-                            <input type="text" name="startTime" value="" placeholder="Start time">
-                            <input type="text" name="endTime" value="" placeholder="End time">
-                            <input type="text" name="F" value="" placeholder="F">
-                            <input type="text" name="diffusion" value="" placeholder="diffusion">
-                            <input type="text" name="brightness" value="" placeholder="brightness">
-                            <input type="text" name="Neff" value="" placeholder="Neff">
-                            </div>
-                        
-                    
-                    </div>-->
+            
+            <!--
+                <div class="vars" >
+                    <input type="text" name="w0" value="" placeholder="w0">
+                    <input type="text" name="z0" value="" placeholder="z0">
+                    <input type="text" name="startTime" value="" placeholder="Start time">
+                    <input type="text" name="endTime" value="" placeholder="End time">
+                    <input type="text" name="F" value="" placeholder="F">
+                    <input type="text" name="diffusion" value="" placeholder="diffusion">
+                    <input type="text" name="brightness" value="" placeholder="brightness">
+                    <input type="text" name="Neff" value="" placeholder="Neff">
+                    </div>
+                </div>
+            -->
             
             <div class="login">
                 <span>
                     <span class="username"></span>
-                    <a href="#sing-in-modal-l" class="show-sign-in" title="Log In"> <img src="images/login.png"/></a>
-                    <a href="#sing-in-modal-r" class="show-sign-in reg" title="Sign Up"> <img src="images/sign_up.png"/></a>
+                    <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
+                    <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
                 </span>
             </div>
             
-            <!-- SI modal login -->
-            <div id="sing-in-modal-l" style="display: none;">
-                <form id="login-form" method="post" action='user/autorization.php'>
-                    <div ><h1>LOG IN</h1></div>
-                    <div id="login-box-name" >Username or Email:</div>
-                    <div id="login-box-field">
-                        <input name="username" class="form-login" title="Username" value="" size="30" maxlength="2048" placeholder="Username" />
-                    </div>
-                    <div id="login-box-name">Password:</div>
-                    <div id="login-box-field">
-                        <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
-                    </div>
-                    <div id="login-box-name">
-                           <input id="entr" type="submit" name="sbmt" class="form-login" value="Log In"/>
-                           <a class="rgstr reg show-sign-in" href="#" style="text-decoration: underline;">Registration</a>
-                    </div>
-                    <div id="login-box-name" class="error-message"></div>
-            </form>
+            <div id="modal">
+                <!-- SI modal login -->
+                <div data-slider="login" class="sub-modal" style="display: none;">
+                    <form id="login-form" method="post" action='user/autorization.php'>
+                        <div ><h1>LOG IN</h1></div>
+                        <div id="login-box-name" >Username or Email:</div>
+                        <div id="login-box-field">
+                            <input name="username" class="form-login" title="Username" value="" size="30" maxlength="2048" placeholder="Username" />
+                        </div>
+                        <div id="login-box-name">Password:</div>
+                        <div id="login-box-field">
+                            <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
+                        </div>
+                        <div id="login-box-name">
+                               <input id="entr" type="submit" name="sbmt" class="form-login" value="Log In"/>
+                               <a class="rgstr show-pageslider" data-open-slide="register" href="#" style="text-decoration: underline;">Registration</a>
+                        </div>
+                        <div id="login-box-name" class="error-message"></div>
+                    </form>
+                </div>
+                <!-- end SI modal login-->
+                
+                <!-- SI modal registration -->
+                <div data-slider="register" class="sub-modal" style="display: none;">
+                    <form id="login-form" method="post" action='#'>
+                        <div ><h1>REGISTRATION</h1></div>
+                        <div id="login-box-name" >Username or Email:</div>
+                        <div id="login-box-field">
+                            <input name="username" class="form-login" title="Username" value="" size="30" maxlength="2048" placeholder="Username" />
+                        </div>
+                        <div id="login-box-name">Password:</div>
+                        <div id="login-box-field">
+                            <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
+                        </div>
+                        <div id="login-box-name">Confirm Password:</div>
+                        <div id="login-box-field">
+                            <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
+                        </div>
+                        <div id="login-box-name">
+                               <input id="entr" type="submit" name="sbmt" class="form-login" value="Sign Up"/>
+                        </div>
+                    </form>
+                </div>
+                <!-- end SI modal registration -->
             </div>
-            <!-- end SI modal login-->
             
-            
-             <!-- SI modal registration -->
-            <div id="sing-in-modal-r" style="display: none;">
-                <form id="login-form" method="post" action='#'>
-                    <div ><h1>REGISTRATION</h1></div>
-                    <div id="login-box-name" >Username or Email:</div>
-                    <div id="login-box-field">
-                        <input name="username" class="form-login" title="Username" value="" size="30" maxlength="2048" placeholder="Username" />
-                    </div>
-                    <div id="login-box-name">Password:</div>
-                    <div id="login-box-field">
-                        <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
-                    </div>
-                    <div id="login-box-name">Confirm Password:</div>
-                    <div id="login-box-field">
-                        <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
-                    </div>
-                    <div id="login-box-name">
-                           <input id="entr" type="submit" name="sbmt" class="form-login" value="Sign Up"/>
-                    </div>
-            </form>
-            </div>
-            <!-- end SI modal registration -->
         </div>
-        
-        
         
         <div class="footer">
         </div>
         
+        <!-- Hidden element to initialize pageslider open/close -->
+        <a href="#modal" id="pageslider-initiator" style="display: none;"></a>
+        
         <script type="text/javascript" src="js/jquery.pageslide.min.js"></script>
-        <script>$(".show-sign-in").pageslide({ direction: "left"});</script>
-       
+        <script type="text/javascript" src="js/script.js"></script>
     </body>
 </html>
 

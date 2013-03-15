@@ -27,6 +27,9 @@ body{
     vertical-align: top;
     line-height: 32px;
 }
+.login .show-pageslider {
+    cursor: pointer;
+}
 
 
 input[type="text"]:focus {
