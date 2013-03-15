@@ -3,9 +3,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function() {
-$(".show-sign-in").pageslide({ direction: "left"});    
-//          ***    SUBMITTING FORM  ***
-
+    //          ***    SUBMITTING FORM  ***
     $('#entr').on('click', function(e) {
         e.preventDefault();
         
@@ -45,12 +43,74 @@ $(".show-sign-in").pageslide({ direction: "left"});
         }
     });
     
-    $('a.reg .show-sign-in').on('click',function(){
-        alert('ff');
-        
-        $.pageslide.close();
+/** LOOK AT THIS **/
     
-        alert('ff');
-     
+    // Add event on hidden link to initialize pageslider open/close event
+    // Unfortunatly we must set modal true to plugin!
+    $('#pageslider-initiator').pageslide({ direction: "left", modal: true});
+    
+    // When click on orange images to login or register
+    $('.show-pageslider').on('click', function(e) {
+        e.preventDefault();
+        
+        // Get attribute 'data-open-slide' from clicked orange button
+        // Attribute can have values - 'login' or 'register' and say us which div in pageslider we should display finded by 'data-slider' attribute
+        showDiv = $(this).data('open-slide');
+        
+        if (false === $('#pageslide').hasClass('opened')) {
+            
+            // This happend when pageslider closed, and we press any orange buttons
+            closePageslider(showDiv);
+            
+        } else {
+            
+            if ($('#pageslide').data('modal-active') === showDiv) {
+            
+                // This happend when pageslider is currently opened, and pageslider 'data-modal-active' attribute match pressed button 'data-open-slide' attribute
+                // We must hide pageslider and hide displayed content in it!
+                showPageslider(showDiv);
+            } else {
+                
+                // This happend when pageslider is currently opened, and pageslider 'data-modal-active' attribute NOT match pressed button 'data-open-slide' attribute
+                // We must hide pageslider and hide displayed content in it then open again pageslider and show other form
+                switchPageslider(showDiv);
+            }
+        }
     });
+    
+/* Reusable functions */
+    
+    function showPageslider(showDiv) {
+        $('#pageslider-initiator').trigger('click');
+            $('#pageslide')
+                .removeClass('opened')
+                .removeAttr('data-modal-active')
+                .find('div[data-slider="' + showDiv + '"]')
+                    .fadeOut(1000);
+    }
+    
+    function closePageslider(showDiv) {
+        $('#pageslider-initiator').trigger('click');
+            $('#pageslide')
+                .addClass('opened')
+                .data('modal-active', showDiv)
+                .find('div[data-slider="' + showDiv + '"]')
+                    .fadeIn(1000);
+    }
+    
+    function switchPageslider(showDiv) {
+        $('#pageslider-initiator').trigger('click');
+            $('#pageslide')
+                .data('modal-active', showDiv)
+                .find('div[data-slider="' + showDiv + '"]')
+                .siblings('.sub-modal')
+                    .fadeOut(300, function() {
+                        // Ckick again on hidden btn to show again pageslider with other content
+                        // Important do it after firs click is triggered with some timeout!!
+                        $('#pageslider-initiator').trigger('click');
+                        $('#pageslide')
+                            .find('div[data-slider="' + showDiv + '"]')
+                            .fadeIn(1000);
+                    });
+    }
 });
