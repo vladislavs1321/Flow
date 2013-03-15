@@ -48,6 +48,7 @@ $(".show-sign-in").pageslide({ direction: "left"});
     $('a.reg .show-sign-in').on('click',function(){
         alert('ff');
         
+        
         $.pageslide.close();
     
         alert('ff');
