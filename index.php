@@ -1,5 +1,5 @@
 <?php
-    session_start();   
+    session_start();
     
     if(null !== $_SESSION['auto_error']) {
         $error = $_SESSION['auto_error'];
@@ -33,19 +33,19 @@
                 <div class="option-button">DOWNLOAD</div>
             </div>
             
-            <!--
-                <div class="vars" >
-                    <input type="text" name="w0" value="" placeholder="w0">
-                    <input type="text" name="z0" value="" placeholder="z0">
-                    <input type="text" name="startTime" value="" placeholder="Start time">
-                    <input type="text" name="endTime" value="" placeholder="End time">
-                    <input type="text" name="F" value="" placeholder="F">
-                    <input type="text" name="diffusion" value="" placeholder="diffusion">
-                    <input type="text" name="brightness" value="" placeholder="brightness">
-                    <input type="text" name="Neff" value="" placeholder="Neff">
-                    </div>
+
+            <div class="vars">
+                <input type="text" name="w0" value="" placeholder="w0">
+                <input type="text" name="z0" value="" placeholder="z0">
+                <input type="text" name="startTime" value="" placeholder="Start time">
+                <input type="text" name="endTime" value="" placeholder="End time">
+                <input type="text" name="F" value="" placeholder="F">
+                <input type="text" name="diffusion" value="" placeholder="diffusion">
+                <input type="text" name="brightness" value="" placeholder="brightness">
+                <input type="text" name="Neff" value="" placeholder="Neff">
                 </div>
-            -->
+            </div>
+
             
             <div class="login">
                 <span>
@@ -91,7 +91,7 @@
                         </div>
                         <div id="login-box-name">Confirm Password:</div>
                         <div id="login-box-field">
-                            <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
+                            <input name="confirmPassword" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
                         </div>
                         <div id="login-box-name">
                                <input id="entr" type="submit" name="sbmt" class="form-login sign-up" value="Sign Up"/>

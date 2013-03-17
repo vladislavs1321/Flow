@@ -72,8 +72,8 @@ abstract class AbstractUser {
             }
         }
     }
+    
     public static function checkPasswordConfirm($password, $confirmPassword){
-            var_dump("FFFFF");exit;
         if ($confirmPassword == '') 
         {      
             self::$error = array('code' => 9, 'message' =>"enter password confirm, please");
