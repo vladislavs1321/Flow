@@ -1,5 +1,4 @@
 <?php
-   
     session_start();   
     
     if(null !== $_SESSION['auto_error']) {
@@ -80,7 +79,7 @@
                 
                 <!-- SI modal registration -->
                 <div data-slider="register" class="sub-modal" style="display: none;">
-                    <form id="login-form" method="post" action='#'>
+                    <form id="login-form" method="post" action='user/registration.php'>
                         <div ><h1>REGISTRATION</h1></div>
                         <div id="login-box-name" >Username or Email:</div>
                         <div id="login-box-field">
@@ -95,8 +94,9 @@
                             <input name="password" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" placeholder="**********"/>
                         </div>
                         <div id="login-box-name">
-                               <input id="entr" type="submit" name="sbmt" class="form-login" value="Sign Up"/>
+                               <input id="entr" type="submit" name="sbmt" class="form-login sign-up" value="Sign Up"/>
                         </div>
+                        <div id="login-box-name" class="error-message"></div>
                     </form>
                 </div>
                 <!-- end SI modal registration -->
