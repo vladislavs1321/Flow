@@ -1,13 +1,4 @@
 <?php
-    session_start();
-    
-    if(null !== $_SESSION['auto_error']) {
-        $error = $_SESSION['auto_error'];
-        var_dump($error);
-    } else {
-        echo("session in progress");
-        var_dump($_SESSION);
-    }
 ?>
 <html>
     <head>
@@ -16,7 +7,8 @@
         <link rel='stylesheet' href='style/jquery.pageslide.css'/> 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+        <script type="text/javascript" src="js/jquery-1.9.min.js"></script>
         <script type="text/javascript" src="js/jquery.animateshadow.min.js"></script>
     </head>
 
@@ -26,34 +18,34 @@
         </div>
 
         <div class="content">
-
-            <div class="main-menu">
-                <div class="option-button">START</div>
-                <div class="option-button">DESCRIPTION</div>
-                <div class="option-button">DOWNLOAD</div>
-            </div>
-            
-
-            <div class="vars">
-                <input type="text" name="w0" value="" placeholder="w0">
-                <input type="text" name="z0" value="" placeholder="z0">
-                <input type="text" name="startTime" value="" placeholder="Start time">
-                <input type="text" name="endTime" value="" placeholder="End time">
-                <input type="text" name="F" value="" placeholder="F">
-                <input type="text" name="diffusion" value="" placeholder="diffusion">
-                <input type="text" name="brightness" value="" placeholder="brightness">
-                <input type="text" name="Neff" value="" placeholder="Neff">
+            <div class="x">
+                
+                <div class="main-menu">
+                    <div class="option-button">START</div>
+                    <div class="option-button">DESCRIPTION</div>
+                    <div class="option-button">DOWNLOAD</div>
+                </div>
+                <div class="vars">
+                    <form class="varaibles" method="get" action="#" >
+                        <ul>
+                            <li><input type="text" name="w0" value="" placeholder="w0"><span>in metres</span>
+                            <li><input type="text" name="z0" value="" placeholder="z0"><span>in metres</span>
+                            <li><input type="text" name="startTime" value="" placeholder="Start time"><span>in seconds</span>
+                            <li><input type="text" name="endTime" value="" placeholder="End time"><span>in seconds</span>
+                            <li><input type="text" name="F" value="" placeholder="Focus factor"><span>q</span>
+                            <li><input type="text" name="diffusion" value="" placeholder=" Molecules diffusion"><span>q</span>
+                            <li><input type="text" name="brightness" value="" placeholder="brightness"><span>in Hz</span>
+                            <li><input type="text" name="Neff" value="" placeholder="Neff"><span>q</span>
+                        </ul>
+                        <input type="submit" value="generate">
+                    </form>
                 </div>
             </div>
 
             
-            <div class="login">
-                <span>
-                    <span class="username"></span>
-                    <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
-                    <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
-                </span>
-            </div>
+
+
+            
             
             <div id="modal">
                 <!-- SI modal login -->
@@ -104,6 +96,14 @@
             
         </div>
         
+        <div class="login">
+            <span>
+                <span class="username"></span>
+                <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
+                <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
+            </span>
+        </div>
+        
         <div class="footer">
         </div>
         
@@ -117,7 +117,7 @@
 
 
 <?php
-    require_once 'Database.php';
+    require_once './database/Database.php';
     require_once 'Flow.php';
     
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../Database.php";
+require_once "../database/Database.php";
 require_once "./User.php";
 
 /*
@@ -59,11 +59,12 @@ abstract class AbstractUser {
         } else{
             if(self::$error['code'] == 5){
                 self::$error = null;
+                $password=self::encryption($password);
+             
                 //Логин свободен - можем создавать нового пользователя
                 if(false === self::addNewUserInDatabase($username, $password, $database)){
                     return false;
                 }
-                
                 //register OK
                 return new User($username, $password, $database);
             } else {
@@ -73,6 +74,20 @@ abstract class AbstractUser {
         }
     }
     
+    public static function generateCode($length=6){
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
+        $code = "";
+        $clen = strlen($chars) - 1;  
+        while (strlen($code) < $length) {
+            $code .= $chars[mt_rand(0,$clen)];  
+        }
+        return $code;
+    }
+    
+    public static function encryption($password){
+        return md5(md5(trim($password)));
+    }
+
     public static function checkPasswordConfirm($password, $confirmPassword){
         if ($confirmPassword == '') 
         {      
@@ -101,8 +116,10 @@ abstract class AbstractUser {
     
     }
     
-    public static function ifUserExist($username, $password, $database){   
+    public static function ifUserExist($username, $password, $database){
+       
         $query = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password' ";
+      
         if( !$database->select($query)) {
             if( !$database->select("SELECT * FROM user WHERE user.username = '$username' ")) {  
                 self::$error = array('code' => 5, 'message' =>"incorrect username");
@@ -111,6 +128,7 @@ abstract class AbstractUser {
                 self::$error = array('code' => 6, 'message' =>"error password");
                 return false;
             }
+            
         } 
         return true;        
     }
