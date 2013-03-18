@@ -4,3 +4,4 @@
 config/*.yml
 !.gitignore
 !*.example
+Database.php

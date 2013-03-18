@@ -27,9 +27,12 @@ body{
     vertical-align: top;
     line-height: 32px;
 }
+.login .show-pageslider {
+    cursor: pointer;
+}
 
 
-input[type="text"]:focus {
+div>input[type="text"]:focus {
    border: 1px solid #b2d1ff;
 }
 
@@ -43,6 +46,43 @@ input[type="text"]:focus {
 .error-message{
     font-size: 22px;
     color: #ff0059;
+}
+ul{
+    padding-top: 15px;
+    list-style: none;
+}
+li>span{
+    color: #fff;
+}
+li{
+    padding-top: 10px;
+    padding-right: 20px;
+}
+li>input{
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    padding-left: 15px;
+    outline: none!important;
+    background-color: #FFF;
+    border: 1px solid #cccccc;
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+}
+li>input:focus{
+    border-color: rgba(255, 140, 0, 1);
+    box-shadow: 0px 0px 1px 1px rgba(255, 140, 0, 1)!important;
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(255, 140, 0, 1)!important;
+    -o-box-shadow: 0px 0px 1px 1px rgba(255, 140, 0, 1)!important;
+    -moz-box-shadow: 0px 0px 1px 1px rgba(255, 140, 0, 1)!important;
+    outline: none!important;
+    
+}
+form.varaibles{
+    background-color: rgba(0,0,0, 0.7);       
+    border-radius: 10px; 
 }
 input[type=submit]{ 
     background: red;
@@ -69,7 +109,7 @@ input[type=submit]:hover{
     background: #F18103;
 }
 
-input:focus{
+div>input:focus{
     outline: 2px solid darkorange;
 }
 .btn{
@@ -92,6 +132,13 @@ input:focus{
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
     cursor: pointer;
 }
+.content{
+    position: absolute;
+}
+.x{
+    height: 600px;
+    width: 1500px;
+}
 .btn:hover {
     background: #F18103;
 }
@@ -103,7 +150,7 @@ input:focus{
 }
 .header{
     text-align: right;
-    padding: 45px 45px 0px 530px;
+    padding: 45px 45px 0px 450px;
     vertical-align: middle;
     font-family: sw, jokerman;
     font-size: 110px;
@@ -113,8 +160,11 @@ input:focus{
 }
 
 .main-menu{
-    position: absolute;
+   
     padding-left: 200px;
+    display: inline-block;
+    margin-right: 100px;
+    vertical-align: text-bottom;
 }
 
 .login{
@@ -137,7 +187,8 @@ input:focus{
     cursor: pointer;
 }
 .vars {
-    position: absolute;
+    
+    display: inline-block;
 }
 .vars > input{
     display: block;
