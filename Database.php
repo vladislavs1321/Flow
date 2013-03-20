@@ -55,5 +55,15 @@ class Database
             return false;
         }        
         return true;
-    }   
+    } 
+    
+    function update($sql)
+    {
+        if(!$resault = mysql_query($sql, $this->connection)) {
+            $this->error = mysql_error();
+            return false;
+        }        
+        return mysql_affected_rows();
+    } 
+    
 }
