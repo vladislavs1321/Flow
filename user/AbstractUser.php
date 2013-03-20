@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../Database.php";
+require_once "../database/Database.php";
 require_once "./User.php";
 
 /*
@@ -89,7 +89,17 @@ abstract class AbstractUser
             }
         }
     }
-    
+
+    public static function generateCode($length=6)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
+        $code = "";
+        $clen = strlen($chars) - 1;  
+        while (strlen($code) < $length) {
+            $code .= $chars[mt_rand(0,$clen)];  
+        }
+        return $code;
+    }
     
     public static function encryption($password)
     {
@@ -139,11 +149,8 @@ abstract class AbstractUser
                 self::$error = array('code' => 6, 'message' =>"error password");
                 return false;
             }
-            
-        } else{
-            
-            return true;        
         }
+        return true;        
     }
     
     protected static function checkIsFormCorrect($username, $password)
@@ -194,16 +201,6 @@ abstract class AbstractUser
     
     
     // *******************************************************************************************
-    public static function generateCode($length=6)
-    {
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
-        $code = "";
-        $clen = strlen($chars) - 1;  
-        while (strlen($code) < $length) {
-            $code .= $chars[mt_rand(0,$clen)];  
-        }
-        return $code;
-    }
     
     public static function generateHash()
     {
