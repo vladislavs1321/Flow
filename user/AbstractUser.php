@@ -13,15 +13,15 @@ require_once "./User.php";
  *
  * @author vladislav
  */
-abstract class AbstractUser {
+abstract class AbstractUser 
+{
     
     protected $personalData = array();  
     
     static $error = null;
+    static $id = null;
     
-    
-    
-    public static function createUser( $username, $password)
+    public static function createUser($username, $password)
     {   
         if(false === self::checkIsFormCorrect($username,$password) ){
             return false;
@@ -31,18 +31,40 @@ abstract class AbstractUser {
         if(false === $database){
             return false;
         }
-        
-        if(false === self::ifUserExist($username, $password, $database)){
+        $userData = self::getUserDataFromDatabase($username, $password, $database);
+        if(false === $userData){
             return false;
+<<<<<<< HEAD
         }else{    
                 return new User($username, $password, $database);
+=======
+        } else {
+//            self::setCookie(self::$id, self::generateHash());  
+            return new User($userData, $database);
+>>>>>>> 47442b249e55f9e9c6fed76f04bdd463a18a8404
         }
        
     }
     
-    
-    
-    public static function regUser($username, $password, $confirmPassword){
+    public static function getUserDataFromDatabase($username, $password, $database){
+        $password = self::encryption($password);
+        $query = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password' ";
+      
+        if( !$userData = $database->select($query)) {
+            if( !$database->select("SELECT * FROM user WHERE user.username = '$username' ")) {  
+                self::$error = array('code' => 5, 'message' =>"incorrect username");
+                return false;
+            } else {
+                self::$error = array('code' => 6, 'message' =>"error password");
+                return false;
+            }
+        } else {
+            return $userData[0];        
+        }
+    }
+
+    public static function regUser($username, $password, $confirmPassword)
+    {
         if(false === self::checkIsFormCorrect($username, $password) || false == self::checkPasswordConfirm($password, $confirmPassword)){
             return false;
         }
@@ -58,10 +80,10 @@ abstract class AbstractUser {
         } else{
             if(self::$error['code'] == 5){
                 self::$error = null;
-                $password=self::encryption($password);
+                $password = self::encryption($password);
              
                 //Логин свободен - можем создавать нового пользователя
-                if(false === self::addNewUserInDatabase($username, $password, $database)){
+                if(false === self::createNewUserDataInDatabase($username, $password, $database)){
                     return false;
                 }
                 //register OK
@@ -72,8 +94,9 @@ abstract class AbstractUser {
             }
         }
     }
-    
-    public static function generateCode($length=6){
+
+    public static function generateCode($length=6)
+    {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
         $code = "";
         $clen = strlen($chars) - 1;  
@@ -83,11 +106,13 @@ abstract class AbstractUser {
         return $code;
     }
     
-    public static function encryption($password){
+    public static function encryption($password)
+    {
         return md5(md5(trim($password)));
     }
 
-    public static function checkPasswordConfirm($password, $confirmPassword){
+    public static function checkPasswordConfirm($password, $confirmPassword)
+    {
         if ($confirmPassword == '') 
         {      
             self::$error = array('code' => 9, 'message' =>"enter password confirm, please");
@@ -100,7 +125,8 @@ abstract class AbstractUser {
         return true;        
     }
     
-    public static function addNewUserInDatabase($username, $password, $database){
+    public static function createNewUserDataInDatabase($username, $password, $database)
+    {
         $query = sprintf(
             "INSERT INTO user (username , password) values ('%s' , '%s')",
             mysql_escape_string($username),
@@ -115,8 +141,14 @@ abstract class AbstractUser {
     
     }
     
+<<<<<<< HEAD
     public static function ifUserExist($username, $password, $database){
         $password=md5(md5($password));
+=======
+    static public function ifUserExist($username, $password, $database)
+    {
+        $password = self::encryption($password);
+>>>>>>> 47442b249e55f9e9c6fed76f04bdd463a18a8404
         $query = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password' ";
       
         if( !$database->select($query)) {
@@ -127,12 +159,18 @@ abstract class AbstractUser {
                 self::$error = array('code' => 6, 'message' =>"error password");
                 return false;
             }
+<<<<<<< HEAD
             return false;
         } 
         return true;  
+=======
+        }
+        return true;        
+>>>>>>> 47442b249e55f9e9c6fed76f04bdd463a18a8404
     }
     
-    protected static function checkIsFormCorrect($username, $password){
+    protected static function checkIsFormCorrect($username, $password)
+    {
         if ($username == '' and $password == '') {
             self::$error = array('code' => 1, 'message' =>"enter username and password, please");
             return false;
@@ -158,6 +196,7 @@ abstract class AbstractUser {
         }
         return $database;
     }
+    
     public static function checkSessionData()
     {
         session_start();
@@ -179,27 +218,16 @@ abstract class AbstractUser {
     
     // *******************************************************************************************
     
-    public function setSession()
+    public static function generateHash()
     {
-        session_start();
-        $_SESSION['username'] = $this->personalData['username'];
-        $_SESSION['password'] = $this->personalData['password'];
-        
+        return md5(self::generateCode(10));
     }
     
-    protected function setPersonalData($username, $password)
+    public static function setCookie($id,$hash)
     {
-        $this->personalData = array(
-                                'username' => $username,
-                                'password' => $password
-                            );
+        setcookie("id", $id, time()+60*60*24*30);
+        setcookie("hash", $hash, time()+60*60*24*30);
     }
-    
-    function getPersonalData() {
-        return $this->personalData;
-    }
-    
-    
 }
 
 ?>

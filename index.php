@@ -115,14 +115,20 @@
 
 
 <?php
+<<<<<<< HEAD
     require_once './database/Database.php';
     require_once 'Flow.php';
   
+=======
+>>>>>>> 47442b249e55f9e9c6fed76f04bdd463a18a8404
 
 //$f = new Flow(0.3e-6, 0.9e-6, 0, 0.1, 0.4,  0.0000000028, 100000, 0.01);
 //$f->simu();
 //var_dump($f);
 //var_dump($f->simu2());
 //var_dump(rand(1,10000)*0.0001);
+<<<<<<< HEAD
 //session_destroy();  
+=======
+>>>>>>> 47442b249e55f9e9c6fed76f04bdd463a18a8404
 ?>
