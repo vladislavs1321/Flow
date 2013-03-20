@@ -35,7 +35,6 @@ abstract class AbstractUser {
         if(false === self::ifUserExist($username, $password, $database)){
             return false;
         }else{    
-                
                 return new User($username, $password, $database);
         }
        
@@ -117,20 +116,20 @@ abstract class AbstractUser {
     }
     
     public static function ifUserExist($username, $password, $database){
-       
+        $password=md5(md5($password));
         $query = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password' ";
       
         if( !$database->select($query)) {
-            if( !$database->select("SELECT * FROM user WHERE user.username = '$username' ")) {  
+                if( !$database->select("SELECT * FROM user WHERE user.username = '$username' ")) {  
                 self::$error = array('code' => 5, 'message' =>"incorrect username");
                 return false;
             } else {
                 self::$error = array('code' => 6, 'message' =>"error password");
                 return false;
             }
-            
+            return false;
         } 
-        return true;        
+        return true;  
     }
     
     protected static function checkIsFormCorrect($username, $password){

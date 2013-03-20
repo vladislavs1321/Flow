@@ -1,5 +1,3 @@
-<?php
-?>
 <html>
     <head>
         <title></title>
@@ -7,7 +5,7 @@
         <link rel='stylesheet' href='style/jquery.pageslide.css'/> 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         
-        <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.min.js"></script>
         <script type="text/javascript" src="js/jquery.animateshadow.min.js"></script>
     </head>
@@ -48,7 +46,7 @@
             
             
             <div id="modal">
-                <!-- SI modal login -->
+<!--                 SI modal login -->
                 <div data-slider="login" class="sub-modal" style="display: none;">
                     <form id="login-form" method="post" action='user/autorization.php'>
                         <div ><h1>LOG IN</h1></div>
@@ -67,9 +65,9 @@
                         <div id="login-box-name" class="error-message"></div>
                     </form>
                 </div>
-                <!-- end SI modal login-->
+<!--                 end SI modal login-->
                 
-                <!-- SI modal registration -->
+<!--                 SI modal registration -->
                 <div data-slider="register" class="sub-modal" style="display: none;">
                     <form id="login-form" method="post" action='user/registration.php'>
                         <div ><h1>REGISTRATION</h1></div>
@@ -91,7 +89,7 @@
                         <div id="login-box-name" class="error-message"></div>
                     </form>
                 </div>
-                <!-- end SI modal registration -->
+<!--                 end SI modal registration -->
             </div>
             
         </div>
@@ -107,7 +105,7 @@
         <div class="footer">
         </div>
         
-        <!-- Hidden element to initialize pageslider open/close -->
+        <!--         Hidden element to initialize pageslider open/close -->
         <a href="#modal" id="pageslider-initiator" style="display: none;"></a>
         
         <script type="text/javascript" src="js/jquery.pageslide.min.js"></script>
@@ -119,12 +117,12 @@
 <?php
     require_once './database/Database.php';
     require_once 'Flow.php';
-    
+  
 
 //$f = new Flow(0.3e-6, 0.9e-6, 0, 0.1, 0.4,  0.0000000028, 100000, 0.01);
 //$f->simu();
 //var_dump($f);
 //var_dump($f->simu2());
 //var_dump(rand(1,10000)*0.0001);
-session_destroy();  
+//session_destroy();  
 ?>
