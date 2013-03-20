@@ -19,7 +19,7 @@ abstract class AbstractUser
     protected $personalData = array();  
     
     static $error = null;
-    static $id = null;
+   
     
     public static function createUser($username, $password)
     {   
@@ -34,14 +34,11 @@ abstract class AbstractUser
         $userData = self::getUserDataFromDatabase($username, $password, $database);
         if(false === $userData){
             return false;
-<<<<<<< HEAD
-        }else{    
-                return new User($username, $password, $database);
-=======
+
+        
         } else {
 //            self::setCookie(self::$id, self::generateHash());  
             return new User($userData, $database);
->>>>>>> 47442b249e55f9e9c6fed76f04bdd463a18a8404
         }
        
     }
@@ -73,8 +70,8 @@ abstract class AbstractUser
         if(false === $database){
             return false;
         }
-        
-        if(true === self::ifUserExist($username, $password, $database)){
+        $userData = self::getUserDataFromDatabase($username, $password, $database);
+        if(true === $userData){
             self::$error = array('code' => 7, 'message' =>"user with this username existed");
             return false;
         } else{
@@ -87,7 +84,7 @@ abstract class AbstractUser
                     return false;
                 }
                 //register OK
-                return new User($username, $password, $database);
+                return new User($userData, $database);
             } else {
                 self::$error = array('code' => 7, 'message' =>"user with this username existed");
                 return false;
@@ -141,33 +138,23 @@ abstract class AbstractUser
     
     }
     
-<<<<<<< HEAD
-    public static function ifUserExist($username, $password, $database){
-        $password=md5(md5($password));
-=======
-    static public function ifUserExist($username, $password, $database)
-    {
-        $password = self::encryption($password);
->>>>>>> 47442b249e55f9e9c6fed76f04bdd463a18a8404
-        $query = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password' ";
-      
-        if( !$database->select($query)) {
-                if( !$database->select("SELECT * FROM user WHERE user.username = '$username' ")) {  
-                self::$error = array('code' => 5, 'message' =>"incorrect username");
-                return false;
-            } else {
-                self::$error = array('code' => 6, 'message' =>"error password");
-                return false;
-            }
-<<<<<<< HEAD
-            return false;
-        } 
-        return true;  
-=======
-        }
-        return true;        
->>>>>>> 47442b249e55f9e9c6fed76f04bdd463a18a8404
-    }
+//    static public function ifUserExist($username, $password, $database)
+//    {
+//        $password = self::encryption($password);
+//        $query = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password' ";
+//      
+//        if( !$database->select($query)) {
+//                if( !$database->select("SELECT * FROM user WHERE user.username = '$username' ")) {  
+//                self::$error = array('code' => 5, 'message' =>"incorrect username");
+//                return false;
+//            } else {
+//                self::$error = array('code' => 6, 'message' =>"error password");
+//                return false;
+//            }
+//            return false;
+//        } 
+//        return true;  
+//    }
     
     protected static function checkIsFormCorrect($username, $password)
     {
