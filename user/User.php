@@ -17,7 +17,8 @@ class User extends AbstractUser {
     protected $hash;
     protected $database;
     
-    public function __construct($userData, $database) {
+    public function __construct(array $userData, $database)
+    {
         $this->userId = $userData[0];
         $this->username = $userData[1];
         $this->password = $userData[2];
@@ -26,16 +27,14 @@ class User extends AbstractUser {
         
 //        $this->authUser($database);
     }
-    public static function setCookie($id, $hash) {
-        parent::setCookie($id, $hash);
+    
+    public function getUsername(){
+        return $this->username;
     }
-//    public function getUsername(){
-//        return $this->username;
-//    }
-//    
-//    public function setUsername($username){
-//        $this->username=$username;
-//    }
+    
+    public function setUsername($username){
+        $this->username=$username;
+    }
 //    
 //    public function authUser($database, $username, $password)
 //    {

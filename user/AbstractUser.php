@@ -16,7 +16,7 @@ require_once "./User.php";
 abstract class AbstractUser 
 {
     
-    protected $personalData = array();  
+//    protected $personalData = array();  
     
     static $error = null;
    
