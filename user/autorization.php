@@ -2,6 +2,7 @@
 require_once './AbstractUser.php';
 
 $user = AbstractUser::createUser($_POST['username'], $_POST['password']);
+
 if(false !== $user){
     $responce = array(
         "success" => true,

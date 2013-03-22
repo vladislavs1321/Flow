@@ -19,13 +19,36 @@ class User extends AbstractUser {
     
     public function __construct(array $userData, $database)
     {
-        $this->userId = $userData[0];
-        $this->username = $userData[1];
-        $this->password = $userData[2];
-        $this->hash = $userData[3];
+        $this->userId = $userData['id'];
+        $this->username = $userData['username'];
+        $this->password = $userData['password'];
+        $this->hash = $this->generateHash();
         $this->database=$database;
-        
-//        $this->authUser($database);
+    }
+    
+    protected function generateHash()
+    {
+        return md5($this->generateCode(10));
+    }
+    
+    protected function updateHash()
+    {
+        $query = "UPDATE user SET user.user_hash= '".$this->hash."' WHERE user.id='".$this->userId."'";
+        if(false == $this->database->update($query)){
+            return false;
+        }
+        return true;
+    }
+
+    protected function setCookie()
+    {
+        if ( 
+            false === setcookie("id", $this->userId, time()+60*60*24*30) 
+            || false === setcookie("hash", $this->hash, time()+60*60*24*30)
+        ) {
+            return false;
+        }
+        return true;
     }
     
     public function getUsername(){
@@ -35,32 +58,20 @@ class User extends AbstractUser {
     public function setUsername($username){
         $this->username=$username;
     }
-//    
-//    public function authUser($database, $username, $password)
-//    {
-//       
-//        $query = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password' ";
-//        $id = $database->select($query);
-//        $query = "UPDATE user SET user.user_hash='".AbstractUser::generateHash()."' WHERE user.id='".$id."'";
-//        $database->update($query);
-//        
-//        session_start();
-//        $_SESSION['username'] = $this->personalData['username'];
-//        $_SESSION['password'] = $this->personalData['password'];
-//    }
-//    
-//    protected function setPersonalData($username, $password)
-//    {
-//        $this->personalData = array(
-//                                'username' => $username,
-//                                'password' => $password
-//                            );
-//    }
-//    
-//    function getPersonalData() 
-//    {
-//        return $this->personalData;
-//    }
+    
+    public function authUser()
+    {
+        if(false === $this->updateHash()){
+            var_dump('cant update hash');
+            return false;
+        }
+        if(false === $this->setCookie()){
+            var_dump('turn ON cookie');
+            return false;
+        }
+        return true;
+    }
+    
 }
 
 ?>

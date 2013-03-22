@@ -26,7 +26,6 @@ abstract class AbstractUser
         if(false === self::checkIsFormCorrect($username,$password) ){
             return false;
         }
-        
         $database = self::connectToDb();
         if(false === $database){
             return false;
@@ -34,19 +33,18 @@ abstract class AbstractUser
         $userData = self::getUserDataFromDatabase($username, $password, $database);
         if(false === $userData){
             return false;
-
-        
         } else {
-//            self::setCookie(self::$id, self::generateHash());  
-            return new User($userData, $database);
+                $user = new User($userData, $database);
+                $user->authUser();
+            return $user;
         }
        
     }
     
-    public static function getUserDataFromDatabase($username, $password, $database){
+    public static function getUserDataFromDatabase($username, $password, $database)
+    {
         $password = self::encryption($password);
         $query = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password' ";
-      
         if( !$userData = $database->select($query)) {
             if( !$database->select("SELECT * FROM user WHERE user.username = '$username' ")) {  
                 self::$error = array('code' => 5, 'message' =>"incorrect username");
@@ -65,7 +63,6 @@ abstract class AbstractUser
         if(false === self::checkIsFormCorrect($username, $password) || false == self::checkPasswordConfirm($password, $confirmPassword)){
             return false;
         }
-        
         $database = self::connectToDb();
         if(false === $database){
             return false;
@@ -78,13 +75,12 @@ abstract class AbstractUser
             if(self::$error['code'] == 5){
                 self::$error = null;
                 $password = self::encryption($password);
-             
-                //Логин свободен - можем создавать нового пользователя
-                if(false === self::createNewUserDataInDatabase($username, $password, $database)){
+                if(false === $userData = self::createNewUserDataInDatabase($username, $password, $database)){
                     return false;
                 }
-                //register OK
-                return new User($userData, $database);
+                $user = new User($userData, $database);
+                $user->authUser();
+                return $user;
             } else {
                 self::$error = array('code' => 7, 'message' =>"user with this username existed");
                 return false;
@@ -92,17 +88,6 @@ abstract class AbstractUser
         }
     }
 
-    public static function generateCode($length=6)
-    {
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
-        $code = "";
-        $clen = strlen($chars) - 1;  
-        while (strlen($code) < $length) {
-            $code .= $chars[mt_rand(0,$clen)];  
-        }
-        return $code;
-    }
-    
     public static function encryption($password)
     {
         return md5(md5(trim($password)));
@@ -133,28 +118,14 @@ abstract class AbstractUser
             self::$error = array('code' => 8, 'message' =>"CANT REGISTER ");
             return false;
         }
-        
-        return true;
-    
+        $query = "SELECT * FROM user WHERE user.id = '".mysql_insert_id()."'";
+        if(!$userData = $database->select($query)){
+            self::$error = array('code' => 8, 'message' =>"CANT REGISTER ");
+            return false;
+        } else{
+            return $userData[0];
+        }
     }
-    
-//    static public function ifUserExist($username, $password, $database)
-//    {
-//        $password = self::encryption($password);
-//        $query = "SELECT * FROM user WHERE user.username = '$username' AND user.password = '$password' ";
-//      
-//        if( !$database->select($query)) {
-//                if( !$database->select("SELECT * FROM user WHERE user.username = '$username' ")) {  
-//                self::$error = array('code' => 5, 'message' =>"incorrect username");
-//                return false;
-//            } else {
-//                self::$error = array('code' => 6, 'message' =>"error password");
-//                return false;
-//            }
-//            return false;
-//        } 
-//        return true;  
-//    }
     
     protected static function checkIsFormCorrect($username, $password)
     {
@@ -175,7 +146,8 @@ abstract class AbstractUser
         return true;
     }  
     
-    public static function connectToDb(){
+    public static function connectToDb()
+    {
         $database = new Database(); 
         if(false === $database->connect()){        
             self::$error = array ('code' => 4, 'message' => "oops, try later" );
@@ -205,16 +177,17 @@ abstract class AbstractUser
     
     // *******************************************************************************************
     
-    public static function generateHash()
+    public function generateCode($length=6)
     {
-        return md5(self::generateCode(10));
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
+        $code = "";
+        $clen = strlen($chars) - 1;  
+        while (strlen($code) < $length) {
+            $code .= $chars[mt_rand(0,$clen)];  
+        }
+        return $code;
     }
     
-    public static function setCookie($id,$hash)
-    {
-        setcookie("id", $id, time()+60*60*24*30);
-        setcookie("hash", $hash, time()+60*60*24*30);
-    }
 }
 
 ?>
