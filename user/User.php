@@ -43,8 +43,8 @@ class User extends AbstractUser {
     protected function setCookie()
     {
         if ( 
-            false === setcookie("id", $this->userId, time()+60*60*24*30) 
-            || false === setcookie("hash", $this->hash, time()+60*60*24*30)
+            false === setcookie("id", $this->userId, time()+60*60*24*30, '/') 
+            || false === setcookie("hash", $this->hash, time()+60*60*24*30, '/')
         ) {
             return false;
         }

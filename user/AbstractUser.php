@@ -34,8 +34,8 @@ abstract class AbstractUser
         if(false === $userData){
             return false;
         } else {
-                $user = new User($userData, $database);
-                $user->authUser();
+            $user = new User($userData, $database);
+            $user->authUser();
             return $user;
         }
        
