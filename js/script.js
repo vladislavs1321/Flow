@@ -17,7 +17,7 @@ $(document).ready(function() {
                     closePageslider(showDiv);
                     $('img').remove();
                     $('.login span>span').html(responce.username);
-                    $('.login > span').append("<a href='http://flow.local'><img style='cursor: pointer;margin-left: 5px;' class='logout' src='images/logout.png' title='Log Out'/></a>");
+                    $('.login > span').append("<a href='http://flow.local/user/resetCookie.php'><img style='cursor: pointer;margin-left: 5px;' class='logout' src='images/logout.png' title='Log Out'/></a>");
                 } else{
                         $('#pageslide').css({
                             boxShadow :  "rgba(255, 0, 0, 0) 0px 0px 60px 5px inset"
@@ -45,7 +45,7 @@ $(document).ready(function() {
             ).removeClass('errored');
         }
     });
-        
+    
 /** LOOK AT THIS **/
     
     // Add event on hidden link to initialize pageslider open/close event

@@ -27,7 +27,7 @@ class Flow {
     public $invIntensity;
     
     
-    public $fileUploadDir = 'S:\web\flow.locals';
+    public $fileUploadDir = 'S:\web\flow.local\data';
    
     function __construct($w0, $z0, $startTime, $endTime, $F, $diffusion, $brightness, $Neff) {
         $this->w0           = $w0;
@@ -53,8 +53,6 @@ class Flow {
     }
     
     /**
-     * 
-     * 
      * @param type $X
      * @param type $Y
      * @param type $Z
@@ -70,7 +68,6 @@ class Flow {
     }
 
     /**
-     * 
      * @param type $X
      * @param type $L
      * @return type
@@ -84,7 +81,6 @@ class Flow {
     }
     
     /**
-     * 
      * @return string
      */
     function simu() {
@@ -97,7 +93,7 @@ class Flow {
         $events=array();
         $numberOfEvents=0;
         
-        $fp = fopen('f1.txt', 'w+');
+        $fp = fopen('data/f1.txt', 'w+');
         
         for ($k = 0; $k < $this->molecules->count; $k++){
             
@@ -146,24 +142,23 @@ class Flow {
             }
         }
         
-      //  var_dump($events);
+        var_dump($events);
         fclose($fp);
-        $query = sprintf("INSERT INTO %s (data, user_id  ) VALUES ('%s', %d)",
-            $db->databaseName,
+        $query = sprintf("INSERT INTO flow.flow_data (data, user_id  ) VALUES ('%s', %d)",
             addslashes(__DIR__).addslashes('\f1.txt'),
             1
         );
         if(false===$db->unselect($query)){
             var_dump($db->error);
         };
-       // var_dump($query);exit;
+        var_dump($query);
     }
     
     function simu2(){
         ini_set('memory_limit', '128M');
         $numberOfEvents=0;
         $events=array();
-        $fp = fopen('f1.txt', 'w+');
+        $fp = fopen('data/f1.txt', 'w+');
         
         $this->intensity = $this->molecules->Neff*$this->molecules->brightness*$this->F/( (1+$this->F)*sqrt(8) );
         $this->invIntensity=1/$this->intensity;
@@ -186,7 +181,7 @@ class Flow {
                     fwrite($fp, $previousEvent."\n");
                 }
             }
-    //        var_dump($events);exit;
+            var_dump($events);
       fclose($fp);
     }
 }

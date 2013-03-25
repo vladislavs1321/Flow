@@ -1,7 +1,11 @@
 <?php
 ini_set('display_errors', 1);
-//error_reporting(E_ALL);
+error_reporting(E_ALL & ~E_NOTICE);
 require_once './user/checkCookie.php';
+$user = checkCookie();
+if (is_object($user)){
+    $username = $user->getUsername();
+}
 ?>
 <html>
     <head>
@@ -13,6 +17,7 @@ require_once './user/checkCookie.php';
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.min.js"></script>
         <script type="text/javascript" src="js/jquery.animateshadow.min.js"></script>
+        <script type="text/javascript" src="js/jquery.cookies.2.2.0.min.js"></script>
     </head>
 
     <body>
@@ -101,9 +106,13 @@ require_once './user/checkCookie.php';
         
         <div class="login">
             <span>
-                <span class="username"></span>
+                <span class="username"><?php echo(isset($username) ? $username : ""); ?></span>
+                <?php if(!isset($username)):?>
                 <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
                 <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
+                <?php else:?>
+                <a href='http://flow.local/user/resetCookie.php'><img style='cursor: pointer;margin-left: 5px;' class='logout' src='images/logout.png' title='Log Out'/></a>
+                <?php endif;?>
             </span>
         </div>
         
@@ -120,9 +129,10 @@ require_once './user/checkCookie.php';
 
 
 <?php
-//$f = new Flow(0.3e-6, 0.9e-6, 0, 0.1, 0.4,  0.0000000028, 100000, 0.01);
-//$f->simu();
-//var_dump($f);
-//var_dump($f->simu2());
+require_once './Flow.php';
+$f = new Flow(0.3e-6, 0.9e-6, 0, 0.1, 0.4,  0.0000000028, 100000, 0.01);
+$f->simu();
+var_dump($f);
+var_dump($f->simu());
 //var_dump(rand(1,10000)*0.0001);
 ?>

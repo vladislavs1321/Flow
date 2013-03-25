@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `flow_data` (
     `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `data_url` varchar(256) default NULL,
     `user_id` int(11) default NULL,
-    `description` varchar(2048) default NULL,
+    `description_url` varchar(2048) default NULL,
     INDEX (user_id),
     CONSTRAINT FOREIGN KEY (user_id) REFERENCES user(id)
         ON DELETE CASCADE

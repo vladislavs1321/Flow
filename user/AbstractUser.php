@@ -1,7 +1,6 @@
 <?php
-session_start();
-require_once "../database/Database.php";
-require_once "./User.php";
+require_once __DIR__ . "/../database/Database.php";
+require_once __DIR__. "/User.php";
 
 /*
  * To change this template, choose Tools | Templates
@@ -155,26 +154,6 @@ abstract class AbstractUser
         }
         return $database;
     }
-    
-    public static function checkSessionData()
-    {
-        session_start();
-        if (null !== $_SESSION['username'] && null !== $_SESSION['password']) {
-            $sessionData = array(
-                'username' => $_SESSION['username'],
-                'password' => $_SESSION['password']
-            );
-            
-            return $sessionData;
-        } else {
-            self::$error = array ('code' => 11, 'message' => "Your time is over!" );
-            return false;
-        }
-    }
-    
-    
-    
-    
     // *******************************************************************************************
     
     public function generateCode($length=6)
