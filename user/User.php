@@ -1,5 +1,6 @@
 <?php
 require_once 'AbstractUser.php';
+require_once '../Flow.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -26,6 +27,10 @@ class User extends AbstractUser {
         $this->database=$database;
     }
     
+    public function generateFlow(){
+         
+    }
+
     protected function generateHash()
     {
         return md5($this->generateCode(10));

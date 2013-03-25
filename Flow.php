@@ -3,7 +3,6 @@
 require_once 'Molecules.php';
 require_once 'gauss.php';
 
-
 /**
  * Description of Flow
  *
@@ -42,11 +41,7 @@ class Flow {
         $this->RV           = 8*10*$w0*10*$w0*10*$z0;
         $this->Veff         = (1+$F)*(1+$F)*pow(pi(),1.5)*$w0*$w0*$z0;
         
-        try {
-            $this->molecules = new Molecules($diffusion, $brightness, $Neff, $this->RV ,$this->Veff, $this->w0);
-        } catch (\Exception $e) {
-            var_dump($e->getMessage());
-        }  
+        $this->molecules = new Molecules($diffusion, $brightness, $Neff, $this->RV ,$this->Veff, $this->w0);
         
         $this->intensity    = (1+$F)*$brightness;
         $this->invIntensity = 1/( (1+$F)*$brightness);
@@ -62,8 +57,8 @@ class Flow {
      */
     public function Bfunction($X, $Y, $Z, $w0, $z0)
     {
-        $a=-2/($w0*$w0);
-        $b=-2/($z0*$z0);
+        $a = -2/($w0*$w0);
+        $b = -2/($z0*$z0);
         return exp( $a*($X*$X + $Y*$Y) + $b*$Z*$Z );
     }
 
@@ -75,7 +70,7 @@ class Flow {
     public function periodicBoundTest($X, $L)
     {
         if( abs($X) > $L ){
-            $X=$X - 2*$L*floor( ($X + $L)/(2*$L) );
+            $X = $X - 2*$L*floor( ($X + $L)/(2*$L) );
         }
         return $X;
     }
@@ -84,22 +79,22 @@ class Flow {
      * @return string
      */
     function simu() {
-        $db= new Database();
+        $db = new Database();
         if (false === $db->connect()){
             var_dump($db->error);
             return fasle;    
         }
         
-        $events=array();
-        $numberOfEvents=0;
-        
-        $fp = fopen('data/f1.txt', 'w+');
+        $events = array();
+        $numberOfEvents = 0;
+        $flowName = time();
+        $fp = fopen($flowName."txt", 'w+');
         
         for ($k = 0; $k < $this->molecules->count; $k++){
             
-            $this->molecules->X =(2*rand(1,10000)*0.0001-1)*$this->RXb;
-            $this->molecules->Y =(2*rand(1,10000)*0.0001-1)*$this->RYb;
-            $this->molecules->Z =(2*rand(1,10000)*0.0001-1)*$this->RZb;
+            $this->molecules->X = (2*rand(1,10000)*0.0001-1)*$this->RXb;
+            $this->molecules->Y = (2*rand(1,10000)*0.0001-1)*$this->RYb;
+            $this->molecules->Z = (2*rand(1,10000)*0.0001-1)*$this->RZb;
             
             $previousEvent=$this->startTime;
             $currentEvent=$previousEvent-$this->invIntensity*log(rand(1,10000)*0.0001);
@@ -126,18 +121,18 @@ class Flow {
                             ){
                                 $numberOfEvents++;
            
-                                $events[$numberOfEvents]=$previousEvent;
+                                $events[$numberOfEvents] = $previousEvent;
                                 fwrite($fp, $previousEvent."\n");
                     }
                     $sigma = sqrt(2*$this->molecules->diffusion*($currentEvent-$previousEvent));
                     
-                    $this->molecules->X= gauss_ms($this->molecules->X, $sigma);
-                    $this->molecules->Y= gauss_ms($this->molecules->Y, $sigma);
-                    $this->molecules->Y= gauss_ms($this->molecules->Z, $sigma);
+                    $this->molecules->X = gauss_ms($this->molecules->X, $sigma);
+                    $this->molecules->Y = gauss_ms($this->molecules->Y, $sigma);
+                    $this->molecules->Y = gauss_ms($this->molecules->Z, $sigma);
                     
-                    $this->molecules->X=$this->periodicBoundTest($this->molecules->X,  $this->RXb);
-                    $this->molecules->Y=$this->periodicBoundTest($this->molecules->Y,  $this->RYb);
-                    $this->molecules->Z=$this->periodicBoundTest($this->molecules->Z,  $this->RZb);
+                    $this->molecules->X = $this->periodicBoundTest($this->molecules->X,  $this->RXb);
+                    $this->molecules->Y = $this->periodicBoundTest($this->molecules->Y,  $this->RYb);
+                    $this->molecules->Z = $this->periodicBoundTest($this->molecules->Z,  $this->RZb);
                 }
             }
         }
@@ -148,7 +143,7 @@ class Flow {
             addslashes(__DIR__).addslashes('\f1.txt'),
             1
         );
-        if(false===$db->unselect($query)){
+        if(false === $db->unselect($query)){
             var_dump($db->error);
         };
         var_dump($query);
