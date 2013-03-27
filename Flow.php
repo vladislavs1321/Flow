@@ -26,7 +26,7 @@ class Flow {
     public $invIntensity;
     
     
-    public $fileUploadDir = 'S:\web\flow.local\data';
+    public $fileUploadDir = '/home/vladislav/web/flow.local/data/';
    
     function __construct($w0, $z0, $startTime, $endTime, $F, $diffusion, $brightness, $Neff) {
         $this->w0           = $w0;
@@ -88,7 +88,7 @@ class Flow {
         $events = array();
         $numberOfEvents = 0;
         $flowName = time();
-        $fp = fopen($flowName."txt", 'w+');
+        $fp = fopen($this->fileUploadDir . $flowName.".txt", 'w+');
         
         for ($k = 0; $k < $this->molecules->count; $k++){
             
@@ -137,16 +137,11 @@ class Flow {
             }
         }
         
-        var_dump($events);
+        //var_dump($events);
         fclose($fp);
-        $query = sprintf("INSERT INTO flow.flow_data (data, user_id  ) VALUES ('%s', %d)",
-            addslashes(__DIR__).addslashes('\f1.txt'),
-            1
-        );
-        if(false === $db->unselect($query)){
-            var_dump($db->error);
-        };
-        var_dump($query);
+        
+        $dataUrl = $this->fileUploadDir . $flowName.".txt";
+        return $dataUrl;
     }
     
     function simu2(){

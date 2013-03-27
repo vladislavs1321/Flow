@@ -34,19 +34,20 @@ if (is_object($user)){
                     <div class="option-button">DOWNLOAD</div>
                 </div>
                 <div class="vars">
-                    <form class="varaibles" method="get" action="#" >
+                    <form class="varaibles" method="get" action="user/generateFlow.php" >
                         <ul>
                             <li><input type="text" name="w0" value="" placeholder="w0"><span>in metres</span>
                             <li><input type="text" name="z0" value="" placeholder="z0"><span>in metres</span>
                             <li><input type="text" name="startTime" value="" placeholder="Start time"><span>in seconds</span>
                             <li><input type="text" name="endTime" value="" placeholder="End time"><span>in seconds</span>
-                            <li><input type="text" name="F" value="" placeholder="Focus factor"><span>q</span>
+                            <li><input type="text" name="F" value="" placeholder="Focus factor"><span>between 0 and 1</span>
                             <li><input type="text" name="diffusion" value="" placeholder=" Molecules diffusion"><span>q</span>
                             <li><input type="text" name="brightness" value="" placeholder="brightness"><span>in Hz</span>
                             <li><input type="text" name="Neff" value="" placeholder="Neff"><span>q</span>
                         </ul>
-                        <input type="submit" value="generate">
+                        <input id="generate" type="submit" value="generate">
                     </form>
+                    <div class="description"><h3>ASASdasdada ahtung AhtUnG AHtuNg</h3></div>
                 </div>
             </div>
 
@@ -130,9 +131,7 @@ if (is_object($user)){
 
 <?php
 require_once './Flow.php';
-$f = new Flow(0.3e-6, 0.9e-6, 0, 0.1, 0.4,  0.0000000028, 100000, 0.01);
-$f->simu();
-var_dump($f);
-var_dump($f->simu());
+require_once './user/User.php';
+
 //var_dump(rand(1,10000)*0.0001);
 ?>

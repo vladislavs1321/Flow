@@ -80,10 +80,6 @@ li>input:focus{
     outline: none!important;
     
 }
-form.varaibles{
-    background-color: rgba(0,0,0, 0.7);       
-    border-radius: 10px; 
-}
 input[type=submit]{ 
     background: red;
     display: inline-block;
@@ -187,9 +183,27 @@ div>input:focus{
     cursor: pointer;
 }
 .vars {
-    
+    height: 360px;
+    width: 900px;
     display: inline-block;
 }
 .vars > input{
     display: block;
+    
   }
+
+form.varaibles{
+    background-color: rgba(0,0,0, 0.7);       
+    border-radius: 10px; 
+    display: inline-block;
+}
+.description{
+    position: absolute;
+    color: #FFF;
+    display: inline-block;
+    width: auto;
+    height: 340px;
+    background-color: rgba(0,0,0, 0.7);       
+    border-radius: 10px;
+    margin-left: 10px;
+}

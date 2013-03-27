@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function() {
-    //          ***    SUBMITTING FORM  ***
+    //          ***    SUBMITTING AUTH FORM  ***
     $('#entr, .sign-up').on('click', function(e) {
         e.preventDefault();
         that = this;
@@ -45,7 +45,26 @@ $(document).ready(function() {
             ).removeClass('errored');
         }
     });
-    
+     //          ***    SUBMITTING GENERATION FORM  ***
+     $('#generate').on('click', function(e){
+         e.preventDefault();
+        that = this;
+        
+        $.get(
+            $(that).parents('form').attr('action'),
+            $(that).parents('form').serialize(),
+            function(responce){
+                if(true === responce.success){
+                    alert('YEAH!');
+                }else{
+                    alert('SHIT!!!');
+                }
+                
+            },
+            'json'
+        );
+         
+     });
 /** LOOK AT THIS **/
     
     // Add event on hidden link to initialize pageslider open/close event

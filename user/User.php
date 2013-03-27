@@ -1,6 +1,6 @@
 <?php
 require_once 'AbstractUser.php';
-require_once '../Flow.php';
+require_once __DIR__ . '/../Flow.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -24,11 +24,31 @@ class User extends AbstractUser {
         $this->username = $userData['username'];
         $this->password = $userData['password'];
         $this->hash = $this->generateHash();
-        $this->database=$database;
+        $this->database = $database;
     }
     
-    public function generateFlow(){
-         
+    public function generateFlow()
+    {
+        $flow = new Flow(0.3e-6, 0.9e-6, 0, 0.1, 0.4,  0.0000000028, 100000, 0.01);
+        $dataUrl = $flow->simu();
+        if(false === $this->insertFlowData($dataUrl)){
+            return false;
+        }
+        return true;
+    }
+    
+    public function insertFlowData($dataUrl)
+    {
+        $db = $this->getDatabase();
+        $query = sprintf("INSERT INTO flow.flow_data (data_url, user_id  ) VALUES ('%s', %d)",
+            $dataUrl,
+            $this->userId
+        );
+        if(false === $db->unselect($query)){
+            var_dump($db->error);
+            return false;
+        };
+        return true;
     }
 
     protected function generateHash()
@@ -58,6 +78,11 @@ class User extends AbstractUser {
     
     public function getUsername(){
         return $this->username;
+    }
+    
+    public function getDatabase()
+    {
+        return $this->database;
     }
     
     public function setUsername($username){
