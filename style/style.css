@@ -14,10 +14,11 @@ a {
 
 
 body{
+    position: absolute;
     background: url(bg.png);
     height: 100%;
     width: 100%;
-    min-width: 1000px;
+    min-width: 1280px;
     margin: 0;
     padding: 0;
 }
@@ -145,14 +146,14 @@ div>input:focus{
     color: #ffffff;
 }
 .header{
-    text-align: right;
-    padding: 45px 45px 0px 450px;
-    vertical-align: middle;
+    text-align: center;
+    vertical-align: bottom;
     font-family: sw, jokerman;
     font-size: 110px;
-    width: auto;
+    width: 100%;
     height: 200px;
-    min-width: 1161px;
+    line-height: 200px;
+    min-width: 1280px;
 }
 
 .main-menu{
@@ -206,4 +207,42 @@ form.varaibles{
     background-color: rgba(0,0,0, 0.7);       
     border-radius: 10px;
     margin-left: 10px;
+}
+
+.matherfacker {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-width: 1280px;
+}
+
+.new-content {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+.new-content > div {
+    height: 100%;
+    float: left;
+}
+
+.block-1 {
+    width: 25%;
+    min-width: 400px;
+    background-color: #F18103;
+}
+.block-2 {
+    max-width: 60%;
+    width: 100%;
+    background-color: #ff0059;
+}
+.block-3 {
+    position: absolute;
+    right: 0;
+    width: 10%;
+    min-width: 300px;
+    background-color: #ccc;
 }
