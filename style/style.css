@@ -161,7 +161,7 @@ div>input:focus{
 }
 .header{
     text-align: right;
-    padding: 45px 45px 0px 450px;
+    padding: 45px 332px 0px 300px;
     vertical-align: middle;
     font-family: sw, jokerman;
     font-size: 110px;
@@ -179,8 +179,11 @@ div>input:focus{
 }
 
 .login{
+    position: absolute;
+    margin-right: 0px;
+    margin-left: 1750px;
     padding-right: 10px;
-    margin: 0;
+   
     float: right;
     display: inline-block;
 }
@@ -199,7 +202,7 @@ div>input:focus{
 }
 .vars {
     height: 360px;
-    width: 850px;
+    width: 760px;
     display: inline-block;
 }
 .vars > input{

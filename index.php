@@ -24,7 +24,20 @@ if (is_object($user)){
         <div class="header">
             Flow Generation
         </div>
-
+        <div>
+            <div class="login">
+                <span>
+                    <span class="username"><?php echo(isset($username) ? $username : ""); ?></span>
+                    <?php if(!isset($username)):?>
+                    <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
+                    <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
+                    <?php else:?>
+                    <a href='http://flow.local/user/resetCookie.php'><img style='cursor: pointer;margin-left: 5px;' class='logout' src='images/logout.png' title='Log Out'/></a>
+                    <?php endif;?>
+                </span>
+            </div>
+        </div>
+        
         <div class="content">
             <div class="x">
                 
@@ -67,14 +80,14 @@ if (is_object($user)){
                     </form>
                     <div class="description"><h3>ASASdasdada ahtung AhtUnG AHtuNg</h3></div>
                 </div>
-                <div class="userpage">
-                <div>
             </div>
+            <div class="userpage">850*360
+            </div>
+        </div>
 
             
 
 
-            
             
             <div id="modal">
 <!--                 SI modal login -->
@@ -124,17 +137,6 @@ if (is_object($user)){
             </div>
         </div>
         
-        <div class="login">
-            <span>
-                <span class="username"><?php echo(isset($username) ? $username : ""); ?></span>
-                <?php if(!isset($username)):?>
-                <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
-                <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
-                <?php else:?>
-                <a href='http://flow.local/user/resetCookie.php'><img style='cursor: pointer;margin-left: 5px;' class='logout' src='images/logout.png' title='Log Out'/></a>
-                <?php endif;?>
-            </span>
-        </div>
         
         <div class="footer">
         </div>
