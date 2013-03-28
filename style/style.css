@@ -7,6 +7,10 @@
     font-family: neu;
     src: url(Neu.ttf);
 }
+@font-face {
+    font-family: DSP;
+    src: url(DSProgress-SemiBold.ttf);
+}
 
 a {
    text-decoration: none;
@@ -49,8 +53,19 @@ div>input[type="text"]:focus {
     color: #ff0059;
 }
 ul{
+    padding-right: 40px;
     padding-top: 15px;
     list-style: none;
+}
+ul>input{
+    color: #FFF;
+    margine-left: 10px;
+}
+.chkbx {
+    color: #fff;
+    padding-left: 0px;
+    padding-top: 0px;
+    
 }
 li>span{
     color: #fff;
@@ -165,8 +180,11 @@ div>input:focus{
 }
 
 .login{
+    position: absolute;
+    margin-right: 0px;
+    margin-left: 1750px;
     padding-right: 10px;
-    margin: 0;
+   
     float: right;
     display: inline-block;
 }
@@ -185,13 +203,13 @@ div>input:focus{
 }
 .vars {
     height: 360px;
-    width: 900px;
+    width: 760px;
     display: inline-block;
 }
 .vars > input{
     display: block;
     
-  }
+  } 
 
 form.varaibles{
     background-color: rgba(0,0,0, 0.7);       
@@ -245,4 +263,17 @@ form.varaibles{
     width: 10%;
     min-width: 300px;
     background-color: #ccc;
+}
+
+.varaibles-header{
+    padding-bottom: 20px;
+}
+fieldset{
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+}
+legend>span{
+    color: #FFF;
+    font-family: DSP, sans-serif;
 }

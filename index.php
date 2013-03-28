@@ -24,7 +24,20 @@ if (is_object($user)){
         <div class="header">
             Flow Generation
         </div>
-
+        <div>
+            <div class="login">
+                <span>
+                    <span class="username"><?php echo(isset($username) ? $username : ""); ?></span>
+                    <?php if(!isset($username)):?>
+                    <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
+                    <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
+                    <?php else:?>
+                    <a href='http://flow.local/user/resetCookie.php'><img style='cursor: pointer;margin-left: 5px;' class='logout' src='images/logout.png' title='Log Out'/></a>
+                    <?php endif;?>
+                </span>
+            </div>
+        </div>
+        
         <div class="content">
             <div class="x">
                 
@@ -36,6 +49,24 @@ if (is_object($user)){
                 <div class="vars">
                     <form class="varaibles" method="get" action="user/generateFlow.php" >
                         <ul>
+                            <div >
+                                <div class="varaibles-header">
+                                    <fieldset>
+                                        <legend><span>&nbsp;Generation Method&nbsp;</span></legend>
+                                        <ul class="chkbx">
+                                            <li>
+                                                <input type="checkbox" name="f1" value="f1"><span>Focus factor</span>
+                                                <input type="checkbox" name="f2" value="f2"><span>Triplet</span>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            
+                            <fieldset>
+                                <legend><span class="varaibles-header">&nbsp;Input Data&nbsp;</span></legend>
+                            </fieldset>
+                            
                             <li><input type="text" name="w0" value="" placeholder="w0"><span>in metres</span>
                             <li><input type="text" name="z0" value="" placeholder="z0"><span>in metres</span>
                             <li><input type="text" name="startTime" value="" placeholder="Start time"><span>in seconds</span>
@@ -43,18 +74,20 @@ if (is_object($user)){
                             <li><input type="text" name="F" value="" placeholder="Focus factor"><span>between 0 and 1</span>
                             <li><input type="text" name="diffusion" value="" placeholder=" Molecules diffusion"><span>q</span>
                             <li><input type="text" name="brightness" value="" placeholder="brightness"><span>in Hz</span>
-                            <li><input type="text" name="Neff" value="" placeholder="Neff"><span>q</span>
+                            <li><input type="text" name="Neff" value="" placeholder="number of molecules in a volume"><span>pcs</span>
                         </ul>
                         <input id="generate" type="submit" value="generate">
                     </form>
                     <div class="description"><h3>ASASdasdada ahtung AhtUnG AHtuNg</h3></div>
                 </div>
             </div>
+            <div class="userpage">850*360
+            </div>
+        </div>
 
             
 
 
-            
             
             <div id="modal">
 <!--                 SI modal login -->
@@ -102,20 +135,8 @@ if (is_object($user)){
                 </div>
 <!--                 end SI modal registration -->
             </div>
-            
         </div>
         
-        <div class="login">
-            <span>
-                <span class="username"><?php echo(isset($username) ? $username : ""); ?></span>
-                <?php if(!isset($username)):?>
-                <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
-                <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
-                <?php else:?>
-                <a href='http://flow.local/user/resetCookie.php'><img style='cursor: pointer;margin-left: 5px;' class='logout' src='images/logout.png' title='Log Out'/></a>
-                <?php endif;?>
-            </span>
-        </div>
         
         <div class="footer">
         </div>
