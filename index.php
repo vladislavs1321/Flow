@@ -18,78 +18,81 @@ if (is_object($user)){
         <script type="text/javascript" src="js/jquery-1.9.min.js"></script>
         <script type="text/javascript" src="js/jquery.animateshadow.min.js"></script>
         <script type="text/javascript" src="js/jquery.cookies.2.2.0.min.js"></script>
+        <script type="text/javascript" src="js/livevalidation-1.3.min.js"></script>
     </head>
 
     <body>
-        <div class="header">
-            Flow Generation
-        </div>
-        <div>
-            <div class="login">
-                <span>
-                    <span class="username"><?php echo(isset($username) ? $username : ""); ?></span>
-                    <?php if(!isset($username)):?>
-                    <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
-                    <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
-                    <?php else:?>
-                    <a href='http://flow.local/user/resetCookie.php'><img style='cursor: pointer;margin-left: 5px;' class='logout' src='images/logout.png' title='Log Out'/></a>
-                    <?php endif;?>
-                </span>
+            <div class="header">
+                <span>Flow Generation</span>
             </div>
-        </div>
-        
-        <div class="content">
-            <div class="x">
+            
+            <div class="new-content">
                 
-                <div class="main-menu">
+                <div class="block-1">
+                    <div class="main-menu">
                     <div class="option-button">START</div>
                     <div class="option-button">DESCRIPTION</div>
                     <div class="option-button">DOWNLOAD</div>
                 </div>
-                <div class="vars">
-                    <form class="varaibles" method="get" action="user/generateFlow.php" >
-                        <ul>
-                            <div >
-                                <div class="varaibles-header">
-                                    <fieldset>
-                                        <legend><span>&nbsp;Generation Method&nbsp;</span></legend>
-                                        <ul class="chkbx">
-                                            <li>
-                                                <input type="checkbox" name="f1" value="f1"><span>Focus factor</span>
-                                                <input type="checkbox" name="f2" value="f2"><span>Triplet</span>
-                                            </li>
-                                        </ul>
-                                    </fieldset>
+                </div>
+                
+                <div class="block-2">
+                    <div class="vars">
+                        <form class="varaibles" method="get" action="user/generateFlow.php" >
+                            <ul>
+                                <div>
+                                    <div class="varaibles-header">
+                                        <fieldset>
+                                            <legend><span>&nbsp;Generation Method&nbsp;</span></legend>
+                                            <ul class="chkbx">
+                                                <li>
+                                                    <input type="checkbox" name="f1" value="f1"><span>Focus factor</span>
+                                                    <input type="checkbox" name="f2" value="f2"><span>Triplet</span>
+                                                </li>
+                                            </ul>
+                                        </fieldset>
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <fieldset>
-                                <legend><span class="varaibles-header">&nbsp;Input Data&nbsp;</span></legend>
-                            </fieldset>
-                            
-                            <li><input type="text" name="w0" value="" placeholder="w0"><span>in metres</span>
-                            <li><input type="text" name="z0" value="" placeholder="z0"><span>in metres</span>
-                            <li><input type="text" name="startTime" value="" placeholder="Start time"><span>in seconds</span>
-                            <li><input type="text" name="endTime" value="" placeholder="End time"><span>in seconds</span>
-                            <li><input type="text" name="F" value="" placeholder="Focus factor"><span>between 0 and 1</span>
-                            <li><input type="text" name="diffusion" value="" placeholder=" Molecules diffusion"><span>q</span>
-                            <li><input type="text" name="brightness" value="" placeholder="brightness"><span>in Hz</span>
-                            <li><input type="text" name="Neff" value="" placeholder="number of molecules in a volume"><span>pcs</span>
-                        </ul>
-                        <input id="generate" type="submit" value="generate">
-                    </form>
+
+                                <fieldset>
+                                    <legend><span class="varaibles-header">&nbsp;Input Data&nbsp;</span></legend>
+                                </fieldset>
+
+                                <li><input id="w0"type="text" name="w0" value="" placeholder="w0"><span>in metres</span>
+                                <li><input id="z0" type="text" name="z0" value="" placeholder="z0"><span>in metres</span>
+                                <li><input id="startTime" type="text" name="startTime" value="" placeholder="Start time"><span>in seconds</span>
+                                <li><input id="endTime" type="text" name="endTime" value="" placeholder="End time"><span>in seconds</span>
+                                <li><input id="F" type="text" name="F" value="" placeholder="Focus factor"><span>between 0 and 1</span>
+                                <li><input id="diffusion" type="text" name="diffusion" value="" placeholder=" Molecules diffusion"><span>q</span>
+                                <li><input id="brightness" type="text" name="brightness" value="" placeholder="brightness"><span>in Hz</span>
+                                <li><input id="Neff" type="text" name="Neff" value="" placeholder="number of molecules in a volume"><span>pcs</span>
+                            </ul>
+                            <input id="generate" type="submit" value="generate">
+                        </form>
+                    </div>
                     <div class="description"><h3>ASASdasdada ahtung AhtUnG AHtuNg</h3></div>
+
+                    <div class="userpage">850*360
+                    </div>
+                </div>
+
+                
+                <div class="block-3">
+                    <div class="login">
+                        <span>
+                            <span class="username"><?php echo(isset($username) ? $username : ""); ?></span>
+                            <?php if(!isset($username)):?>
+                            <img class="show-pageslider" data-open-slide="login" src="images/login.png" title="Log In"/>
+                            <img class="show-pageslider" data-open-slide="register" src="images/sign_up.png" title="Sign Up"/>
+                            <?php else:?>
+                            <a href='http://flow.local/user/resetCookie.php'><img style='cursor: pointer;margin-left: 5px;' class='logout' src='images/logout.png' title='Log Out'/></a>
+                            <?php endif;?>
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="userpage">850*360
-            </div>
-        </div>
-
-            
-
-
-            
-            <div id="modal">
+        
+        <div id="modal">
 <!--                 SI modal login -->
                 <div data-slider="login" class="sub-modal" style="display: none;">
                     <form id="login-form" method="post" action='user/autorization.php'>
@@ -133,13 +136,6 @@ if (is_object($user)){
                         <div id="login-box-name" class="error-message"></div>
                     </form>
                 </div>
-<!--                 end SI modal registration -->
-            </div>
-        </div>
-        
-        
-        <div class="footer">
-        </div>
         
         <!--         Hidden element to initialize pageslider open/close -->
         <a href="#modal" id="pageslider-initiator" style="display: none;"></a>

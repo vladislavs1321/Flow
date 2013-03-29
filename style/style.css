@@ -87,6 +87,18 @@ li>input{
     -moz-transition: border linear .2s, box-shadow linear .2s;
     -o-transition: border linear .2s, box-shadow linear .2s;
 }
+li>input.valid{
+     border-color: chartreuse;
+}
+li>input.valid:focus{
+    border-color: chartreuse;
+}
+li>input.invalid{
+    border-color: #ff0059;
+}
+li>input.invalid:focus{
+    border-color: #ff0059;
+}
 li>input:focus{
     border-color: rgba(255, 140, 0, 1);
     box-shadow: 0px 0px 1px 1px rgba(255, 140, 0, 1)!important;
@@ -173,7 +185,7 @@ div>input:focus{
 
 .main-menu{
    
-    padding-left: 200px;
+    padding-left: 100px;
     display: inline-block;
     margin-right: 100px;
     vertical-align: text-bottom;
@@ -182,10 +194,8 @@ div>input:focus{
 .login{
     position: absolute;
     margin-right: 0px;
-    margin-left: 1750px;
     padding-right: 10px;
-   
-    float: right;
+    right: 0;
     display: inline-block;
 }
 
@@ -227,20 +237,13 @@ form.varaibles{
     margin-left: 10px;
 }
 
-.matherfacker {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    min-width: 1280px;
-}
-
 .new-content {
     position: relative;
     height: 500px;
     width: 100%;
     margin: 0;
     padding: 0;
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
 .new-content > div {
     height: 100%;
@@ -248,21 +251,24 @@ form.varaibles{
 }
 
 .block-1 {
+    overflow:hidden;
     width: 25%;
     min-width: 400px;
-    background-color: #F18103;
+    /*background-color: #F18103;*/
 }
 .block-2 {
+    overflow:hidden;
     max-width: 60%;
     width: 100%;
-    background-color: #ff0059;
+    /*background-color: #ff0059;*/
 }
 .block-3 {
+    overflow:hidden;
     position: absolute;
     right: 0;
     width: 10%;
     min-width: 300px;
-    background-color: #ccc;
+    /*background-color: #ccc;*/
 }
 
 .varaibles-header{
@@ -276,4 +282,33 @@ fieldset{
 legend>span{
     color: #FFF;
     font-family: DSP, sans-serif;
+}
+
+.LV_validation_message{
+    font-weight:bold;
+    margin:0 0 0 5px;
+}
+
+.LV_valid {
+    color:#00CC00!important;
+}
+	
+.LV_invalid {
+    color:#CC0000!important;
+}
+    
+.LV_valid_field,
+input.LV_valid_field:hover, 
+input.LV_valid_field:active,
+textarea.LV_valid_field:hover, 
+textarea.LV_valid_field:active {
+    border: 1px solid #00CC00!important;
+}
+    
+.LV_invalid_field, 
+input.LV_invalid_field:hover, 
+input.LV_invalid_field:active,
+textarea.LV_invalid_field:hover, 
+textarea.LV_invalid_field:active {
+    border: 1px solid #CC0000!important;
 }
