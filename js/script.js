@@ -69,11 +69,32 @@ $(document).ready(function() {
         if(true === $(this).prop("checked")){
             $('ul.input-data').append('<li class="F"><input id="F" type="text" name="F" value="" placeholder="Focus factor"><span>between 0 and 1</span>');
             liveValidation("F").add( Validate.Numericality, {minimum: 0, maximum: 1});
-         } else{
+            $('fieldset.generation-method').append('<li class="F"><span>outfocus factor</span>');
+        } else{
             $('ul.input-data').find('li.F').remove();
-            
+            $('fieldset.generation-method').find('li.F').remove();
         }
-     } );
+     });
+     
+     $('#T').on('click',function(){
+        if(true === $(this).prop("checked")){
+            $('fieldset.generation-method').append('<li class="T"><span>triplet states</span>');
+        } else{
+            $('fieldset.generation-method').find('li.T').remove();
+        }
+     });
+     
+     $('#history').on('click',function(){
+         if( $('#start').hasClass('active') ){
+             $(this).removeClass('passive').addClass('active');
+         }
+     });
+         
+     $('#start').on('click',function(){
+         if( $('#history').hasClass('active') ){
+             $(this).removeClass('active').addClass('passive');
+         }
+     });
          
      //          ***    VALIDATION GENERATION FORM  ***
     liveValidation("w0").add( Validate.Numericality, {minimum: 0.0000001, maximum: 10});

@@ -26,8 +26,8 @@ class Flow {
     public $invIntensity;
     
     
-//    public $fileUploadDir = '/home/vladislav/web/flow.local/data/';// linux
-    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
+    public $fileUploadDir = '/home/vladislav/web/flow.local/data/';// linux
+//    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
    
     function __construct($w0, $z0, $startTime, $endTime, $F, $diffusion, $brightness, $Neff) {
         $this->w0           = $w0;
@@ -89,7 +89,13 @@ class Flow {
         $events = array();
         $numberOfEvents = 0;
         $flowName = time();
-        $fp = fopen($this->fileUploadDir . $flowName.".txt", 'w+');
+        
+        if(false === $fp = fopen($this->fileUploadDir . $flowName.".txt", 'w+')){
+            var_dump("cant create flow_data file in current dir");
+            return false;
+            exit;
+        }
+                ;
         
         for ($k = 0; $k < $this->molecules->count; $k++){
             
@@ -104,7 +110,7 @@ class Flow {
                 
                 while(true){
                     
-                    $previousEvent = $currentEvent;
+                     $previousEvent = $currentEvent;
                     $currentEvent = $previousEvent-$this->invIntensity*log(rand(1,10000)*0.0001);
                     
                     if($currentEvent > $this->endTime){
@@ -122,7 +128,7 @@ class Flow {
                             ){
                                 $numberOfEvents++;
                                 $events[$numberOfEvents] = $previousEvent;
-                                var_dump($events);
+//                                var_dump($events);
                                 fwrite($fp, $previousEvent."\n");
                     }
                     $sigma = sqrt(2*$this->molecules->diffusion*($currentEvent-$previousEvent));
@@ -138,7 +144,7 @@ class Flow {
             }
         }
         
-        var_dump($events);
+//        var_dump($events);
         fclose($fp);
         
         $dataUrl = $this->fileUploadDir . $flowName.".txt";

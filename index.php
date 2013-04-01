@@ -30,15 +30,15 @@ if (is_object($user)){
                 
                 <div class="block-1">
                     <div class="main-menu">
-                    <div class="option-button">START</div>
-                    <div class="option-button">DESCRIPTION</div>
-                    <div class="option-button">DOWNLOAD</div>
-                </div>
+                        <div id="start " class="option-button passive">START</div>
+                        <div class="option-button">DESCRIPTION</div>
+                        <div id ="history " class="option-button active">HISTORY</div>
+                    </div>
                 </div>
                 
                 <div class="block-2">
                     
-                    <div class="vars">
+                    <!--<div class="vars">
                         <form class="varaibles" method="get" action="user/generateFlow.php" >
                             <ul class="input-data">
                                 <div>
@@ -73,30 +73,73 @@ if (is_object($user)){
                                 <h3 style="display: inline-block;padding-right: 10px;">DESCRIPTION</h3><span>Date of creating flow</span>
                             </div>
                             <ul>
-                                <fieldset>
+                                <fieldset class="generation-method">
                                     <legend><span>Flow Generation Method</span></legend>
                                     <li><span>molecules diffusion pocess</span>
-                                    <li><span>outfocus factor</span>
-                                    <li><span>triplet states</span>
                                 </fieldset>
                                 <fieldset>
                                     <legend><span>Parametrs of Generation</span></legend>
-                                    <li>w0
-                                    <li>z0
-                                    <li>startTime
-                                    <li>endTime
-                                    <li>bighthess
-                                    <li>intensity
-                                    <li>Neff
-                                    <li>F factor
+                                    <li><span class="varaible">w0</span><span class="value" >3e-6</span> 
+                                    <li><span class="varaible">z0</span><span class="value" >3e-6</span>
+                                    <li><span class="varaible">startTime</span><span class="value" >0</span>
+                                    <li><span class="varaible">endTime</span><span class="value" >2</span>
+                                    <li><span class="varaible">bighthess</span><span class="value" >2.8e-10</span>
+                                    <li><span class="varaible">intensity</span><span class="value" >100000</span>
+                                    <li><span class="varaible">Neff</span><span class="value" >0.01</span>
+                                    <li><span class="varaible">F factor</span><span class="value" >0.7</span>
                                 </fieldset>
                             </ul>
                         </div>
                     </div>
+                    -->
                     
 
-                    <!--<div class="user-ststs">850*360-->
-                    <!--</div>-->
+                    <div class="history">flow history
+                        <ul>
+                            <li class="row">
+                                <span class="number">1</span>
+                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="description-link">view description</span>
+                                <span class="download">X<span>
+                            </li>
+                                
+                            <li class="row">
+                                <span class="number">1</span>
+                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="description-link">view description</span>
+                                <span class="download">X<span>
+                            </li>
+                                
+                            <li class="row">
+                                <span class="number">1</span>
+                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="description-link">view description</span>
+                                <span class="download">X<span>
+                            </li>
+                                
+                            <li class="row">
+                                <span class="number">1</span>
+                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="description-link">view description</span>
+                                <span class="download">X<span>
+                            </li>
+                                
+                            <li class="row">
+                                <span class="number">1</span>
+                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="description-link">view description</span>
+                                <span class="download">X<span>
+                            </li>
+                                
+                            <li class="row">
+                                <span class="number">1</span>
+                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="description-link">view description</span>
+                                <span class="download">X<span>
+                            </li>
+                            
+                        </ul>
+                    </div>
                 </div>
 
                 

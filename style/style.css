@@ -206,6 +206,9 @@ div>input:focus{
     display: block;
     height: 100px;
 }
+.active{
+    opacity: 1!important;
+}
 .option-button:hover{
     -webkit-transition: opacity 1s linear;
     opacity: 1;
@@ -226,13 +229,20 @@ form.varaibles{
     border-radius: 10px; 
     display: inline-block;
 }
-.user-ststs{
+.history{
     width: 800px;
     background-color: rgba(0,0,0, 0.7);   
     height: 400px;
     color: #FFF;
     border-radius: 10px;
     margin-left: 10px;
+}
+.row{
+    padding-bottom: 20px;
+    font-family: arial;
+}
+.row>span{
+    padding-right: 30px;
 }
 .description{
     position: absolute;
