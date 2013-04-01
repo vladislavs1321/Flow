@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Molecules.php';
-require_once 'gauss.php';
+require_once __DIR__.'/gauss.php';
 
 /**
  * Description of Flow
@@ -26,7 +26,8 @@ class Flow {
     public $invIntensity;
     
     
-    public $fileUploadDir = '/home/vladislav/web/flow.local/data/';
+//    public $fileUploadDir = '/home/vladislav/web/flow.local/data/';// linux
+    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
    
     function __construct($w0, $z0, $startTime, $endTime, $F, $diffusion, $brightness, $Neff) {
         $this->w0           = $w0;
@@ -120,8 +121,8 @@ class Flow {
                                   )
                             ){
                                 $numberOfEvents++;
-           
                                 $events[$numberOfEvents] = $previousEvent;
+                                var_dump($events);
                                 fwrite($fp, $previousEvent."\n");
                     }
                     $sigma = sqrt(2*$this->molecules->diffusion*($currentEvent-$previousEvent));
@@ -137,7 +138,7 @@ class Flow {
             }
         }
         
-        //var_dump($events);
+        var_dump($events);
         fclose($fp);
         
         $dataUrl = $this->fileUploadDir . $flowName.".txt";

@@ -37,43 +37,66 @@ if (is_object($user)){
                 </div>
                 
                 <div class="block-2">
+                    
                     <div class="vars">
                         <form class="varaibles" method="get" action="user/generateFlow.php" >
-                            <ul>
+                            <ul class="input-data">
                                 <div>
                                     <div class="varaibles-header">
                                         <fieldset>
                                             <legend><span>&nbsp;Generation Method&nbsp;</span></legend>
                                             <ul class="chkbx">
                                                 <li>
-                                                    <input type="checkbox" name="f1" value="f1"><span>Focus factor</span>
-                                                    <input type="checkbox" name="f2" value="f2"><span>Triplet</span>
+                                                    <input id="Ffactor" type="checkbox" name="f1" value="f1"><span>Focus factor</span>
+                                                    <input id="T" type="checkbox" name="f2" value="f2"><span>Triplet</span>
                                                 </li>
                                             </ul>
                                         </fieldset>
                                     </div>
                                 </div>
-
                                 <fieldset>
                                     <legend><span class="varaibles-header">&nbsp;Input Data&nbsp;</span></legend>
                                 </fieldset>
-
                                 <li><input id="w0"type="text" name="w0" value="" placeholder="w0"><span>in metres</span>
                                 <li><input id="z0" type="text" name="z0" value="" placeholder="z0"><span>in metres</span>
                                 <li><input id="startTime" type="text" name="startTime" value="" placeholder="Start time"><span>in seconds</span>
                                 <li><input id="endTime" type="text" name="endTime" value="" placeholder="End time"><span>in seconds</span>
-                                <li><input id="F" type="text" name="F" value="" placeholder="Focus factor"><span>between 0 and 1</span>
-                                <li><input id="diffusion" type="text" name="diffusion" value="" placeholder=" Molecules diffusion"><span>q</span>
-                                <li><input id="brightness" type="text" name="brightness" value="" placeholder="brightness"><span>in Hz</span>
-                                <li><input id="Neff" type="text" name="Neff" value="" placeholder="number of molecules in a volume"><span>pcs</span>
+                                <li><input id="diffusion" type="text" name="diffusion" value="" placeholder="Molecules diffusion"><span>metres<sup>2</sup>/seconds</span>
+                                <li><input id="brightness" type="text" name="brightness" value="" placeholder="Brightness"><span>in Hz</span>
+                                <li><input id="Neff" type="text" name="Neff" value="" placeholder="Molecules in a volume"><span>pcs</span>
                             </ul>
                             <input id="generate" type="submit" value="generate">
                         </form>
+                        
+                        <div class="description">
+                            <div>
+                                <h3 style="display: inline-block;padding-right: 10px;">DESCRIPTION</h3><span>Date of creating flow</span>
+                            </div>
+                            <ul>
+                                <fieldset>
+                                    <legend><span>Flow Generation Method</span></legend>
+                                    <li><span>molecules diffusion pocess</span>
+                                    <li><span>outfocus factor</span>
+                                    <li><span>triplet states</span>
+                                </fieldset>
+                                <fieldset>
+                                    <legend><span>Parametrs of Generation</span></legend>
+                                    <li>w0
+                                    <li>z0
+                                    <li>startTime
+                                    <li>endTime
+                                    <li>bighthess
+                                    <li>intensity
+                                    <li>Neff
+                                    <li>F factor
+                                </fieldset>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="description"><h3>ASASdasdada ahtung AhtUnG AHtuNg</h3></div>
+                    
 
-                    <div class="userpage">850*360
-                    </div>
+                    <!--<div class="user-ststs">850*360-->
+                    <!--</div>-->
                 </div>
 
                 

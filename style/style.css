@@ -226,12 +226,20 @@ form.varaibles{
     border-radius: 10px; 
     display: inline-block;
 }
+.user-ststs{
+    width: 800px;
+    background-color: rgba(0,0,0, 0.7);   
+    height: 400px;
+    color: #FFF;
+    border-radius: 10px;
+    margin-left: 10px;
+}
 .description{
     position: absolute;
     color: #FFF;
     display: inline-block;
     width: auto;
-    height: 340px;
+    height: auto;
     background-color: rgba(0,0,0, 0.7);       
     border-radius: 10px;
     margin-left: 10px;
@@ -286,7 +294,7 @@ legend>span{
 
 .LV_validation_message{
     font-weight:bold;
-    margin:0 0 0 5px;
+    margin:0px 10px 0px 0px;
 }
 
 .LV_valid {

@@ -63,52 +63,27 @@ $(document).ready(function() {
             },
             'json'
         );
-         
      });
      
+     $('#Ffactor').on('click',function(){
+        if(true === $(this).prop("checked")){
+            $('ul.input-data').append('<li class="F"><input id="F" type="text" name="F" value="" placeholder="Focus factor"><span>between 0 and 1</span>');
+            liveValidation("F").add( Validate.Numericality, {minimum: 0, maximum: 1});
+         } else{
+            $('ul.input-data').find('li.F').remove();
+            
+        }
+     } );
+         
      //          ***    VALIDATION GENERATION FORM  ***
+    liveValidation("w0").add( Validate.Numericality, {minimum: 0.0000001, maximum: 10});
+    liveValidation("z0").add( Validate.Numericality, {minimum: 0.0000001, maximum: 10});
+    liveValidation("startTime").add( Validate.Numericality, {minimum: 0, maximum: 3600, onlyInteger: true});
+    liveValidation("endTime").add( Validate.Numericality, {minimum: 0, maximum: 3600 });
+    liveValidation("diffusion").add( Validate.Numericality, {minimum: 1e-12, maximum: 2.8e-10});
+    liveValidation("brightness").add( Validate.Numericality, {minimum: 10000, maximum: 150000, onlyInteger: true});
+    liveValidation("Neff").add( Validate.Numericality, {minimum: 0.01, maximum: 5});
      
-    function liveValidation(id){
-        var lv = new LiveValidation( 
-            id,{
-                onValid: function() {
-                    this.addFieldClass();
-                    if($(this.element).hasClass("LV_valid_field")){
-                        setValidColor(this);
-                    }
-                },
-                onInvalid: function() {
-                    this.addFieldClass();
-                    this.insertMessage(
-                        this.createMessageSpan() 
-                    );
-                    if($(this.element).hasClass("LV_invalid_field")){
-                        setInvalidColor(this);
-                    }
-                },   
-                wait: 500
-            }
-        );
-        return lv;
-    }
-    
-    
-//    liveValidation("w0").add( Validate.Presence);
-    liveValidation("w0").add( Validate.Numericality, {minimum: 0, maximum: 10});
-    liveValidation("z0").add( Validate.Numericality, {minimum: 0, maximum: 10});
-     
-     
-    function setValidColor(validator){
-//        $(validator.element).css({"border-color" : "rgba(127, 255, 0, 1)"});
-//        $(validator.element).next('span').css({color: "chartreuse"});
-        $(validator.element).next('span').addClass('LV_valid');
-     }
-     
-     function setInvalidColor(validator){
-//        $(validator.element).css({"border-color" : "rgba(255, 0, 89, 1)"});
-//        $(validator.element).next('span').css({color: "#ff0059"});
-        $(validator.element).next('span').addClass('LV_invalid');
-     }
 /** LOOK AT THIS **/
     
     // Add event on hidden link to initialize pageslider open/close event
@@ -180,4 +155,36 @@ $(document).ready(function() {
                             .fadeIn(1000);
                     });
     }
+    
+    function liveValidation(id){
+        var lv = new LiveValidation( 
+            id,{
+                onValid: function() {
+                    this.addFieldClass();
+                    if($(this.element).hasClass("LV_valid_field")){
+                        setValidColor(this);
+                    }
+                },
+                onInvalid: function() {
+                    this.addFieldClass();
+                    this.insertMessage(
+                        this.createMessageSpan() 
+                    );
+                    if($(this.element).hasClass("LV_invalid_field")){
+                        setInvalidColor(this);
+                    }
+                },   
+                wait: 500
+            }
+        );
+        return lv;
+    }
+    
+    function setValidColor(validator){
+        $(validator.element).next('span').removeClass('LV_invalid').addClass('LV_valid');
+     }
+     
+     function setInvalidColor(validator){
+        $(validator.element).next('span').next().removeClass('LV_valid').addClass('LV_invalid');
+     }
 });
