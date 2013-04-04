@@ -30,15 +30,15 @@ if (is_object($user)){
                 
                 <div class="block-1">
                     <div class="main-menu">
-                        <div id="start " class="option-button passive">START</div>
+                        <div id="start" class="option-button passive">START</div>
                         <div class="option-button">DESCRIPTION</div>
-                        <div id ="history " class="option-button active">HISTORY</div>
+                        <div id ="history" class="option-button active">HISTORY</div>
                     </div>
                 </div>
                 
                 <div class="block-2">
                     
-                    <!--<div class="vars">
+                    <div class="vars">
                         <form class="varaibles" method="get" action="user/generateFlow.php" >
                             <ul class="input-data">
                                 <div>
@@ -62,7 +62,7 @@ if (is_object($user)){
                                 <li><input id="startTime" type="text" name="startTime" value="" placeholder="Start time"><span>in seconds</span>
                                 <li><input id="endTime" type="text" name="endTime" value="" placeholder="End time"><span>in seconds</span>
                                 <li><input id="diffusion" type="text" name="diffusion" value="" placeholder="Molecules diffusion"><span>metres<sup>2</sup>/seconds</span>
-                                <li><input id="brightness" type="text" name="brightness" value="" placeholder="Brightness"><span>in Hz</span>
+                                <li><input id="Intensity" type="text" name="Intensity" value="" placeholder="Intensity"><span>in Hz</span>
                                 <li><input id="Neff" type="text" name="Neff" value="" placeholder="Molecules in a volume"><span>pcs</span>
                             </ul>
                             <input id="generate" type="submit" value="generate">
@@ -70,31 +70,31 @@ if (is_object($user)){
                         
                         <div class="description">
                             <div>
-                                <h3 style="display: inline-block;padding-right: 10px;">DESCRIPTION</h3><span>Date of creating flow</span>
+                                <h3 style="display: inline-block;padding-right: 10px;">DESCRIPTION</h3>
+                                <span><?php $now=date("Y-m-d H:i:s");print_r($now);?></span>
                             </div>
                             <ul>
                                 <fieldset class="generation-method">
                                     <legend><span>Flow Generation Method</span></legend>
                                     <li><span>molecules diffusion pocess</span>
                                 </fieldset>
-                                <fieldset>
+                                <fieldset class="generation-parametres">
                                     <legend><span>Parametrs of Generation</span></legend>
-                                    <li><span class="varaible">w0</span><span class="value" >3e-6</span> 
-                                    <li><span class="varaible">z0</span><span class="value" >3e-6</span>
-                                    <li><span class="varaible">startTime</span><span class="value" >0</span>
-                                    <li><span class="varaible">endTime</span><span class="value" >2</span>
-                                    <li><span class="varaible">bighthess</span><span class="value" >2.8e-10</span>
-                                    <li><span class="varaible">intensity</span><span class="value" >100000</span>
-                                    <li><span class="varaible">Neff</span><span class="value" >0.01</span>
-                                    <li><span class="varaible">F factor</span><span class="value" >0.7</span>
+                                    <li><span class="varaible">w0</span><span class="value w0" ></span> 
+                                    <li><span class="varaible">z0</span><span class="value z0" ></span>
+                                    <li><span class="varaible">StartTime</span><span class="value startTime" ></span>
+                                    <li><span class="varaible">EndTime</span><span class="value endTime" ></span>
+                                    <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" ></span>
+                                    <li><span class="varaible">Intensity</span><span class="value intensity" ></span>
+                                    <li><span class="varaible">Neff</span><span class="value Neff" ></span>
                                 </fieldset>
                             </ul>
                         </div>
                     </div>
-                    -->
+                    
                     
 
-                    <div class="history">flow history
+<!--                    <div class="history">flow history
                         <ul>
                             <li class="row">
                                 <span class="number">1</span>
@@ -139,7 +139,7 @@ if (is_object($user)){
                             </li>
                             
                         </ul>
-                    </div>
+                    </div>-->
                 </div>
 
                 
@@ -215,6 +215,4 @@ if (is_object($user)){
 <?php
 require_once './Flow.php';
 require_once './user/User.php';
-
-//var_dump(rand(1,10000)*0.0001);
 ?>

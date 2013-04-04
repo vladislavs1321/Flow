@@ -128,7 +128,6 @@ class Flow {
                             ){
                                 $numberOfEvents++;
                                 $events[$numberOfEvents] = $previousEvent;
-//                                var_dump($events);
                                 fwrite($fp, $previousEvent."\n");
                     }
                     $sigma = sqrt(2*$this->molecules->diffusion*($currentEvent-$previousEvent));
@@ -144,7 +143,6 @@ class Flow {
             }
         }
         
-//        var_dump($events);
         fclose($fp);
         
         $dataUrl = $this->fileUploadDir . $flowName.".txt";

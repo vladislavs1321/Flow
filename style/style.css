@@ -209,6 +209,9 @@ div>input:focus{
 .active{
     opacity: 1!important;
 }
+passive{
+    opacity: 0.3!important;
+}
 .option-button:hover{
     -webkit-transition: opacity 1s linear;
     opacity: 1;
@@ -223,6 +226,13 @@ div>input:focus{
     display: block;
     
   } 
+  .value{
+      float: right;
+  }  
+  .varaible{
+      padding-right: 20px;
+  }
+  
 
 form.varaibles{
     background-color: rgba(0,0,0, 0.7);       

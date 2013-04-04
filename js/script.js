@@ -46,65 +46,79 @@ $(document).ready(function() {
         }
     });
      //          ***    SUBMITTING GENERATION FORM  ***
-     $('#generate').on('click', function(e){
-         e.preventDefault();
-        that = this;
-        
-        $.get(
-            $(that).parents('form').attr('action'),
-            $(that).parents('form').serialize(),
-            function(responce){
-                if(true === responce.success){
-                    alert('YEAH!');
-                }else{
-                    alert('SHIT!!!');
-                }
-                
-            },
-            'json'
-        );
-     });
-     
-     $('#Ffactor').on('click',function(){
+    $('#generate').on('click', function(e){
+        e.preventDefault();
+       that = this;
+
+       $.get(
+           $(that).parents('form').attr('action'),
+           $(that).parents('form').serialize(),
+           function(responce){
+               if(true === responce.success){
+                   alert('YEAH!');
+               }else{
+                   alert('SHIT!!!');
+               }
+
+           },
+           'json'
+       );
+    });
+
+    $('#Ffactor').on('click',function(){
         if(true === $(this).prop("checked")){
-            $('ul.input-data').append('<li class="F"><input id="F" type="text" name="F" value="" placeholder="Focus factor"><span>between 0 and 1</span>');
-            liveValidation("F").add( Validate.Numericality, {minimum: 0, maximum: 1});
-            $('fieldset.generation-method').append('<li class="F"><span>outfocus factor</span>');
+            $('ul.input-data').append('<li class="input-data-f"><input id="F" type="text" name="F" value="" placeholder="Focus factor"><span>between 0 and 1</span>');
+            $('fieldset.generation-method').append('<li class="generation-method-f"><span>outfocus factor</span>');
+            $('fieldset.generation-parametres').append('<li class="generation-parametres-f"><span class="varaible">F factor</span><span class="value F" ></span>');
+            if($('#F').length){
+                validators.push(liveValidation("F").add( Validate.Numericality, {minimum: 0, maximum: 1}));
+            }
         } else{
-            $('ul.input-data').find('li.F').remove();
-            $('fieldset.generation-method').find('li.F').remove();
+            $('ul.input-data').find('li.input-data-f').remove();
+            $('fieldset.generation-method').find('li.generation-method-f').remove();
+            $('fieldset.generation-parametres').find('li.generation-parametres-f').remove();
+            validators=validators.slice(0,validators.length-1);
         }
-     });
+    });
      
-     $('#T').on('click',function(){
+    $('#T').on('click',function(){
         if(true === $(this).prop("checked")){
             $('fieldset.generation-method').append('<li class="T"><span>triplet states</span>');
         } else{
             $('fieldset.generation-method').find('li.T').remove();
         }
-     });
+    });
      
-     $('#history').on('click',function(){
-         if( $('#start').hasClass('active') ){
-             $(this).removeClass('passive').addClass('active');
-         }
-     });
+    $('#history').on('click',function(){
+        if( $('#start').hasClass('active') ){
+            $('#start').removeClass('active').addClass('passive');
+            $('#history').addClass('active');
+        }
+    });
          
-     $('#start').on('click',function(){
-         if( $('#history').hasClass('active') ){
-             $(this).removeClass('active').addClass('passive');
-         }
-     });
+    $('#start').on('click',function(){
+        if( $('#history').hasClass('active') ){
+            $('#history').removeClass('active').addClass('passive');
+            $('#start').addClass('active');
+        }
+    });
          
      //          ***    VALIDATION GENERATION FORM  ***
-    liveValidation("w0").add( Validate.Numericality, {minimum: 0.0000001, maximum: 10});
-    liveValidation("z0").add( Validate.Numericality, {minimum: 0.0000001, maximum: 10});
-    liveValidation("startTime").add( Validate.Numericality, {minimum: 0, maximum: 3600, onlyInteger: true});
-    liveValidation("endTime").add( Validate.Numericality, {minimum: 0, maximum: 3600 });
-    liveValidation("diffusion").add( Validate.Numericality, {minimum: 1e-12, maximum: 2.8e-10});
-    liveValidation("brightness").add( Validate.Numericality, {minimum: 10000, maximum: 150000, onlyInteger: true});
-    liveValidation("Neff").add( Validate.Numericality, {minimum: 0.01, maximum: 5});
-     
+    var validators = [];
+    if($('#w0').length){validators.push(liveValidation("w0").add( Validate.Numericality, {minimum: 0.0000001, maximum: 10}));}
+    if($('#z0').length){validators.push(liveValidation("z0").add( Validate.Numericality, {minimum: 0.0000001, maximum: 10}));}
+    if($('#startTime').length){validators.push(liveValidation("startTime").add( Validate.Numericality, {minimum: 0, maximum: 3600, onlyInteger: true}));}
+    if($('#endTime').length){validators.push(liveValidation("endTime").add( Validate.Numericality, {minimum: 0, maximum: 3600 }));}
+    if($('#diffusion').length){validators.push(liveValidation("diffusion").add( Validate.Numericality, {minimum: 1e-12, maximum: 2.8e-10}));}
+    if($('#Intensity').length){validators.push(liveValidation("Intensity").add( Validate.Numericality, {minimum: 10000, maximum: 150000, onlyInteger: true}));}
+    if($('#Neff').length){validators.push(liveValidation("Neff").add( Validate.Numericality, {minimum: 0.01, maximum: 5}));}
+    
+    setInterval(function() {
+        LiveValidation.massValidate(validators);
+        
+    }, 200);
+    
+    
 /** LOOK AT THIS **/
     
     // Add event on hidden link to initialize pageslider open/close event
@@ -185,6 +199,7 @@ $(document).ready(function() {
                     if($(this.element).hasClass("LV_valid_field")){
                         setValidColor(this);
                     }
+                    $('.'+ id ).empty().append($(this.element).val());
                 },
                 onInvalid: function() {
                     this.addFieldClass();
@@ -194,7 +209,9 @@ $(document).ready(function() {
                     if($(this.element).hasClass("LV_invalid_field")){
                         setInvalidColor(this);
                     }
-                },   
+                    $('span.value.' + id).empty();
+                }
+                ,   
                 wait: 500
             }
         );

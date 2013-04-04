@@ -29,12 +29,11 @@ class User extends AbstractUser {
     
     public function generateFlow()
     {
-//        $flow = new Flow(0.3e-6, 0.9e-6, 0, 0.1, 0.4,  0.0000000028, 100000, 0.01);
-        $flow = new Flow(
+       $flow = new Flow(
                     $_GET['w0'] = 3e-6,
                     $_GET['z0'] = 3e-6,
                     $_GET['startTime'] = 0,
-                    $_GET['endTime'] = 5,
+                    $_GET['endTime'] = 60,
                     $_GET['F'] = 0,
                     $_GET['diffusion']=2.8e-10,
                     $_GET['brightness']=100000,
