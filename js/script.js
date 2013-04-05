@@ -45,8 +45,17 @@ $(document).ready(function() {
             ).removeClass('errored');
         }
     });
+    
+    $('#back').on('click', function() {
+        $('.description').hide('clip',2000,function(){
+            clearInterval(i);
+            $('.varaibles').show('fold',2000);
+            
+        });
+    });
      //          ***    SUBMITTING GENERATION FORM  ***
     $('#generate').on('click', function(e){
+        alert('1');
         e.preventDefault();
        that = this;
 
@@ -54,6 +63,7 @@ $(document).ready(function() {
            $(that).parents('form').attr('action'),
            $(that).parents('form').serialize(),
            function(responce){
+               alert('2');
                if(true === responce.success){
                    alert('YEAH!');
                }else{
@@ -113,9 +123,16 @@ $(document).ready(function() {
     if($('#Intensity').length){validators.push(liveValidation("Intensity").add( Validate.Numericality, {minimum: 10000, maximum: 150000, onlyInteger: true}));}
     if($('#Neff').length){validators.push(liveValidation("Neff").add( Validate.Numericality, {minimum: 0.01, maximum: 5}));}
     
-    setInterval(function() {
-        LiveValidation.massValidate(validators);
-        
+   var i = setInterval(function() {
+        var areAllValid = LiveValidation.massValidate(validators);
+        if( true === areAllValid ) {
+            if($('input.LV_valid_field').length === validators.length){
+                $('.varaibles').hide( 'fold', 2000, function(){
+                    $('.description').show('clip',1000);
+                    $('.description').css({"display":"inline-block"});
+                });
+            }
+        }
     }, 200);
     
     

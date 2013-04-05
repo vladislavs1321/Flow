@@ -33,7 +33,7 @@ class User extends AbstractUser {
                     $_GET['w0'] = 3e-6,
                     $_GET['z0'] = 3e-6,
                     $_GET['startTime'] = 0,
-                    $_GET['endTime'] = 60,
+                    $_GET['endTime'] = 0.001,
                     $_GET['F'] = 0,
                     $_GET['diffusion']=2.8e-10,
                     $_GET['brightness']=100000,

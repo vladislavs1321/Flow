@@ -19,6 +19,8 @@ if (is_object($user)){
         <script type="text/javascript" src="js/jquery.animateshadow.min.js"></script>
         <script type="text/javascript" src="js/jquery.cookies.2.2.0.min.js"></script>
         <script type="text/javascript" src="js/livevalidation-1.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
+        
     </head>
 
     <body>
@@ -38,8 +40,8 @@ if (is_object($user)){
                 
                 <div class="block-2">
                     
-                    <div class="vars">
-                        <form class="varaibles" method="get" action="user/generateFlow.php" >
+                    <div class="vars" hidden="false">
+                        <form id="form1" class="varaibles" method="get" action="user/generateFlow.php" >
                             <ul class="input-data">
                                 <div>
                                     <div class="varaibles-header">
@@ -65,13 +67,15 @@ if (is_object($user)){
                                 <li><input id="Intensity" type="text" name="Intensity" value="" placeholder="Intensity"><span>in Hz</span>
                                 <li><input id="Neff" type="text" name="Neff" value="" placeholder="Molecules in a volume"><span>pcs</span>
                             </ul>
-                            <input id="generate" type="submit" value="generate">
+                            <!--<input id="generate" type="button" class="btn" value="generate">-->
                         </form>
                         
-                        <div class="description">
+                        <div class="description" >
+                             <!--style="display: none"-->
+                             
                             <div>
                                 <h3 style="display: inline-block;padding-right: 10px;">DESCRIPTION</h3>
-                                <span><?php $now=date("Y-m-d H:i:s");print_r($now);?></span>
+                                <!--<span><?php $now=date("Y-m-d H:i:s");print_r($now);?></span>-->
                             </div>
                             <ul>
                                 <fieldset class="generation-method">
@@ -89,6 +93,10 @@ if (is_object($user)){
                                     <li><span class="varaible">Neff</span><span class="value Neff" ></span>
                                 </fieldset>
                             </ul>
+                            <div >
+                                <input id="back" type="button"  class="btn " value=" <<BACK">
+                                <input id="generate" form="form1" type="button"  class="btn" value="GENERATE>>">
+                            </div>
                         </div>
                     </div>
                     
