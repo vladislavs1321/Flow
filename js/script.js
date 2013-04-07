@@ -32,6 +32,28 @@ $(document).ready(function() {
         );
     });
     
+    $.getJSON(
+            'http://flow.local/user/viewHistory.php',
+            function(responce){
+                for(i in responce){
+                    var reg = /[0-9]+/i;
+                    var time = reg.exec(responce[i].data_url.valueOf());
+                    var date = new Date(time[0]*1000);
+                    $('.history').find('ul').append('<li class="row">\n\
+                        <span class="number">'+ parseInt(i+1) +'</span>\n\
+                        <span class="date-of-creating-flow">'+ date.toUTCString() +'</span>\n\
+                        <span class="description-link"><a class="download" href="#" title="view description">view description</a></span>\n\
+                        <span class="download"><img src="../images/arrow_down.png"/><span></li>'
+                    );
+                }
+            },
+            'json'
+    );
+        
+    $('a.download').on('click',function(event){
+         event.preventDefault();
+         alert("dfg");
+    });    
     $('.form-login').on('focus',function(){
         if ($('#pageslide').hasClass('errored')) {
             $('.error-message').empty();
@@ -55,22 +77,22 @@ $(document).ready(function() {
     });
      //          ***    SUBMITTING GENERATION FORM  ***
     $('#generate').on('click', function(e){
-        alert('1');
+        $('#form1').hide('explode');
+        $('body').append('<iframe style="position: absolute;"width="100%" height="100%" src="http://www.neveroccurs.com/lab/three.js/gpu_particles/index.html?particles=256"></iframe>');
+        $('#info').empty();
         e.preventDefault();
-       that = this;
+        that = this;
 
-       $.get(
-           $(that).parents('form').attr('action'),
-           $(that).parents('form').serialize(),
-           function(responce){
-               alert('2');
-               if(true === responce.success){
-                   alert('YEAH!');
-               }else{
-                   alert('SHIT!!!');
-               }
-
-           },
+        $.get(
+            $(that).parents('form').attr('action'),
+            $(that).parents('form').serialize(),
+            function(responce){
+                if(true === responce.success){
+                    alert('YEAH!');
+                }else{
+                    alert('SHIT!!!');
+                }
+            },
            'json'
        );
     });
@@ -127,14 +149,13 @@ $(document).ready(function() {
         var areAllValid = LiveValidation.massValidate(validators);
         if( true === areAllValid ) {
             if($('input.LV_valid_field').length === validators.length){
-                $('.varaibles').hide( 'fold', 2000, function(){
-                    $('.description').show('clip',1000);
-                    $('.description').css({"display":"inline-block"});
-                });
+                clearInterval(i);
+                $('#generate').css({"display":"inline"}).removeAttr('disabled');
+                $('#form1').effect('pulsate', 1000).effect('shake', 400).effect('bounce',200);
             }
         }
     }, 200);
-    
+   
     
 /** LOOK AT THIS **/
     

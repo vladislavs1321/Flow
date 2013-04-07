@@ -39,12 +39,22 @@ class User extends AbstractUser {
                     $_GET['brightness']=100000,
                     $_GET['Neff']=0.01
                 );
-        $dataUrl = $flow->simu();
+        if (false === $dataUrl = $flow->simu()){
+            return false;
+        }
         if(false === $this->insertFlowData($dataUrl)){
             return false;
         }
         return true;
     }
+    public function viewHistory(){
+        $query="SELECT * FROM flow_data WHERE flow_data.user_id ='$this->userId'";
+        if(false === $respounce=$this->database->select($query)){
+            return false;
+        }
+        return $respounce;
+    }
+
     public function generateDescription(){
         
     }
@@ -89,6 +99,10 @@ class User extends AbstractUser {
     
     public function getUsername(){
         return $this->username;
+    }
+    
+    public function getUserId(){
+        return $this->usernId;
     }
     
     public function getDatabase()

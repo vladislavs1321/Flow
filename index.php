@@ -5,6 +5,11 @@ require_once './user/checkCookie.php';
 $user = checkCookie();
 if (is_object($user)){
     $username = $user->getUsername();
+    $time= time();
+    $date = date("j.m.Y H:i:s", $time);
+    var_dump($date);
+    var_dump($time);
+    require_once __DIR__.'/user/viewHistory.php';
 }
 ?>
 <html>
@@ -39,8 +44,8 @@ if (is_object($user)){
                 </div>
                 
                 <div class="block-2">
-                    
-                    <div class="vars" hidden="false">
+                    <!--<iframe width="100%" height="100%" src="http://www.neveroccurs.com/lab/three.js/gpu_particles/index.html?particles=256"></iframe>-->
+<!--                    <div class="vars" hidden="false">
                         <form id="form1" class="varaibles" method="get" action="user/generateFlow.php" >
                             <ul class="input-data">
                                 <div>
@@ -67,15 +72,13 @@ if (is_object($user)){
                                 <li><input id="Intensity" type="text" name="Intensity" value="" placeholder="Intensity"><span>in Hz</span>
                                 <li><input id="Neff" type="text" name="Neff" value="" placeholder="Molecules in a volume"><span>pcs</span>
                             </ul>
-                            <!--<input id="generate" type="button" class="btn" value="generate">-->
+                            <input id="generate" type="button" form="form1" class="btn" value="<<GENERATE>>" disabled="true" style="display: none">
                         </form>
                         
-                        <div class="description" >
-                             <!--style="display: none"-->
+                        <div class="description"  style="display: none">
                              
                             <div>
                                 <h3 style="display: inline-block;padding-right: 10px;">DESCRIPTION</h3>
-                                <!--<span><?php $now=date("Y-m-d H:i:s");print_r($now);?></span>-->
                             </div>
                             <ul>
                                 <fieldset class="generation-method">
@@ -98,56 +101,56 @@ if (is_object($user)){
                                 <input id="generate" form="form1" type="button"  class="btn" value="GENERATE>>">
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     
                     
 
-<!--                    <div class="history">flow history
+                    <div class="history">
                         <ul>
                             <li class="row">
                                 <span class="number">1</span>
-                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
+                                <span class="description-link">view description</span>
+                                <span class="download">X<span>
+                            </li>
+                                
+                            <li class="row">
+                                <span class="number">2</span>
+                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
                                 <span class="description-link">view description</span>
                                 <span class="download">X<span>
                             </li>
                                 
                             <li class="row">
                                 <span class="number">1</span>
-                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
                                 <span class="description-link">view description</span>
                                 <span class="download">X<span>
                             </li>
                                 
                             <li class="row">
                                 <span class="number">1</span>
-                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
                                 <span class="description-link">view description</span>
                                 <span class="download">X<span>
                             </li>
                                 
                             <li class="row">
                                 <span class="number">1</span>
-                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
                                 <span class="description-link">view description</span>
                                 <span class="download">X<span>
                             </li>
                                 
                             <li class="row">
-                                <span class="number">1</span>
-                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">1</span>
-                                <span class="date of creating flow">11.12.2013 monday 12:34</span>
+                                <span class="number">6</span>
+                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
                                 <span class="description-link">view description</span>
                                 <span class="download">X<span>
                             </li>
                             
                         </ul>
-                    </div>-->
+                    </div>
                 </div>
 
                 
