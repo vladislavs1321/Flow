@@ -30,15 +30,15 @@ class User extends AbstractUser {
     public function generateFlow()
     {
        $flow = new Flow(
-                    $_GET['w0'] = 3e-6,
-                    $_GET['z0'] = 3e-6,
-                    $_GET['startTime'] = 0,
-                    $_GET['endTime'] = 0.001,
-                    $_GET['F'] = 0,
-                    $_GET['diffusion']=2.8e-10,
-                    $_GET['brightness']=100000,
-                    $_GET['Neff']=0.01
-                );
+                    $_GET['w0'],
+                    $_GET['z0'],
+                    $_GET['startTime'],
+                    $_GET['endTime'],
+                    $_GET['diffusion'],
+                    $_GET['brightness'],
+                    $_GET['Neff'],
+                    $_GET['F'] = 0
+        );
         if (false === $dataUrl = $flow->simu()){
             return false;
         }
@@ -47,7 +47,8 @@ class User extends AbstractUser {
         }
         return true;
     }
-    public function viewHistory(){
+    public function viewHistory()
+    {
         $query="SELECT * FROM flow_data WHERE flow_data.user_id ='$this->userId'";
         if(false === $respounce=$this->database->select($query)){
             return false;

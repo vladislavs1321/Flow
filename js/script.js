@@ -31,26 +31,27 @@ $(document).ready(function() {
             'json'
         );
     });
-    
-    $.getJSON(
-            'http://flow.local/user/viewHistory.php',
-            function(responce){
-                for(i in responce){
-                    var reg = /[0-9]+/i;
-                    var time = reg.exec(responce[i].data_url.valueOf());
-                    var date = new Date(time[0]*1000);
-                    $('.history').find('ul').append('<li class="row">\n\
-                        <span class="number">'+ parseInt(i+1) +'</span>\n\
-                        <span class="date-of-creating-flow">'+ date.toUTCString() +'</span>\n\
-                        <span class="description-link"><a class="download" href="#" title="view description">view description</a></span>\n\
-                        <span class="download"><img src="../images/arrow_down.png"/><span></li>'
-                    );
-                }
-            },
-            'json'
-    );
+    if($('#historys').length){
+        $.getJSON(
+                'http://flow.local/user/viewHistory.php',
+                function(responce){
+                    for(i in responce){
+                        var reg = /[0-9]+/i;
+                        var time = reg.exec(responce[i].data_url.valueOf());
+                        var date = new Date(time[0]*1000);
+                        $('.history').find('ul').append('<li class="row">\n\
+                            <span class="number">'+ parseInt(i+1) +'</span>\n\
+                            <span class="date-of-creating-flow">'+ date.toUTCString() +'</span>\n\
+                            <span class="description-link"><a class="download" href="#" title="view description">view description</a></span>\n\
+                            <span class="download"><img src="../images/arrow_down.png"/><span></li>'
+                        );
+                    }
+                },
+                'json'
+        );
+    }
         
-    $('a.download').on('click',function(event){
+    $('body').on('click', 'a.download', function(event){
          event.preventDefault();
          alert("dfg");
     });    
@@ -149,7 +150,7 @@ $(document).ready(function() {
         var areAllValid = LiveValidation.massValidate(validators);
         if( true === areAllValid ) {
             if($('input.LV_valid_field').length === validators.length){
-                clearInterval(i);
+                window.clearInterval(i);
                 $('#generate').css({"display":"inline"}).removeAttr('disabled');
                 $('#form1').effect('pulsate', 1000).effect('shake', 400).effect('bounce',200);
             }

@@ -29,10 +29,5 @@ class Molecules {
         $this->count            = round($RV*$Neff/$Veff);
     }
     
-//    function Bfunction($X, $Y, $Z, $w0, $z0){
-//        $a=-2/($w0*$w0);
-//        $b=-2/($z0*$z0);
-//        return exp( $a*($X*$X + $Y*SY) + $b*$z*$z );
-//    }
 }
 ?>

@@ -25,6 +25,9 @@ class Flow {
     public $intensity;
     public $invIntensity;
     
+    public $moleculesDiffusion = "molecules diffusion";
+    public $outfocusFactor = "";
+    public $tripletStates = "triplet states";
     
     public $fileUploadDir = '/home/vladislav/web/flow.local/data/';// linux
 //    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
@@ -79,7 +82,8 @@ class Flow {
     /**
      * @return string
      */
-    function simu() {
+    
+        function simu() {
         $db = new Database();
         if (false === $db->connect()){
             var_dump($db->error);
@@ -95,8 +99,30 @@ class Flow {
             return false;
             exit;
         }
-                ;
+        $json_descr="{'w0':'','z0':'','startTime':'','endTime':'','diffusion':'','intencity':'','Neff':'','F':'',}";
+        $description =   "######### DESCRIPTION #########\n\n
+                                >>> Flow Generation Method <<<\n
+                                ----" . $this->moleculesDiffusion ."\n
+                                ----". $this->outfocusFactor ."\n
+                                ----". $this->tripletStates ."\n\n
+                                >>> Parametrs of Generation <<<\n\n
+                                ----w0---------------".$this->w0."\n
+                                ----z0---------------".$this->z0."\n
+                                ----startTime--------".$this->startTime."\n
+                                ----endTime----------".$this->endTime."\n
+                                ----Intensity--------".$this->intensity."\n
+                                ----Brightness-------".$this->molecules->brightness."\n    
+                                ----Neff-------------".$this->molecules->Neff."\n
+                                ----F----------------".$this->F."\n";
         
+        $descriptionName= $flowName."description";
+        if(false === $dfp = fopen($this->fileUploadDir . $descriptionName.".txt", 'w+')){
+            var_dump("cant create flow_data file in current dir");
+            return false;
+            exit;
+        }
+        fwrite($dfp, $description);
+        fclose($dfp);
         for ($k = 0; $k < $this->molecules->count; $k++){
             
             $this->molecules->X = (2*rand(1,10000)*0.0001-1)*$this->RXb;
@@ -110,7 +136,7 @@ class Flow {
                 
                 while(true){
                     
-                     $previousEvent = $currentEvent;
+                    $previousEvent = $currentEvent;
                     $currentEvent = $previousEvent-$this->invIntensity*log(rand(1,10000)*0.0001);
                     
                     if($currentEvent > $this->endTime){
@@ -150,6 +176,7 @@ class Flow {
     }
     
     function simu2(){
+        $this->outfocusFactor = "outfocus factor";
         ini_set('memory_limit', '128M');
         $numberOfEvents=0;
         $events=array();

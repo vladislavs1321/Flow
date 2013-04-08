@@ -9,7 +9,7 @@ if (is_object($user)){
     $date = date("j.m.Y H:i:s", $time);
     var_dump($date);
     var_dump($time);
-    require_once __DIR__.'/user/viewHistory.php';
+    $user->viewHistory();
 }
 ?>
 <html>
@@ -44,8 +44,7 @@ if (is_object($user)){
                 </div>
                 
                 <div class="block-2">
-                    <!--<iframe width="100%" height="100%" src="http://www.neveroccurs.com/lab/three.js/gpu_particles/index.html?particles=256"></iframe>-->
-<!--                    <div class="vars" hidden="false">
+                    <div class="vars" hidden="false">
                         <form id="form1" class="varaibles" method="get" action="user/generateFlow.php" >
                             <ul class="input-data">
                                 <div>
@@ -68,7 +67,7 @@ if (is_object($user)){
                                 <li><input id="z0" type="text" name="z0" value="" placeholder="z0"><span>in metres</span>
                                 <li><input id="startTime" type="text" name="startTime" value="" placeholder="Start time"><span>in seconds</span>
                                 <li><input id="endTime" type="text" name="endTime" value="" placeholder="End time"><span>in seconds</span>
-                                <li><input id="diffusion" type="text" name="diffusion" value="" placeholder="Molecules diffusion"><span>metres<sup>2</sup>/seconds</span>
+                                <li><input id="diffusion" type="text" name="brightness" value="" placeholder="Molecules diffusion"><span>metres<sup>2</sup>/seconds</span>
                                 <li><input id="Intensity" type="text" name="Intensity" value="" placeholder="Intensity"><span>in Hz</span>
                                 <li><input id="Neff" type="text" name="Neff" value="" placeholder="Molecules in a volume"><span>pcs</span>
                             </ul>
@@ -101,11 +100,11 @@ if (is_object($user)){
                                 <input id="generate" form="form1" type="button"  class="btn" value="GENERATE>>">
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                     
                     
 
-                    <div class="history">
+<!--                    <div id="history" class="history">
                         <ul>
                             <li class="row">
                                 <span class="number">1</span>
@@ -151,9 +150,10 @@ if (is_object($user)){
                             
                         </ul>
                     </div>
-                </div>
+                </div>-->
 
                 
+            </div>
                 <div class="block-3">
                     <div class="login">
                         <span>
@@ -167,7 +167,6 @@ if (is_object($user)){
                         </span>
                     </div>
                 </div>
-            </div>
         
         <div id="modal">
 <!--                 SI modal login -->
