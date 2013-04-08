@@ -67,8 +67,8 @@ if (is_object($user)){
                                 <li><input id="z0" type="text" name="z0" value="" placeholder="z0"><span>in metres</span>
                                 <li><input id="startTime" type="text" name="startTime" value="" placeholder="Start time"><span>in seconds</span>
                                 <li><input id="endTime" type="text" name="endTime" value="" placeholder="End time"><span>in seconds</span>
-                                <li><input id="diffusion" type="text" name="brightness" value="" placeholder="Molecules diffusion"><span>metres<sup>2</sup>/seconds</span>
-                                <li><input id="Intensity" type="text" name="Intensity" value="" placeholder="Intensity"><span>in Hz</span>
+                                <li><input id="diffusion" type="text" name="diffusion" value="" placeholder="Molecules diffusion"><span>metres<sup>2</sup>/seconds</span>
+                                <li><input id="Brightness" type="text" name="Brightness" value="" placeholder="Brightness"><span>in Hz</span>
                                 <li><input id="Neff" type="text" name="Neff" value="" placeholder="Molecules in a volume"><span>pcs</span>
                             </ul>
                             <input id="generate" type="button" form="form1" class="btn" value="<<GENERATE>>" disabled="true" style="display: none">
@@ -91,7 +91,7 @@ if (is_object($user)){
                                     <li><span class="varaible">StartTime</span><span class="value startTime" ></span>
                                     <li><span class="varaible">EndTime</span><span class="value endTime" ></span>
                                     <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" ></span>
-                                    <li><span class="varaible">Intensity</span><span class="value intensity" ></span>
+                                    <li><span class="varaible">Brightness</span><span class="value Brightness" ></span>
                                     <li><span class="varaible">Neff</span><span class="value Neff" ></span>
                                 </fieldset>
                             </ul>

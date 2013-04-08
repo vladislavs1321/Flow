@@ -35,7 +35,7 @@ class User extends AbstractUser {
                     $_GET['startTime'],
                     $_GET['endTime'],
                     $_GET['diffusion'],
-                    $_GET['brightness'],
+                    $_GET['Brightness'],
                     $_GET['Neff'],
                     $_GET['F'] = 0
         );

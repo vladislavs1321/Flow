@@ -143,7 +143,7 @@ $(document).ready(function() {
     if($('#startTime').length){validators.push(liveValidation("startTime").add( Validate.Numericality, {minimum: 0, maximum: 3600, onlyInteger: true}));}
     if($('#endTime').length){validators.push(liveValidation("endTime").add( Validate.Numericality, {minimum: 0, maximum: 3600 }));}
     if($('#diffusion').length){validators.push(liveValidation("diffusion").add( Validate.Numericality, {minimum: 1e-12, maximum: 2.8e-10}));}
-    if($('#Intensity').length){validators.push(liveValidation("Intensity").add( Validate.Numericality, {minimum: 10000, maximum: 150000, onlyInteger: true}));}
+    if($('#Brightness').length){validators.push(liveValidation("Brightness").add( Validate.Numericality, {minimum: 10000, maximum: 150000, onlyInteger: true}));}
     if($('#Neff').length){validators.push(liveValidation("Neff").add( Validate.Numericality, {minimum: 0.01, maximum: 5}));}
     
    var i = setInterval(function() {

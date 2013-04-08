@@ -29,10 +29,10 @@ class Flow {
     public $outfocusFactor = "";
     public $tripletStates = "triplet states";
     
-    public $fileUploadDir = '/home/vladislav/web/flow.local/data/';// linux
-//    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
+//    public $fileUploadDir = '/home/vladislav/web/flow.local/data/';// linux
+    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
    
-    function __construct($w0, $z0, $startTime, $endTime, $F, $diffusion, $brightness, $Neff) {
+    function __construct($w0, $z0, $startTime, $endTime, $diffusion, $Brightness, $Neff, $F) {
         $this->w0           = $w0;
         $this->z0           = $z0;
         $this->startTime    = $startTime;
@@ -45,10 +45,10 @@ class Flow {
         $this->RV           = 8*10*$w0*10*$w0*10*$z0;
         $this->Veff         = (1+$F)*(1+$F)*pow(pi(),1.5)*$w0*$w0*$z0;
         
-        $this->molecules = new Molecules($diffusion, $brightness, $Neff, $this->RV ,$this->Veff, $this->w0);
+        $this->molecules = new Molecules($diffusion, $Brightness, $Neff, $this->RV ,$this->Veff, $this->w0);
         
-        $this->intensity    = (1+$F)*$brightness;
-        $this->invIntensity = 1/( (1+$F)*$brightness);
+        $this->intensity    = (1+$F)*$Brightness;
+        $this->invIntensity = 1/( (1+$F)*$Brightness);
     }
     
     /**
@@ -110,8 +110,8 @@ class Flow {
                                 ----z0---------------".$this->z0."\n
                                 ----startTime--------".$this->startTime."\n
                                 ----endTime----------".$this->endTime."\n
-                                ----Intensity--------".$this->intensity."\n
-                                ----Brightness-------".$this->molecules->brightness."\n    
+                                ----Intensity--------".$this->diffusion."\n
+                                ----Brightness-------".$this->molecules->Brightness."\n    
                                 ----Neff-------------".$this->molecules->Neff."\n
                                 ----F----------------".$this->F."\n";
         
@@ -143,7 +143,7 @@ class Flow {
                         break;
                     }
                     
-                    if(rand(1,10000)*0.0001*$this->intensity < (1+$this->F)*$this->molecules->brightness
+                    if(rand(1,10000)*0.0001*$this->intensity < (1+$this->F)*$this->molecules->Brightness
                           *$this->Bfunction(
                                     $this->molecules->X,
                                     $this->molecules->Y,
@@ -182,7 +182,7 @@ class Flow {
         $events=array();
         $fp = fopen('data/f1.txt', 'w+');
         
-        $this->intensity = $this->molecules->Neff*$this->molecules->brightness*$this->F/( (1+$this->F)*sqrt(8) );
+        $this->intensity = $this->molecules->Neff*$this->molecules->Brightness*$this->F/( (1+$this->F)*sqrt(8) );
         $this->invIntensity=1/$this->intensity;
         
         $previousEvent = $this->startTime;

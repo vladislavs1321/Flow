@@ -1,0 +1,30 @@
+######### DESCRIPTION #########
+
+
+                                >>> Flow Generation Method <<<
+
+                                ----molecules diffusion
+
+                                ----
+
+                                ----triplet states
+
+
+                                >>> Parametrs of Generation <<<
+
+
+                                ----w0---------------3e-6
+
+                                ----z0---------------9e-6
+
+                                ----startTime--------0
+
+                                ----endTime----------2
+
+                                ----Intensity--------100000
+
+                                ----Brightness-------100000
+    
+                                ----Neff-------------0.01
+
+                                ----F----------------0

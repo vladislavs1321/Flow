@@ -7,7 +7,7 @@
  */
 class Molecules {
     public $diffusion   = 0.0000000028;
-    public $brightness  = 100000; 
+    public $Brightness  = 100000; 
     public $Neff        = 0.01;
     
     public $simulMeanCount;
@@ -19,9 +19,9 @@ class Molecules {
     public $Z;
 
 
-    function __construct($diffusion, $brightness, $Neff, $RV ,$Veff, $w0 ) {
+    function __construct($diffusion, $Brightness, $Neff, $RV ,$Veff, $w0 ) {
         $this->diffusion        = $diffusion;
-        $this->brightness       = $brightness;
+        $this->Brightness       = $Brightness;
         $this->Neff             = $Neff;
         
         $this->simulMeanCount   = $RV*$diffusion/$Veff; 

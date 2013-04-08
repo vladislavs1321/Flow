@@ -1,0 +1,6 @@
+Brightness profile parameters, m: w0=3e-007 z0=9e-007
+Correction factor, F: 0.4
+The total number of molecules: 7
+Molecule brightness, Hz: 100000
+Molecules diffusion time, s: 8.0357e-005
+Neff: 0.01

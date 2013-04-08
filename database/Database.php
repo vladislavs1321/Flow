@@ -5,7 +5,7 @@ class Database
     private $connection; 
     private $hostname      = 'localhost';
     private $username      = 'root';
-    private $password      = 'password';
+    private $password      = '';
     public $databaseName  = 'flow';
     public $error;
     
