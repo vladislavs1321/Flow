@@ -31,7 +31,8 @@ $(document).ready(function() {
             'json'
         );
     });
-    if($('#historys').length){
+    
+    if($('#history').length){
         $.getJSON(
                 'http://flow.local/user/viewHistory.php',
                 function(responce){
@@ -78,7 +79,7 @@ $(document).ready(function() {
     });
      //          ***    SUBMITTING GENERATION FORM  ***
     $('#generate').on('click', function(e){
-        $('#form1').hide('explode');
+//        $('#form1').hide('explode');
         $('body').append('<iframe style="position: absolute;"width="100%" height="100%" src="http://www.neveroccurs.com/lab/three.js/gpu_particles/index.html?particles=256"></iframe>');
         $('#info').empty();
         e.preventDefault();

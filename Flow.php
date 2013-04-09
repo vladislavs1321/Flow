@@ -29,8 +29,8 @@ class Flow {
     public $outfocusFactor = "";
     public $tripletStates = "triplet states";
     
-//    public $fileUploadDir = '/home/vladislav/web/flow.local/data/';// linux
-    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
+    public $fileUploadDir = '/home/vladislav/web/flow.local/data/';// linux
+//    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
    
     function __construct($w0, $z0, $startTime, $endTime, $diffusion, $Brightness, $Neff, $F) {
         $this->w0           = $w0;
@@ -99,7 +99,7 @@ class Flow {
             return false;
             exit;
         }
-        $json_descr="{'w0':'','z0':'','startTime':'','endTime':'','diffusion':'','intencity':'','Neff':'','F':'',}";
+        
         $description =   "######### DESCRIPTION #########\n\n
                                 >>> Flow Generation Method <<<\n
                                 ----" . $this->moleculesDiffusion ."\n
@@ -110,7 +110,7 @@ class Flow {
                                 ----z0---------------".$this->z0."\n
                                 ----startTime--------".$this->startTime."\n
                                 ----endTime----------".$this->endTime."\n
-                                ----Intensity--------".$this->diffusion."\n
+                                ----Diffusion--------".$this->diffusion."\n
                                 ----Brightness-------".$this->molecules->Brightness."\n    
                                 ----Neff-------------".$this->molecules->Neff."\n
                                 ----F----------------".$this->F."\n";

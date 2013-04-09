@@ -57,15 +57,28 @@ class User extends AbstractUser {
     }
 
     public function generateDescription(){
-        
+        $d = array(
+                w0          => $_GET['w0'],
+                z0          => $_GET['z0'],
+                startTime   => $_GET['startTime'] ,
+                endTime     => $_GET['endTime'],
+                Intensity   => $_GET['diffusion'],
+                Brightness  => $_GET['Brightness'],    
+                Neff        => $_GET['Neff'],
+                F           => $_GET['F']
+        );
+        return $d = json_encode($d);
     }
+    
     public function insertFlowData($dataUrl)
     {
         $db = $this->getDatabase();
-        $query = sprintf("INSERT INTO flow.flow_data (data_url, user_id  ) VALUES ('%s', %d)",
+        $query = sprintf("INSERT INTO flow.flow_data (data_url, user_id, description_url   ) VALUES ('%s', %d, '%s'  )",
             $dataUrl,
-            $this->userId
+            $this->userId,
+            $this->generateDescription()  
         );
+        
         if(false === $db->unselect($query)){
             var_dump($db->error);
             return false;
