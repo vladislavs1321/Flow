@@ -10,7 +10,6 @@ require_once __DIR__ . '/gauss.php';
  */
 class Flow
 {
-
     public $w0;
     public $z0;
     public $startTime;
@@ -33,13 +32,15 @@ class Flow
 
 //    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
 
-    function __construct($w0, $z0, $startTime, $endTime, $diffusion, $Brightness, $Neff, $F)
+    function __construct($w0, $z0, $startTime, $endTime, $diffusion, $Brightness, $Neff, $F, $rateAb, $rateBa)
     {
         $this->w0 = $w0;
         $this->z0 = $z0;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
         $this->F = $F;
+        $this->rateAb = $rateAb;
+        $this->rateBa = $rateBa;
 
         $this->RXb = 10 * $w0;
         $this->RYb = 10 * $w0;

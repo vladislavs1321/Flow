@@ -37,7 +37,10 @@ class User extends AbstractUser {
                     $_GET['diffusion'],
                     $_GET['Brightness'],
                     $_GET['Neff'],
-                    $_GET['F'] = 0
+                    $_GET['F'] = 0,
+                    $_GET['ka'],
+                    $_GET['kb'] 
+                    
         );
         if (false === $dataUrl = $flow->simu()){
             return false;
