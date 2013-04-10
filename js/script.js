@@ -117,6 +117,13 @@ $(document).ready(function() {
      
     $('#T').on('click',function(){
         if(true === $(this).prop("checked")){
+            $('ul.input-data').append('<li class="input-data-tka"><input id="ka" type="text" name="ka" value="" placeholder="Rate Constant A"><span>in Hz</span>');
+            $('ul.input-data').append('<li class="input-data-tkb"><input id="kb" type="text" name="kb" value="" placeholder="Rate Constant B"><span>in Hz</span>');
+            if($('#ka').length){
+                validators.push(liveValidation("ka").add( Validate.Numericality, {minimum: 500000, maximum: 1500000}));
+            }if($('#kb').length){
+                validators.push(liveValidation("kb").add( Validate.Numericality, {minimum: 500000, maximum: 1500000}));
+            }
             $('fieldset.generation-method').append('<li class="T"><span>triplet states</span>');
         } else{
             $('fieldset.generation-method').find('li.T').remove();
