@@ -16,6 +16,9 @@ class Flow {
     public $endTime;
     public $F;
     public $molecules;
+    public $rateAb;
+    public $rateBa;
+    
     
     public $RXb;
     public $RYb;
@@ -83,14 +86,14 @@ class Flow {
      * @return string
      */
     
-        function simu() {
+    function simu() {
         $db = new Database();
         if (false === $db->connect()){
             var_dump($db->error);
-            return fasle;    
+            return false;    
         }
         
-        $events = array();
+//        $events = array();
         $numberOfEvents = 0;
         $flowName = time();
         
@@ -116,6 +119,7 @@ class Flow {
                                 ----F----------------".$this->F."\n";
         
         $descriptionName= $flowName."description";
+        
         if(false === $dfp = fopen($this->fileUploadDir . $descriptionName.".txt", 'w+')){
             var_dump("cant create flow_data file in current dir");
             return false;
@@ -153,7 +157,7 @@ class Flow {
                                   )
                             ){
                                 $numberOfEvents++;
-                                $events[$numberOfEvents] = $previousEvent;
+//                                $events[$numberOfEvents] = $previousEvent;
                                 fwrite($fp, $previousEvent."\n");
                     }
                     $sigma = sqrt(2*$this->molecules->diffusion*($currentEvent-$previousEvent));
@@ -170,17 +174,26 @@ class Flow {
         }
         
         fclose($fp);
-        
+        exec("sort -g /home/vladislav/web/flow.local/data/".$flowName." -o /home/vladislav/web/flow.local/data/".$flowName."");
         $dataUrl = $this->fileUploadDir . $flowName.".txt";
         return $dataUrl;
     }
     
-    function simu2(){
+    function simu2($dataUrl){
+        $db = new Database();
+        if (false === $db->connect()){
+            var_dump($db->error);
+            return false;    
+        }
+        if(false === $fp = fopen($dataUrl, 'w+')){
+            var_dump("cant create flow_data file in current dir");
+            return false;
+            exit;
+        }
+        
         $this->outfocusFactor = "outfocus factor";
-        ini_set('memory_limit', '128M');
-        $numberOfEvents=0;
-        $events=array();
-        $fp = fopen('data/f1.txt', 'w+');
+        $numberOfEvents = 0;
+//        $events=array();
         
         $this->intensity = $this->molecules->Neff*$this->molecules->Brightness*$this->F/( (1+$this->F)*sqrt(8) );
         $this->invIntensity=1/$this->intensity;
@@ -191,19 +204,124 @@ class Flow {
             if( $currentEvent< $this->endTime){
                 
                 while(true){
-                    $previousEvent=$currentEvent;
-                    $currentEvent=$previousEvent - $this->invIntensity*log(rand(1,10000)*0.0001);
+                    $previousEvent = $currentEvent;
+                    $currentEvent = $previousEvent - $this->invIntensity*log(rand(1,10000)*0.0001);
 
                     if( $currentEvent > $this->endTime){
                         break;
                     }
-                    $numberOfEvents=$numberOfEvents+1;
-                    $events[$numberOfEvents]=$previousEvent;
+                    $numberOfEvents = $numberOfEvents+1;
+//                    $events[$numberOfEvents]=$previousEvent;
              
                     fwrite($fp, $previousEvent."\n");
                 }
             }
-            var_dump($events);
-      fclose($fp);
+        fclose($fp);
+        exec("sort -g ".$dataUrl." -o ".$dataUrl."");
+        return $dataUrl;
+    }
+    
+    function simu3(){
+        $db = new Database();
+        if (false === $db->connect()){
+            var_dump($db->error);
+            return false;    
+        }
+        
+        $flowName = time();
+        if(false === $fp = fopen($this->fileUploadDir . $flowName.".txt", 'w+')){
+            var_dump("cant create flow_data file in current dir");
+            return false;
+            exit;
+        }
+        
+//        $events = array();
+        $numberOfEvents = 0;
+        
+        $rateAb = $this->rateAb; //in Hz
+        $rateBa = $this->rateBa;
+
+        $tA = 1/$rateAb;
+        $tB = 1/$rateBa;
+
+        $Pa = $rateBa/($rateAb+$rateBa);
+        $Pb = $rateAb/($rateAb+$rateBa);
+        
+        
+        $CurTau = 0;
+        $flag = false;
+        
+        for ($k = 0; $k < $this->molecules->count; $k++){
+            
+            $this->molecules->X = (2*rand(1,10000)*0.0001-1)*$this->RXb;
+            $this->molecules->Y = (2*rand(1,10000)*0.0001-1)*$this->RYb;
+            $this->molecules->Z = (2*rand(1,10000)*0.0001-1)*$this->RZb;
+            
+            $previousEvent = $this->startTime;
+            $currentEvent = $previousEvent-$this->invIntensity*log(rand(1,10000)*0.0001);
+            
+            if ( $Pa > rand(1,10000)*0.0001 ){
+                $state = 'A';
+            } else{
+                $state = 'B';
+            }
+            
+            $CurTau = 0;
+            ///
+            if ( $currentEvent < $this->endTime ){
+                while ( true ){
+                    $previousEvent = $currentEvent;
+                    $currentEvent = $previousEvent-$this->invIntensity*log(rand(1,10000)*0.0001);
+
+                    if ($currentEvent > $this->endTime){			   
+                        break;                      
+                    }
+
+                    $currentIntensity = $this->molecules->Brightness*$this->Bfunction(
+                                                                                $this->molecules->X,
+                                                                                $this->molecules->Y,
+                                                                                $this->molecules->Z,
+                                                                                $this->w0,
+                                                                                $this->z0
+                    );
+
+                    if ( rand(1,10000)*0.0001*$this->intensity < $currentIntensity ){                   
+                        $flag = true;
+                        while ($flag){
+                            if ($state == 'A') {
+                                if ($previousEvent < $CurTau) {
+                                    $numberOfEvents = $numberOfEvents+1;                     
+                                    fwrite($fp, $previousEvent."\n");
+                                    $flag = false;
+                                } else {
+                                    $CurTau += -$tB*log(rand(1,10000)*0.0001);
+                                    $state = 'B';
+                                }
+                            } else {
+                                if ($previousEvent > $CurTau) {
+                                    $CurTau += -$tA*log(rand(1,10000)*0.0001);
+                                    $state = 'A';
+                                } else{
+                                    $flag = false;
+                                }
+                            }
+                        }
+                    }
+                    $sigma = sqrt(2*$this->molecules->diffusion*($currentEvent-$previousEvent));
+
+                    $this->molecules->X = gauss_ms($this->molecules->X, $sigma);
+                    $this->molecules->Y = gauss_ms($this->molecules->Y, $sigma);
+                    $this->molecules->Y = gauss_ms($this->molecules->Z, $sigma);
+
+                    $this->molecules->X = $this->periodicBoundTest($this->molecules->X,  $this->RXb);
+                    $this->molecules->Y = $this->periodicBoundTest($this->molecules->Y,  $this->RYb);
+                    $this->molecules->Z = $this->periodicBoundTest($this->molecules->Z,  $this->RZb);           
+			   }
+            }
+        }
+        fclose($fp);
+        exec("sort -g /home/vladislav/web/flow.local/data/".$flowName." -o /home/vladislav/web/flow.local/data/".$flowName."");
+        $dataUrl = $this->fileUploadDir . $flowName.".txt";
+        return $dataUrl;
     }
 }

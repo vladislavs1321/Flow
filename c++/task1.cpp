@@ -81,7 +81,7 @@ int main()
 
 
 
-	ofstream ofs_Flow(FileName);//создаются выходной поток и текстовый файл  The file with the output flow
+	ofstream ofs_Flow(FileName);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ  The file with the output flow
 	int OutputPrecision=10;
 
 
@@ -90,7 +90,7 @@ int main()
 
    
 	/*
-    if ( !ofs_Flow.bad() ) //проверка успешности открытия потока
+    if ( !ofs_Flow.bad() ) //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     {
         ofs_Flow << "Writing to a basic_ofstream object..." << endl;
         ofs_Flow.close();
@@ -192,7 +192,7 @@ bool flag=false;
 	  CurTau=0.0;
 
          if ( CurrentEvent < EndTime )
-		 {
+            {
 
                while ( true )
 			   {
@@ -311,7 +311,7 @@ bool flag=false;
 
        ofs_Flow.close();
 
-	   multiset<double> sorted_data; //Объявляем шаблонный класс упорядоченного множетсва.
+	   multiset<double> sorted_data; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	ifstream in(FileName);
 	char str[30];
 
@@ -325,7 +325,7 @@ bool flag=false;
 		in.getline(str,25);
 		in.getline(str,25);
 
-		while (in) //Читаем файл
+		while (in) //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 		{
 			double tmp;
 			in >> tmp;
@@ -334,20 +334,20 @@ bool flag=false;
 	}
 
 		in.close();
-		cout << "Lines count: " << sorted_data.size() << endl; //Количество прочитанных строк.
+		cout << "Lines count: " << sorted_data.size() << endl; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 
 
 
 		ofstream out("output.txt");
 		out<<"ID:"<<"FLOWDATABE"<<'\n'<<"V :"<<"T1"<<'\n';
-        out.precision(OutputPrecision);
+                out.precision(OutputPrecision);
 
 		if(!out) 
 		{
 			cout << "Can't open output file";
 			
 		}
-		//Записываем в выходной файл числа в отсотртированном виде.
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
 		multiset<double>::const_iterator i = sorted_data.begin();
 		multiset<double>::const_iterator ie = sorted_data.end();
 		for (; i != ie; ++i)
