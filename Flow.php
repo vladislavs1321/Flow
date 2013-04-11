@@ -14,10 +14,10 @@ class Flow
     public $z0;
     public $startTime;
     public $endTime;
-    public $F;
+    public $F = 0;
     public $molecules;
-    public $rateAb;
-    public $rateBa;
+    public $rateAb = 0;
+    public $rateBa = 0;
     public $RXb;
     public $RYb;
     public $RZb;
@@ -32,7 +32,7 @@ class Flow
 
 //    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
 
-    function __construct($w0, $z0, $startTime, $endTime, $diffusion, $Brightness, $Neff, $F, $rateAb, $rateBa)
+    function __construct($w0, $z0, $startTime, $endTime, $diffusion, $Brightness, $Neff, $F , $rateAb, $rateBa)
     {
         $this->w0 = $w0;
         $this->z0 = $z0;
@@ -104,30 +104,6 @@ class Flow
             exit;
         }
 
-        $description = "######### DESCRIPTION #########\n\n
-                                >>> Flow Generation Method <<<\n
-                                ----" . $this->moleculesDiffusion . "\n
-                                ----" . $this->outfocusFactor . "\n
-                                ----" . $this->tripletStates . "\n\n
-                                >>> Parametrs of Generation <<<\n\n
-                                ----w0---------------" . $this->w0 . "\n
-                                ----z0---------------" . $this->z0 . "\n
-                                ----startTime--------" . $this->startTime . "\n
-                                ----endTime----------" . $this->endTime . "\n
-                                ----Diffusion--------" . $this->diffusion . "\n
-                                ----Brightness-------" . $this->molecules->Brightness . "\n    
-                                ----Neff-------------" . $this->molecules->Neff . "\n
-                                ----F----------------" . $this->F . "\n";
-
-        $descriptionName = $flowName . "description";
-
-        if (false === $dfp = fopen($this->fileUploadDir . $descriptionName . ".txt", 'w+')) {
-            var_dump("cant create flow_data file in current dir");
-            return false;
-            exit;
-        }
-        fwrite($dfp, $description);
-        fclose($dfp);
         for ($k = 0; $k < $this->molecules->count; $k++) {
 
             $this->molecules->X = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RXb;
@@ -176,14 +152,15 @@ class Flow
     }
 
     //outfocus
-    function simu2($dataUrl)
+    function simu2()
     {
         $db = new Database();
         if (false === $db->connect()) {
             var_dump($db->error);
             return false;
         }
-        if (false === $fp = fopen($dataUrl, 'w+')) {
+        $flowName = time();
+        if (false === $fp = fopen($this->fileUploadDir . $flowName . "temp.txt", 'w+')) {
             var_dump("cant create flow_data file in current dir");
             return false;
             exit;
@@ -215,7 +192,8 @@ class Flow
             }
         }
         fclose($fp);
-        exec("sort -g " . $dataUrl . " -o " . $dataUrl . "");
+//        exec("sort -g " . $dataUrl . " -o " . $dataUrl . "");
+        $dataUrl = $this->fileUploadDir . $flowName . "temp.txt";
         return $dataUrl;
     }
 
@@ -321,7 +299,7 @@ class Flow
         return $dataUrl;
     }
 
-//Triplets + Diffusion + outfocus
+    //Triplets + Diffusion + outfocus
     function simu4()
     {
         return $dataUrl = $this->simu2($this->simu3());
@@ -329,6 +307,9 @@ class Flow
     //Diffusion+outfocus
     function simu5()
     {
-        return $dataUrl = $this->simu2($this->simu());
+        $dataUrl = $this->simu();
+        $dataUrl2 = $this->simu2();
+        exec("sort -g -m " . $dataUrl . " ".$dataUrl2." " .$dataUrl. "");
+//        return $dataUrl = $this->simu2($this->simu());
     }
 }
