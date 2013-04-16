@@ -6,9 +6,9 @@
  * @author Vladislav
  */
 class Molecules {
-    public $diffusion   = 0.0000000028;
-    public $Brightness  = 100000; 
-    public $Neff        = 0.01;
+    public $diffusion   ;
+    public $Brightness ; 
+    public $Neff       ;
     
     public $simulMeanCount;
     public $diffusionTime;

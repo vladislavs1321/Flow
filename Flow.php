@@ -50,8 +50,8 @@ class Flow
 
         $this->molecules = new Molecules($diffusion, $Brightness, $Neff, $this->RV, $this->Veff, $this->w0);
 
-        $this->intensity = (1 + $F) * $Brightness;
-        $this->invIntensity = 1 / ( (1 + $F) * $Brightness);
+        $this->intensity = (1 + $F) * $this->molecules->Brightness;;
+        $this->invIntensity = 1 / ( (1 + $F) * $this->molecules->Brightness);
     }
 
     /**
@@ -76,8 +76,14 @@ class Flow
      */
     public function periodicBoundTest($X, $L)
     {
-        if (abs($X) > $L) {
-            $X = $X - 2 * $L * floor(($X + $L) / (2 * $L));
+        while(abs($X) > $L){
+            if (abs($X) > $L) {
+                $X = $X - 2 * $L * floor(($X + $L) / (2 * $L));
+            }
+        }
+        if(is_nan($X))
+        {
+            var_dump($X);
         }
         return $X;
     }
@@ -88,49 +94,55 @@ class Flow
      */
     function simu()
     {
-        $db = new Database();
-        if (false === $db->connect()) {
-            var_dump($db->error);
-            return false;
-        }
+//        $db = new Database();
+//        if (false === $db->connect()) {
+//            var_dump($db->error);
+//            return false;
+//        }
 
-//        $events = array();
+        $events = array();
         $numberOfEvents = 0;
-        $flowName = time();
-
-        if (false === $fp = fopen($this->fileUploadDir . $flowName . ".txt", 'w+')) {
-            var_dump("cant create flow_data file in current dir");
-            return false;
-            exit;
-        }
+//        $flowName = time();
+//
+//        if (false === $fp = fopen($this->fileUploadDir . $flowName . ".txt", 'w+')) {
+//            var_dump("cant create flow_data file in current dir");
+//            return false;
+//            exit;
+//        }
+//         
+            
 
         for ($k = 0; $k < $this->molecules->count; $k++) {
 
             $this->molecules->X = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RXb;
             $this->molecules->Y = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RYb;
             $this->molecules->Z = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RZb;
-
+           
+            $xx1= $this->molecules->X;    
+            $yy1= $this->molecules->Y;    
+            $zz1= $this->molecules->Z;  
+            
             $previousEvent = $this->startTime;
             $currentEvent = $previousEvent - $this->invIntensity * log(rand(1, 10000) * 0.0001);
 
             if ($currentEvent < $this->endTime) {
 
                 while (true) {
-
+                    $iterator++;
                     $previousEvent = $currentEvent;
                     $currentEvent = $previousEvent - $this->invIntensity * log(rand(1, 10000) * 0.0001);
 
                     if ($currentEvent > $this->endTime) {
                         break;
                     }
-
-                    if (rand(1, 10000) * 0.0001 * $this->intensity < (1 + $this->F) * $this->molecules->Brightness * $this->Bfunction(
-                                    $this->molecules->X, $this->molecules->Y, $this->molecules->Z, $this->w0, $this->z0
-                            )
-                    ) {
+                    $a = rand(1, 10000) * 0.0001 * $this->intensity;
+                    $b = (1 + $this->F) * $this->molecules->Brightness * $this->Bfunction(
+                                    $this->molecules->X, $this->molecules->Y, $this->molecules->Z, $this->w0, $this->z0);
+                    if ($a < $b ) {
                         $numberOfEvents++;
-//                                $events[$numberOfEvents] = $previousEvent;
-                        fwrite($fp, $previousEvent . "\n");
+                        $events[$numberOfEvents] = $previousEvent;
+                        var_dump($previousEvent);
+//                        fwrite($fp, $previousEvent . "\n");
                     }
                     $sigma = sqrt(2 * $this->molecules->diffusion * ($currentEvent - $previousEvent));
 
@@ -139,16 +151,28 @@ class Flow
                     $this->molecules->Y = gauss_ms($this->molecules->Z, $sigma);
 
                     $this->molecules->X = $this->periodicBoundTest($this->molecules->X, $this->RXb);
+                    if(is_nan($this->molecules->X)){
+                        var_dump("pbtX");
+                        exit();
+                    }
                     $this->molecules->Y = $this->periodicBoundTest($this->molecules->Y, $this->RYb);
+                    if(is_nan($this->molecules->y)){
+                        var_dump("pbtY");
+                        exit();
+                    }
                     $this->molecules->Z = $this->periodicBoundTest($this->molecules->Z, $this->RZb);
+                    if(is_nan($this->molecules->Z)){
+                        var_dump("pbtZ");
+                        exit();
+                    }
                 }
             }
         }
 
-        fclose($fp);
-        exec("sort -g /home/vladislav/web/flow.local/data/" . $flowName . " -o /home/vladislav/web/flow.local/data/" . $flowName . "");
-        $dataUrl = $this->fileUploadDir . $flowName . ".txt";
-        return $dataUrl;
+//        fclose($fp);
+//        exec("sort -g /home/vladislav/web/flow.local/data/" . $flowName . " -o /home/vladislav/web/flow.local/data/" . $flowName . "");
+//        $dataUrl = $this->fileUploadDir . $flowName . ".txt";
+//        return $dataUrl;
     }
 
     //outfocus

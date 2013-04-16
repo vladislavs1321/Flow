@@ -224,10 +224,10 @@ if (is_object($user)){
 <?php
 require_once './Flow.php';
 require_once './user/User.php';
-$f = new Flow(3e-6, 9e-6, 0, 1, 2.8e-10, 100000, 0.01, 0, 0, 0);
-//$f->simu2();
-    for($i;$i<10;$i++){
+$f = new Flow(3e-6, 9e-6, 0, 0.5, 2.8e-10, 100000, 0.01, 0, 0, 0);
 $f->simu();
-}
+//    for($i;$i<10;$i++){
+//$f->simu();
+//}
 
 ?>
