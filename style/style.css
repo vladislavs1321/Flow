@@ -250,12 +250,20 @@ form.varaibles{
     padding-bottom: 20px;
 }
 .history{
-    width: 590px;
+    width: 600px;
     background-color: rgba(0,0,0, 0.7);   
-    height: 400px;
+    height: 380px;
     color: #FFF;
     border-radius: 10px;
     margin-left: 10px;
+    overflow-y: scroll;
+}
+.history>ul>li.row{
+    padding-right: 0px !important; 
+}
+.history>ul>li.row>span.download{
+    padding-left: 30px!important;
+    padding-right:  10px!important;
 }
 .row{
     padding-bottom: 20px;

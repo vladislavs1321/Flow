@@ -50,7 +50,7 @@ class Flow
 
         $this->molecules = new Molecules($diffusion, $Brightness, $Neff, $this->RV, $this->Veff, $this->w0);
 
-        $this->intensity = (1 + $F) * $this->molecules->Brightness;;
+        $this->intensity = (1 + $F) * $this->molecules->Brightness;
         $this->invIntensity = 1 / ( (1 + $F) * $this->molecules->Brightness);
     }
 
@@ -66,6 +66,7 @@ class Flow
     {
         $a = -2 / ($w0 * $w0);
         $b = -2 / ($z0 * $z0);
+        $c= exp($a * ($X * $X + $Y * $Y) + $b * $Z * $Z);
         return exp($a * ($X * $X + $Y * $Y) + $b * $Z * $Z);
     }
 
@@ -114,28 +115,28 @@ class Flow
 
         for ($k = 0; $k < $this->molecules->count; $k++) {
 
-            $this->molecules->X = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RXb;
-            $this->molecules->Y = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RYb;
-            $this->molecules->Z = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RZb;
+            $this->molecules->X = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RXb;
+            $this->molecules->Y = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RYb;
+            $this->molecules->Z = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RZb;
            
             $xx1= $this->molecules->X;    
             $yy1= $this->molecules->Y;    
             $zz1= $this->molecules->Z;  
             
             $previousEvent = $this->startTime;
-            $currentEvent = $previousEvent - $this->invIntensity * log(rand(1, 10000) * 0.0001);
+            $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
 
             if ($currentEvent < $this->endTime) {
 
                 while (true) {
                     $iterator++;
                     $previousEvent = $currentEvent;
-                    $currentEvent = $previousEvent - $this->invIntensity * log(rand(1, 10000) * 0.0001);
+                    $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
 
                     if ($currentEvent > $this->endTime) {
                         break;
                     }
-                    $a = rand(1, 10000) * 0.0001 * $this->intensity;
+                    $a = (float)rand()/(float)getrandmax() * $this->intensity;
                     $b = (1 + $this->F) * $this->molecules->Brightness * $this->Bfunction(
                                     $this->molecules->X, $this->molecules->Y, $this->molecules->Z, $this->w0, $this->z0);
                     if ($a < $b ) {
@@ -198,13 +199,13 @@ class Flow
         $this->invIntensity = 1 / $this->intensity;
 
         $previousEvent = $this->startTime;
-        $currentEvent = $previousEvent - $this->invIntensity * log(rand(1, 10000) * 0.0001);
+        $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
 
         if ($currentEvent < $this->endTime) {
 
             while (true) {
                 $previousEvent = $currentEvent;
-                $currentEvent = $previousEvent - $this->invIntensity * log(rand(1, 10000) * 0.0001);
+                $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
 
                 if ($currentEvent > $this->endTime) {
                     break;
@@ -255,14 +256,14 @@ class Flow
 
         for ($k = 0; $k < $this->molecules->count; $k++) {
 
-            $this->molecules->X = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RXb;
-            $this->molecules->Y = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RYb;
-            $this->molecules->Z = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RZb;
+            $this->molecules->X = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RXb;
+            $this->molecules->Y = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RYb;
+            $this->molecules->Z = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RZb;
 
             $previousEvent = $this->startTime;
-            $currentEvent = $previousEvent - $this->invIntensity * log(rand(1, 10000) * 0.0001);
+            $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
 
-            if ($Pa > rand(1, 10000) * 0.0001) {
+            if ($Pa > (float)rand()/(float)getrandmax()) {
                 $state = 'A';
             } else {
                 $state = 'B';
@@ -273,7 +274,7 @@ class Flow
             if ($currentEvent < $this->endTime) {
                 while (true) {
                     $previousEvent = $currentEvent;
-                    $currentEvent = $previousEvent - $this->invIntensity * log(rand(1, 10000) * 0.0001);
+                    $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
 
                     if ($currentEvent > $this->endTime) {
                         break;
@@ -283,7 +284,7 @@ class Flow
                                     $this->molecules->X, $this->molecules->Y, $this->molecules->Z, $this->w0, $this->z0
                     );
 
-                    if (rand(1, 10000) * 0.0001 * $this->intensity < $currentIntensity) {
+                    if ((float)rand()/(float)getrandmax() * $this->intensity < $currentIntensity) {
                         $flag = true;
                         while ($flag) {
                             if ($state == 'A') {
@@ -292,12 +293,12 @@ class Flow
                                     fwrite($fp, $previousEvent . "\n");
                                     $flag = false;
                                 } else {
-                                    $CurTau += -$tB * log(rand(1, 10000) * 0.0001);
+                                    $CurTau += -$tB * log((float)rand()/(float)getrandmax());
                                     $state = 'B';
                                 }
                             } else {
                                 if ($previousEvent > $CurTau) {
-                                    $CurTau += -$tA * log(rand(1, 10000) * 0.0001);
+                                    $CurTau += -$tA * log((float)rand()/(float)getrandmax());
                                     $state = 'A';
                                 } else {
                                     $flag = false;

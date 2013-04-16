@@ -80,7 +80,9 @@ class User extends AbstractUser
             Intensity => $_GET['diffusion'],
             Brightness => $_GET['Brightness'],
             Neff => $_GET['Neff'],
-            F => $_GET['F']
+            F => $_GET['F'],
+            rateAb => $_GET['ka'],    
+            rateBa => $_GET['kb']   
         );
         return $d = json_encode($d);
     }

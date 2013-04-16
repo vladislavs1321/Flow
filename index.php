@@ -16,6 +16,7 @@ if (is_object($user)){
         <title></title>
         <link rel='stylesheet' href='style/style.css'/> 
         <link rel='stylesheet' href='style/jquery.pageslide.css'/> 
+        <link rel='stylesheet' href='style/jquery.mCustomScrollbar.css'/> 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -24,6 +25,8 @@ if (is_object($user)){
         <script type="text/javascript" src="js/jquery.cookies.2.2.0.min.js"></script>
         <script type="text/javascript" src="js/livevalidation-1.3.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+        <script type="text/javascript" src="js/mwheelIntent.js"></script>
         
     </head>
 
@@ -43,7 +46,7 @@ if (is_object($user)){
                 </div>
                 
                 <div class="block-2">
-                    <div class="vars" hidden="false">
+<!--                    <div class="vars" hidden="false">
                         <form id="form1" class="varaibles" method="get" action="user/generateFlow.php" >
                             <ul class="input-data">
                                 <div>
@@ -100,55 +103,12 @@ if (is_object($user)){
                             </div>
                         </div>
                     </div>
-                    
+                    -->
                     
 
-<!--                    <div id="history" class="history">
-                        <ul>
-                            <li class="row">
-                                <span class="number">1</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">2</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">1</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">1</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">1</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">6</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                            
-                        </ul>
-                    </div>-->
+                    <div id="history" class="history">
+                        <ul></ul>
+                    </div>
                 </div>
 
                 
@@ -215,6 +175,8 @@ if (is_object($user)){
         <!--         Hidden element to initialize pageslider open/close -->
         <a href="#modal" id="pageslider-initiator" style="display: none;"></a>
         
+        <script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mCustomScrollbar.min.js"></script>
         <script type="text/javascript" src="js/jquery.pageslide.min.js"></script>
         <script type="text/javascript" src="js/script.js"></script>
     </body>
@@ -224,8 +186,8 @@ if (is_object($user)){
 <?php
 require_once './Flow.php';
 require_once './user/User.php';
-$f = new Flow(3e-6, 9e-6, 0, 0.5, 2.8e-10, 100000, 0.01, 0, 0, 0);
-$f->simu();
+//$f = new Flow(3e-6, 9e-6, 0, 0.5, 2.8e-10, 100000, 0.01, 0, 0, 0);
+//$f->simu();
 //    for($i;$i<10;$i++){
 //$f->simu();
 //}
