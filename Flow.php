@@ -76,9 +76,9 @@ class Flow
      */
     public function periodicBoundTest($X, $L)
     {
-        if (abs($X) > $L) {
-            $X = $X - 2 * $L * floor(($X + $L) / (2 * $L));
-        }
+            if (abs($X) > $L) {
+                $X = $X - 2 * $L * floor(($X + $L) / (2 * $L));
+            }
         return $X;
     }
 
@@ -104,12 +104,12 @@ class Flow
             exit;
         }
 
-        for ($k = 0; $k < $this->molecules->count; $k++) {
+         for ($k = 0; $k < $this->molecules->count; $k++) {
 
             $this->molecules->X = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RXb;
             $this->molecules->Y = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RYb;
             $this->molecules->Z = (2 * rand(1, 10000) * 0.0001 - 1) * $this->RZb;
-
+            
             $previousEvent = $this->startTime;
             $currentEvent = $previousEvent - $this->invIntensity * log(rand(1, 10000) * 0.0001);
 
@@ -123,7 +123,7 @@ class Flow
                     if ($currentEvent > $this->endTime) {
                         break;
                     }
-
+                    
                     if (rand(1, 10000) * 0.0001 * $this->intensity < (1 + $this->F) * $this->molecules->Brightness * $this->Bfunction(
                                     $this->molecules->X, $this->molecules->Y, $this->molecules->Z, $this->w0, $this->z0
                             )
@@ -133,7 +133,7 @@ class Flow
                         fwrite($fp, $previousEvent . "\n");
                     }
                     $sigma = sqrt(2 * $this->molecules->diffusion * ($currentEvent - $previousEvent));
-
+                   
                     $this->molecules->X = gauss_ms($this->molecules->X, $sigma);
                     $this->molecules->Y = gauss_ms($this->molecules->Y, $sigma);
                     $this->molecules->Y = gauss_ms($this->molecules->Z, $sigma);
@@ -141,15 +141,10 @@ class Flow
                     $this->molecules->X = $this->periodicBoundTest($this->molecules->X, $this->RXb);
                     $this->molecules->Y = $this->periodicBoundTest($this->molecules->Y, $this->RYb);
                     $this->molecules->Z = $this->periodicBoundTest($this->molecules->Z, $this->RZb);
+                    }
                 }
             }
         }
-
-        fclose($fp);
-        exec("sort -g /home/vladislav/web/flow.local/data/" . $flowName . " -o /home/vladislav/web/flow.local/data/" . $flowName . "");
-        $dataUrl = $this->fileUploadDir . $flowName . ".txt";
-        return $dataUrl;
-    }
 
     //outfocus
     function simu2()
