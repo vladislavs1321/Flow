@@ -33,36 +33,34 @@ $(document).ready(function() {
     });
     
     if($('#history').length){
+        var storage = window.localStorage;
+//        storage.clear();
         $.getJSON(
                 'http://flow.local/user/viewHistory.php',
-                function(responce){
+                function(responce){ 
                     for(i in responce){
                         var reg = /[0-9]+/i;
                         var time = reg.exec(responce[i].data_url.valueOf());
                         var date = new Date(time[0]*1000);
                         $('.history').find('ul').append('<li class="row">\n\
                             <span class="date-of-creating-flow">'+ date.toUTCString() +'</span>\n\
-                            <span class="description-link"><a class="download" href="#" title="view description">view description</a></span>\n\
+                            <span class="description-link"><a class="view" href="#" title="view description">view description</a></span>\n\
                             <span class="download"><a href="'+responce[i].data_url+'"><img src="../images/arrow_down.png"/></a></span></li>'
                         );
-                        var descripts = new Array();    
-                        descripts[i] = responce[i].description_url.valueOf();
-//                        console.log(descripts);
-                        localStorage.descripts = JSON.stringify(descripts);
+                        storage.setItem(i,responce[i].description_url.valueOf());
                     }
                 },
                 'json'
         );
-     console.log(JSON.parse(localStorage.descripts));       
-    
     }
+    console.log(storage);
     $(window).load(function(){
         $(".history").mCustomScrollbar({scrollButtons: {enable: true}});
     });
         
-    $('body').on('click', 'a.download', function(event){
+    $('body').on('click', 'a.view', function(event){
          event.preventDefault();
-         $('.block-2').append('<div class="description">\n\
+         $('.block-2').append('<div class="description" hidden=true >\n\
                                     <ul>\n\
                                         <fieldset class="generation-method"><legend><span>Flow Generation Method</span></legend>\n\
                                             <li><span>molecules diffusion pocess</span>\n\
@@ -79,7 +77,9 @@ $(document).ready(function() {
                                         </fieldset>\n\
                                     </ul>\n\
                                     </div>\n\
-                            </div>');
+                            </div>').show('drop');
+        $('.description').show('slow');
+               
     });    
     $('.form-login').on('focus',function(){
         if ($('#pageslide').hasClass('errored')) {

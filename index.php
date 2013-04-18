@@ -5,10 +5,6 @@ require_once './user/checkCookie.php';
 $user = checkCookie();
 if (is_object($user)){
     $username = $user->getUsername();
-    $time= time();
-    $date = date("j.m.Y H:i:s", $time);
-    var_dump($date);
-    var_dump($time);
 }
 ?>
 <html>
