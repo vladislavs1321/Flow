@@ -5,10 +5,6 @@ require_once './user/checkCookie.php';
 $user = checkCookie();
 if (is_object($user)){
     $username = $user->getUsername();
-    $time= time();
-    $date = date("j.m.Y H:i:s", $time);
-    var_dump($date);
-    var_dump($time);
 }
 ?>
 <html>
@@ -16,14 +12,16 @@ if (is_object($user)){
         <title></title>
         <link rel='stylesheet' href='style/style.css'/> 
         <link rel='stylesheet' href='style/jquery.pageslide.css'/> 
+        <link rel='stylesheet' href='style/jquery.mCustomScrollbar.css'/> 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.min.js"></script>
         <script type="text/javascript" src="js/jquery.animateshadow.min.js"></script>
         <script type="text/javascript" src="js/jquery.cookies.2.2.0.min.js"></script>
         <script type="text/javascript" src="js/livevalidation-1.3.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mCustomScrollbar.min.js"></script>
         
     </head>
 
@@ -37,13 +35,12 @@ if (is_object($user)){
                 <div class="block-1">
                     <div class="main-menu">
                         <div id="start" class="option-button passive">START</div>
-                        <div class="option-button">DESCRIPTION</div>
                         <div id ="history" class="option-button active">HISTORY</div>
                     </div>
                 </div>
                 
                 <div class="block-2">
-                    <div class="vars" hidden="false">
+<!--                    <div class="vars" hidden="false">
                         <form id="form1" class="varaibles" method="get" action="user/generateFlow.php" >
                             <ul class="input-data">
                                 <div>
@@ -72,87 +69,32 @@ if (is_object($user)){
                             </ul>
                             <input id="generate" type="button" form="form1" class="btn" value="<<GENERATE>>" disabled="true" style="display: none">
                         </form>
-                        
-                        <div class="description"  style="display: none">
-                             
-                            <div>
-                                <h3 style="display: inline-block;padding-right: 10px;">DESCRIPTION</h3>
-                            </div>
-                            <ul>
-                                <fieldset class="generation-method">
-                                    <legend><span>Flow Generation Method</span></legend>
-                                    <li><span>molecules diffusion pocess</span>
-                                </fieldset>
-                                <fieldset class="generation-parametres">
-                                    <legend><span>Parametrs of Generation</span></legend>
-                                    <li><span class="varaible">w0</span><span class="value w0" ></span> 
-                                    <li><span class="varaible">z0</span><span class="value z0" ></span>
-                                    <li><span class="varaible">StartTime</span><span class="value startTime" ></span>
-                                    <li><span class="varaible">EndTime</span><span class="value endTime" ></span>
-                                    <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" ></span>
-                                    <li><span class="varaible">Brightness</span><span class="value Brightness" ></span>
-                                    <li><span class="varaible">Neff</span><span class="value Neff" ></span>
-                                </fieldset>
-                            </ul>
-                            <div >
-                                <input id="back" type="button"  class="btn " value=" <<BACK">
-                                <input id="generate" form="form1" type="button"  class="btn" value="GENERATE>>">
-                            </div>
-                        </div>
+                       --> 
+                    <div id="history" class="history">
+                        <ul></ul>
                     </div>
-                    
-                    
-
-<!--                    <div id="history" class="history">
+                       
+<!--                    <div class="description">
                         <ul>
-                            <li class="row">
-                                <span class="number">1</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">2</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">1</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">1</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">1</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                                
-                            <li class="row">
-                                <span class="number">6</span>
-                                <span class="date-of-creating-flow">11.12.2013 monday 12:34</span>
-                                <span class="description-link">view description</span>
-                                <span class="download">X<span>
-                            </li>
-                            
+                            <fieldset class="generation-method">
+                                <legend><span>Flow Generation Method</span></legend>
+                                <li><span>molecules diffusion process</span>
+                            </fieldset>
+                            <fieldset class="generation-parametres">
+                                <legend><span>Parametrs of Generation</span></legend>
+                                <li><span class="varaible">w0</span><span class="value w0" ></span> 
+                                <li><span class="varaible">z0</span><span class="value z0" ></span>
+                                <li><span class="varaible">StartTime</span><span class="value startTime" ></span>
+                                <li><span class="varaible">EndTime</span><span class="value endTime" ></span>
+                                <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" ></span>
+                                <li><span class="varaible">Brightness</span><span class="value Brightness" ></span>
+                                <li><span class="varaible">Neff</span><span class="value Neff" ></span>
+                            </fieldset>
                         </ul>
                     </div>-->
-                </div>
-
-                
-           
+                </div><!--
+                    -->
+               
                 <div class="block-3">
                     <div class="login">
                         <span>
@@ -166,7 +108,7 @@ if (is_object($user)){
                         </span>
                     </div>
                 </div>
-            </div>>
+            </div>
         <div id="modal">
 <!--                 SI modal login -->
                 <div data-slider="login" class="sub-modal" style="display: none;">
@@ -215,6 +157,8 @@ if (is_object($user)){
         <!--         Hidden element to initialize pageslider open/close -->
         <a href="#modal" id="pageslider-initiator" style="display: none;"></a>
         
+        <script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mCustomScrollbar.min.js"></script>
         <script type="text/javascript" src="js/jquery.pageslide.min.js"></script>
         <script type="text/javascript" src="js/script.js"></script>
     </body>
@@ -225,12 +169,8 @@ if (is_object($user)){
 require_once './Flow.php';
 require_once './user/User.php';
 require_once './gauss.php';
-$f = new Flow(3e-6, 9e-6, 0, 0.01, 2.8e-10, 100000, 0.01, 0, 0, 0);
-//$f->simu2();
+//$f = new Flow(3e-6, 9e-6, 0, 0.01, 2.8e-10, 100000, 0.01, 0, 0, 0);
    
-$f->simu();
-//for($i=0;$i<1000;$i++){
-//    $a[$i]=  gauss_ms($m, $s); 
-//}
+//$f->simu();
 
 ?>

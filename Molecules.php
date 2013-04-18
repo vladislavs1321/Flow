@@ -9,6 +9,8 @@ class Molecules {
     public $diffusion   ;
     public $Brightness  ; 
     public $Neff        ;
+    public $Brightness ; 
+    public $Neff       ;
     
     public $simulMeanCount;
     public $diffusionTime;
