@@ -43,21 +43,43 @@ $(document).ready(function() {
                         $('.history').find('ul').append('<li class="row">\n\
                             <span class="date-of-creating-flow">'+ date.toUTCString() +'</span>\n\
                             <span class="description-link"><a class="download" href="#" title="view description">view description</a></span>\n\
-                            <span class="download"><img src="../images/arrow_down.png"/><span></li>'
+                            <span class="download"><a href="'+responce[i].data_url+'"><img src="../images/arrow_down.png"/></a></span></li>'
                         );
+                        var descripts = new Array();    
+                        descripts[i] = responce[i].description_url.valueOf();
+//                        console.log(descripts);
+                        localStorage.descripts = JSON.stringify(descripts);
                     }
                 },
                 'json'
         );
-            
-        $(function() {
-            $('.history').jScrollPane();
-        });    
+     console.log(JSON.parse(localStorage.descripts));       
+    
     }
+    $(window).load(function(){
+        $(".history").mCustomScrollbar({scrollButtons: {enable: true}});
+    });
         
     $('body').on('click', 'a.download', function(event){
          event.preventDefault();
-         alert("dfg");
+         $('.block-2').append('<div class="description">\n\
+                                    <ul>\n\
+                                        <fieldset class="generation-method"><legend><span>Flow Generation Method</span></legend>\n\
+                                            <li><span>molecules diffusion pocess</span>\n\
+                                        </fieldset>\n\
+                                        <fieldset class="generation-parametres">\n\
+                                            <legend><span>Parametrs of Generation</span></legend>\n\
+                                            <li><span class="varaible">w0</span><span class="value w0" ></span>\n\
+                                            <li><span class="varaible">z0</span><span class="value z0" ></span>\n\
+                                            <li><span class="varaible">StartTime</span><span class="value startTime" ></span>\n\
+                                            <li><span class="varaible">EndTime</span><span class="value endTime" ></span>\n\
+                                            <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" ></span>\n\
+                                            <li><span class="varaible">Brightness</span><span class="value Brightness" ></span>\n\
+                                            <li><span class="varaible">Neff</span><span class="value Neff" ></span>\n\
+                                        </fieldset>\n\
+                                    </ul>\n\
+                                    </div>\n\
+                            </div>');
     });    
     $('.form-login').on('focus',function(){
         if ($('#pageslide').hasClass('errored')) {

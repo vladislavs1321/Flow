@@ -250,13 +250,15 @@ form.varaibles{
     padding-bottom: 20px;
 }
 .history{
+    display: inline-block;
     width: 600px;
     background-color: rgba(0,0,0, 0.7);   
     height: 380px;
     color: #FFF;
     border-radius: 10px;
     margin-left: 10px;
-    overflow-y: scroll;
+    overflow: auto;
+    padding: 20px 3px 20px 0px;
 }
 .history>ul>li.row{
     padding-right: 0px !important; 
@@ -266,6 +268,7 @@ form.varaibles{
     padding-right:  10px!important;
 }
 .row{
+    padding-right: 0px;
     padding-bottom: 20px;
     font-family: arial;
 }
@@ -274,14 +277,13 @@ form.varaibles{
 }
 .description{
     position: absolute;
-    color: #FFF;
     display: inline-block;
+    color: #FFF;
     width: auto;
     height: auto;
     background-color: rgba(0,0,0, 0.7);       
     border-radius: 10px;
-    margin-left: 10px;
-    margin-left: 300px;
+    margin-left: 40px;
 }
 
 .new-content {
