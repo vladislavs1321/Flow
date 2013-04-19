@@ -20,13 +20,13 @@ class Molecules {
 
 
     function __construct($diffusion, $Brightness, $Neff, $RV ,$Veff, $w0 ) {
-        $this->diffusion        = $diffusion;
-        $this->Brightness       = $Brightness;
-        $this->Neff             = $Neff;
+        (float)$this->diffusion        = $diffusion;
+        (float)$this->Brightness       = $Brightness;
+        (float)$this->Neff             = $Neff;
         
-        $this->simulMeanCount   = $RV*$diffusion/$Veff; 
-        $this->diffusionTime    = $w0*$w0/(4*$diffusion);
-        $this->count            = round($RV*$Neff/$Veff);
+        (float)$this->simulMeanCount   = $RV*$diffusion/$Veff; 
+        (float)$this->diffusionTime    = $w0*$w0/(4*$diffusion);
+        (float)$this->count            = round($RV*$Neff/$Veff);
     }
     
 }

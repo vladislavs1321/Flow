@@ -241,7 +241,10 @@ passive{
       color: #FFF;
       
   }  
-
+  .description-container{
+      position: absolute;
+      display: inline-block;
+  }
 form.varaibles{
     background-color: rgba(0,0,0, 0.7);       
     border-radius: 10px; 
@@ -276,7 +279,7 @@ form.varaibles{
     padding-right: 30px;
 }
 .description{
-    position: absolute;
+    position: relative;
     display: inline-block;
     color: #FFF;
     width: auto;

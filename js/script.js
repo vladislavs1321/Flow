@@ -60,25 +60,30 @@ $(document).ready(function() {
         
     $('body').on('click', 'a.view', function(event){
          event.preventDefault();
-         $('.block-2').append('<div class="description" hidden=true >\n\
-                                    <ul>\n\
-                                        <fieldset class="generation-method"><legend><span>Flow Generation Method</span></legend>\n\
-                                            <li><span>molecules diffusion pocess</span>\n\
-                                        </fieldset>\n\
-                                        <fieldset class="generation-parametres">\n\
-                                            <legend><span>Parametrs of Generation</span></legend>\n\
-                                            <li><span class="varaible">w0</span><span class="value w0" ></span>\n\
-                                            <li><span class="varaible">z0</span><span class="value z0" ></span>\n\
-                                            <li><span class="varaible">StartTime</span><span class="value startTime" ></span>\n\
-                                            <li><span class="varaible">EndTime</span><span class="value endTime" ></span>\n\
-                                            <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" ></span>\n\
-                                            <li><span class="varaible">Brightness</span><span class="value Brightness" ></span>\n\
-                                            <li><span class="varaible">Neff</span><span class="value Neff" ></span>\n\
-                                        </fieldset>\n\
-                                    </ul>\n\
-                                    </div>\n\
-                            </div>').show('drop');
-        $('.description').show('slow');
+         if($('.description-container').find('.description').length === 0){
+            $('.description-container').append('<div class="description" data-state="open" style="display: none;" >\n\
+                                       <ul>\n\
+                                           <fieldset class="generation-method"><legend><span>Flow Generation Method</span></legend>\n\
+                                               <li><span>molecules diffusion pocess</span>\n\
+                                           </fieldset>\n\
+                                           <fieldset class="generation-parametres">\n\
+                                               <legend><span>Parametrs of Generation</span></legend>\n\
+                                               <li><span class="varaible">w0</span><span class="value w0" ></span>\n\
+                                               <li><span class="varaible">z0</span><span class="value z0" ></span>\n\
+                                               <li><span class="varaible">StartTime</span><span class="value startTime" ></span>\n\
+                                               <li><span class="varaible">EndTime</span><span class="value endTime" ></span>\n\
+                                               <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" ></span>\n\
+                                               <li><span class="varaible">Brightness</span><span class="value Brightness" ></span>\n\
+                                               <li><span class="varaible">Neff</span><span class="value Neff" ></span>\n\
+                                           </fieldset>\n\
+                                       </ul>\n\
+                                       </div>\n\
+                               </div>');
+           $('.description').toggle('drop');
+        }else{
+            $('.description').toggle('drop');
+            $('.description').toggle('drop');
+        }
                
     });    
     $('.form-login').on('focus',function(){

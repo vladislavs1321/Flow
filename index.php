@@ -2,6 +2,12 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 require_once './user/checkCookie.php';
+require_once './Flow.php';
+require_once './user/User.php';
+//$f = new Flow(3e-7, 9e-7, 0, 1, 2.8e-10, 100000, 0.01, 0.4, 1100000, 490000);
+//$f = new Flow(3e-7, 9e-7, 0, 1, 2.8e-10, 100000, 0.01, 0.4, 0, 0);
+//var_dump($f);
+//$f->s();
 $user = checkCookie();
 if (is_object($user)){
     $username = $user->getUsername();
@@ -40,7 +46,7 @@ if (is_object($user)){
                 </div>
                 
                 <div class="block-2">
-<!--                    <div class="vars" hidden="false">
+                    <div class="vars" hidden="false">
                         <form id="form1" class="varaibles" method="get" action="user/generateFlow.php" >
                             <ul class="input-data">
                                 <div>
@@ -69,29 +75,12 @@ if (is_object($user)){
                             </ul>
                             <input id="generate" type="button" form="form1" class="btn" value="<<GENERATE>>" disabled="true" style="display: none">
                         </form>
-                       --> 
-                    <div id="history" class="history">
+                    </div>    
+<!--                <div id="history" class="history">
                         <ul></ul>
-                    </div>
-                       
-<!--                    <div class="description">
-                        <ul>
-                            <fieldset class="generation-method">
-                                <legend><span>Flow Generation Method</span></legend>
-                                <li><span>molecules diffusion process</span>
-                            </fieldset>
-                            <fieldset class="generation-parametres">
-                                <legend><span>Parametrs of Generation</span></legend>
-                                <li><span class="varaible">w0</span><span class="value w0" ></span> 
-                                <li><span class="varaible">z0</span><span class="value z0" ></span>
-                                <li><span class="varaible">StartTime</span><span class="value startTime" ></span>
-                                <li><span class="varaible">EndTime</span><span class="value endTime" ></span>
-                                <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" ></span>
-                                <li><span class="varaible">Brightness</span><span class="value Brightness" ></span>
-                                <li><span class="varaible">Neff</span><span class="value Neff" ></span>
-                            </fieldset>
-                        </ul>
                     </div>-->
+                    <div  class="description-container"></div>
+                       
                 </div><!--
                     -->
                     
@@ -171,10 +160,8 @@ if (is_object($user)){
 
 
 <?php
-require_once './Flow.php';
-require_once './user/User.php';
-//$f = new Flow(3e-6, 9e-6, 0, 0.5, 2.8e-10, 100000, 0.01, 0, 0, 0);
-//$f->simu();
+
+//$f->s();
 //    for($i;$i<10;$i++){
 //$f->simu();
 //}

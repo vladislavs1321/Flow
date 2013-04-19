@@ -30,31 +30,14 @@ class User extends AbstractUser
         $this->database = $database;
     }
 
-    public function generateFlow($f1 = 0, $f2 = 0)
+    public function generateFlow()
     {
         $flow = new Flow(
                 $_GET['w0'], $_GET['z0'], $_GET['startTime'], $_GET['endTime'], $_GET['diffusion'], $_GET['Brightness'], $_GET['Neff'], $_GET['F'], $_GET['ka'], $_GET['kb']
         );
-        if ($f1 == 'f1' && $f2 == 'f2') {
-            if (false === $dataUrl = $flow->simu4()) {
+        if (false === $dataUrl = $flow->s()) {
                 return false;
             }
-        }
-        if ($f1 == 'f1' && $f2 == 0) {
-            if (false === $dataUrl = $flow->simu5()) {
-                return false;
-            }
-        }
-        if ($f1 == 0 && $f2 == 'f2') {
-            if (false === $dataUrl = $flow->simu3()) {
-                return false;
-            }
-        }
-        if ($f1 == 0 && $f2 == 0) {
-            if (false === $dataUrl = $flow->simu()) {
-                return false;
-            }
-        }
         if (false === $this->insertFlowData($dataUrl)) {
             return false;
         }
