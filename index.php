@@ -46,7 +46,7 @@ if (is_object($user)){
                 </div>
                 
                 <div class="block-2">
-                    <div class="vars" hidden="false">
+<!--                    <div class="vars" hidden="false">
                         <form id="form1" class="varaibles" method="get" action="user/generateFlow.php" >
                             <ul class="input-data">
                                 <div>
@@ -75,20 +75,12 @@ if (is_object($user)){
                             </ul>
                             <input id="generate" type="button" form="form1" class="btn" value="<<GENERATE>>" disabled="true" style="display: none">
                         </form>
-                    </div>    
+                    </div>    -->
 <!--                <div id="history" class="history">
                         <ul></ul>
                     </div>-->
-                    <div  class="description-container"></div>
                        
-                </div><!--
-                    -->
-                    
-
-               
-
-                
-           
+                </div>
                 <div class="block-3">
                     <div class="login">
                         <span>

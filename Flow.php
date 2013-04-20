@@ -20,7 +20,8 @@ class Flow
     public $Veff;
     public $intensity;
     public $invIntensity;
-    public $fileUploadDir = '/home/vladislav/web/flow.local/data/'; // linux
+//    public $fileUploadDir = '/home/vladislav/web/flow.local/data/'; // linux
+    public $fileUploadDir = '/home/varloc2000/web/flow.local/data/'; // linux
 
 //    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
 
