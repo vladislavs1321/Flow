@@ -79,7 +79,11 @@ $(document).ready(function() {
             console.log(storage);
             $('body').on('click', 'a.view', function(event){
                 event.preventDefault();
-                var number = $('a.view').attr('date-number');
+                var number = $(this).attr('data-number');
+                
+                console.log(this);
+                console.log(storage[number]);
+                console.log(number);
                 if($('.description-container').find('.description').length === 0){
                     $('.description-container').append('<div class="description" data-state="open" style="display: none;" >\n\
                                               <ul>\n\
