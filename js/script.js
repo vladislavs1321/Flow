@@ -67,7 +67,7 @@ $(document).ready(function() {
                         $('.history').find('ul').append('<li class="row">\n\
                             <span class="date-of-creating-flow">'+ date.toUTCString() +'</span>\n\
                             <span class="description-link"><a class="view" href="#" title="view description">view description</a></span>\n\
-                            <span class="download"><a href="'+responce[i].data_url+'"><img src="../images/arrow_down.png"/></a></span></li>'
+                            <span class="download"><a href="data/'+time+'.txt.zip"><img src="../images/arrow_down.png"/></a></span></li>'
                         );
                         storage.setItem(i,responce[i].description_url.valueOf());
                     }

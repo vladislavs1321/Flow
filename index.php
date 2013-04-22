@@ -12,6 +12,7 @@ $user = checkCookie();
 if (is_object($user)){
     $username = $user->getUsername();
 }
+ 
 ?>
 <html>
     <head>
@@ -157,5 +158,4 @@ if (is_object($user)){
 //    for($i;$i<10;$i++){
 //$f->simu();
 //}
-
 ?>
