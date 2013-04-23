@@ -101,6 +101,16 @@ $(document).ready(function() {
                                               </ul>\n\
                                               </div>\n\
                                       </div>');
+                    if(d.F !== null){
+                        $('.generation-method').append('<li><span>outfocus factor</span>');
+                        $('.generation-parametres').append('<li><span class="varaible">F</span><span class="value F" >'+d.F+'</span>');
+                        
+                    }
+                    if(d.rateAb !== null){
+                        $('.generation-method').append('<li><span>triplet states</span>');
+                        $('.generation-parametres').append('<li><span class="varaible">rate A</span><span class="value rateAb" >'+d.rateAb+'</span>');
+                        $('.generation-parametres').append('<li><span class="varaible">rate B</span><span class="value rateBa" >'+d.rateBa+'</span>');
+                    }
                     $('.description').toggle('drop');
                 }else{
                     $('.description').toggle('drop');
