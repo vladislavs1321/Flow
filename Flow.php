@@ -1,23 +1,18 @@
 <?php
 
 require_once 'Molecules.php';
-require_once __DIR__ . '/gauss.php';
 
-/**
- * Description of Flow
- *
- * @author Vladislav
- */
 class Flow
 {
+
     public $w0;
     public $z0;
     public $startTime;
     public $endTime;
-    public $F = 0;
+    public $F;
     public $molecules;
-    public $rateAb = 0;
-    public $rateBa = 0;
+    public $rateAb;
+    public $rateBa;
     public $RXb;
     public $RYb;
     public $RZb;
@@ -25,205 +20,34 @@ class Flow
     public $Veff;
     public $intensity;
     public $invIntensity;
-    public $moleculesDiffusion = "molecules diffusion";
-    public $outfocusFactor = "";
-    public $tripletStates = "triplet states";
     public $fileUploadDir = '/home/vladislav/web/flow.local/data/'; // linux
+//    public $fileUploadDir = '/home/varloc2000/web/flow.local/data/'; // linux
 
 //    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
 
-    function __construct($w0, $z0, $startTime, $endTime, $diffusion, $Brightness, $Neff, $F , $rateAb, $rateBa)
+    function __construct($w0, $z0, $startTime, $endTime, $diffusion, $Brightness, $Neff, $F, $rateAb, $rateBa)
     {
-        $this->w0 = $w0;
-        $this->z0 = $z0;
-        $this->startTime = $startTime;
-        $this->endTime = $endTime;
-        $this->F = $F;
-        $this->rateAb = $rateAb;
-        $this->rateBa = $rateBa;
+        (float) $this->w0 = $w0;
+        (float) $this->z0 = $z0;
+        (float) $this->startTime = $startTime;
+        (float) $this->endTime = $endTime;
+        (float) $this->F = $F;
+        (float) $this->rateAb = $rateAb;
+        (float) $this->rateBa = $rateBa;
 
-        $this->RXb = 10 * $w0;
-        $this->RYb = 10 * $w0;
-        $this->RZb = 10 * $z0;
-        $this->RV = 8 * 10 * $w0 * 10 * $w0 * 10 * $z0;
-        $this->Veff = (1 + $F) * (1 + $F) * pow(pi(), 1.5) * $w0 * $w0 * $z0;
+        (float) $this->RXb = 10 * $w0;
+        (float) $this->RYb = 10 * $w0;
+        (float) $this->RZb = 10 * $z0;
+        (float) $this->RV = 8 * $this->RXb * $this->RYb * $this->RZb;
+        (float) $this->Veff = (1 + $F) * (1 + $F) * pow(pi(), 1.5) * $w0 * $w0 * $z0;
 
         $this->molecules = new Molecules($diffusion, $Brightness, $Neff, $this->RV, $this->Veff, $this->w0);
 
-        $this->intensity = (1 + $F) * $this->molecules->Brightness;
-        $this->invIntensity = 1 / ( (1 + $F) * $this->molecules->Brightness);
+        (float) $this->intensity = (1 + $F) * $this->molecules->Brightness;
+        (float) $this->invIntensity = 1 / $this->intensity;
     }
 
-    /**
-     * @param type $X
-     * @param type $Y
-     * @param type $Z
-     * @param type $w0
-     * @param type $z0
-     * @return type
-     */
-    public function Bfunction($X, $Y, $Z, $w0, $z0)
-    {
-        $a = -2 / ($w0 * $w0);
-        $b = -2 / ($z0 * $z0);
-        $c= exp($a * ($X * $X + $Y * $Y) + $b * $Z * $Z);
-        return exp($a * ($X * $X + $Y * $Y) + $b * $Z * $Z);
-    }
-
-    /**
-     * @param type $X
-     * @param type $L
-     * @return type
-     */
-    public function periodicBoundTest($X, $L)
-    {
-        while(abs($X) > $L){
-            if (abs($X) > $L) {
-                $X = $X - 2 * $L * floor(($X + $L) / (2 * $L));
-            }
-        }
-        if(is_nan($X))
-        {
-            var_dump($X);
-        }
-        return $X;
-    }
-
-    /**
-     * Diffusion
-     * @return string
-     */
-    function simu()
-    {
-//        $db = new Database();
-//        if (false === $db->connect()) {
-//            var_dump($db->error);
-//            return false;
-//        }
-
-        $events = array();
-        $numberOfEvents = 0;
-//        $flowName = time();
-//
-//        if (false === $fp = fopen($this->fileUploadDir . $flowName . ".txt", 'w+')) {
-//            var_dump("cant create flow_data file in current dir");
-//            return false;
-//            exit;
-//        }
-//         
-            
-
-        for ($k = 0; $k < $this->molecules->count; $k++) {
-
-            $this->molecules->X = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RXb;
-            $this->molecules->Y = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RYb;
-            $this->molecules->Z = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RZb;
-           
-            $xx1= $this->molecules->X;    
-            $yy1= $this->molecules->Y;    
-            $zz1= $this->molecules->Z;  
-            
-            $previousEvent = $this->startTime;
-            $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
-
-            if ($currentEvent < $this->endTime) {
-
-                while (true) {
-                    $iterator++;
-                    $previousEvent = $currentEvent;
-                    $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
-
-                    if ($currentEvent > $this->endTime) {
-                        break;
-                    }
-                    $a = (float)rand()/(float)getrandmax() * $this->intensity;
-                    $b = (1 + $this->F) * $this->molecules->Brightness * $this->Bfunction(
-                                    $this->molecules->X, $this->molecules->Y, $this->molecules->Z, $this->w0, $this->z0);
-                    if ($a < $b ) {
-                        $numberOfEvents++;
-                        $events[$numberOfEvents] = $previousEvent;
-                        var_dump($previousEvent);
-//                        fwrite($fp, $previousEvent . "\n");
-                    }
-                    $sigma = sqrt(2 * $this->molecules->diffusion * ($currentEvent - $previousEvent));
-
-                    $this->molecules->X = gauss_ms($this->molecules->X, $sigma);
-                    $this->molecules->Y = gauss_ms($this->molecules->Y, $sigma);
-                    $this->molecules->Y = gauss_ms($this->molecules->Z, $sigma);
-
-                    $this->molecules->X = $this->periodicBoundTest($this->molecules->X, $this->RXb);
-                    if(is_nan($this->molecules->X)){
-                        var_dump("pbtX");
-                        exit();
-                    }
-                    $this->molecules->Y = $this->periodicBoundTest($this->molecules->Y, $this->RYb);
-                    if(is_nan($this->molecules->y)){
-                        var_dump("pbtY");
-                        exit();
-                    }
-                    $this->molecules->Z = $this->periodicBoundTest($this->molecules->Z, $this->RZb);
-                    if(is_nan($this->molecules->Z)){
-                        var_dump("pbtZ");
-                        exit();
-                    }
-                }
-            }
-        }
-
-//        fclose($fp);
-//        exec("sort -g /home/vladislav/web/flow.local/data/" . $flowName . " -o /home/vladislav/web/flow.local/data/" . $flowName . "");
-//        $dataUrl = $this->fileUploadDir . $flowName . ".txt";
-//        return $dataUrl;
-    }
-
-    //outfocus
-    function simu2()
-    {
-        $db = new Database();
-        if (false === $db->connect()) {
-            var_dump($db->error);
-            return false;
-        }
-        $flowName = time();
-        if (false === $fp = fopen($this->fileUploadDir . $flowName . "temp.txt", 'w+')) {
-            var_dump("cant create flow_data file in current dir");
-            return false;
-            exit;
-        }
-
-        $this->outfocusFactor = "outfocus factor";
-        $numberOfEvents = 0;
-//        $events=array();
-
-        $this->intensity = $this->molecules->Neff * $this->molecules->Brightness * $this->F / ( (1 + $this->F) * sqrt(8) );
-        $this->invIntensity = 1 / $this->intensity;
-
-        $previousEvent = $this->startTime;
-        $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
-
-        if ($currentEvent < $this->endTime) {
-
-            while (true) {
-                $previousEvent = $currentEvent;
-                $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
-
-                if ($currentEvent > $this->endTime) {
-                    break;
-                }
-                $numberOfEvents = $numberOfEvents + 1;
-//                    $events[$numberOfEvents]=$previousEvent;
-
-                fwrite($fp, $previousEvent . "\n");
-            }
-        }
-        fclose($fp);
-//        exec("sort -g " . $dataUrl . " -o " . $dataUrl . "");
-        $dataUrl = $this->fileUploadDir . $flowName . "temp.txt";
-        return $dataUrl;
-    }
-
-    //Triplets+diffusion
-    function simu3()
+    function s()
     {
         $db = new Database();
         if (false === $db->connect()) {
@@ -238,103 +62,210 @@ class Flow
             exit;
         }
 
-//        $events = array();
-        $numberOfEvents = 0;
+        function normrnd($dM, $dD)
+        {
 
-        $rateAb = $this->rateAb; //in Hz
-        $rateBa = $this->rateBa;
+// In the result of work of this generator one recives
+// two gauss random value. One of them is used as a result (dNVal2)
+// and one stays for the next call of function due too C++
+// mechanism of static variables
 
-        $tA = 1 / $rateAb;
-        $tB = 1 / $rateBa;
+            (bool) $bFlag_Val2 = false;
+            (double) $dNVal2;
+            (double) $dFac;
+            (double) $dR;
 
-        $Pa = $rateBa / ($rateAb + $rateBa);
-        $Pb = $rateAb / ($rateAb + $rateBa);
+            if ($bFlag_Val2) { // We have an extra deviate handy, so
+                (bool) $bFlag_Val2 = false; // so unset the flag,
+                return $dNVal2 * $dD + $dM; // and return it.
+            }
+            do {
+                (double) $dUVal1 = 2.0 * (double) rand() / (double) getrandmax() - 1.0; // pick two uniform numbers in the square extending from -1 to +1 in each direction
+                (double) $dUVal2 = 2.0 * (double) rand() / (double) getrandmax() - 1.0;
 
+                $dR = $dUVal1 * $dUVal1 + $dUVal2 * $dUVal2; // see if they are in the unit circle,
+            } while ($dR >= 1.0 || $dR == 0.0); // and if they are not, try again.
 
-        $CurTau = 0;
-        $flag = false;
+            $dFac = sqrt(-2.0 * log($dR) / $dR);
+// Now make the Box-Muller transformation to get two normal deviates.
+// Return one and save the other for next time.
+            $dNVal2 = $dUVal1 * $dFac;
+            (bool) $bFlag_Val2 = true; // Set flag.
+            return $dUVal2 * $dFac * $dD + $dM;
+        }
 
-        for ($k = 0; $k < $this->molecules->count; $k++) {
+        function B_function($x, $y, $z, $w0_0, $z0_0)
+        {
 
-            $this->molecules->X = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RXb;
-            $this->molecules->Y = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RYb;
-            $this->molecules->Z = (2 * (float)rand()/(float)getrandmax() - 1) * $this->RZb;
+            (float) $a = -2.0 / ($w0_0 * $w0_0);
+            (float) $b = -2.0 / ($z0_0 * $z0_0);
+            return exp($a * ($x * $x + $y * $y) + $b * $z * $z);
+        }
 
-            $previousEvent = $this->startTime;
-            $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
+        function PeriodicBoundTest($X, $L)
+        {
+            if (abs($X) > $L) {
+                $X = $X - 2 * $L * floor(($X + $L) / (2 * $L));
+            }
+            return $X;
+        }
 
-            if ($Pa > (float)rand()/(float)getrandmax()) {
-                $state = 'A';
+        (float) $w0 = $this->w0;    // in meters
+        (float) $z0 = $this->z0;    // in meters
+        (float) $F = $this->F;
+
+        //% Modelling area
+        (float) $R_Xb = 10 * $w0;
+        (float) $R_Yb = 10 * $w0;
+        (float) $R_Zb = 10 * $z0;
+
+        // Volumes
+        (float) $R_V = 8 * $R_Xb * $R_Yb * $R_Zb;
+
+        //% Standard volume of FCS
+        (float) $Veff = (1 + $F) * (1 + $F) * ( pow(pi(), 1.5) ) * $w0 * $w0 * $z0;
+
+        //% Molecules
+
+        (float) $Molecules_Diffusion = $this->molecules->diffusion;
+        (float) $Molecules_Brightness = $this->molecules->Brightness; // in Hz
+        (float) $Molecules_Neff = $this->molecules->Neff;
+
+        (float) $Molecules_SimulMeanCount = $R_V * $Molecules_Neff / $Veff;
+        (float) $Molecules_DiffusionTime = $w0 * $w0 / (4 * $Molecules_Diffusion);
+        (float) $Molecules_Count = round($Molecules_SimulMeanCount);
+        //Triplet states
+        (float) $Kab = $this->rateAb; //in Hz
+        (float) $Kba = $this->rateBa;
+
+        (float) $Ta = 1 / $Kab;
+        (float) $Tb = 1 / $Kba;
+
+        (float) $Pa = $Kba / ($Kab + $Kba);
+        (float) $Pb = $Kab / ($Kab + $Kba);
+
+        (float) $CurTau = 0.0;
+        (bool) $flag = false;
+
+        (int) $NumberOfEvents = 0;
+        (int) $FNumberOfEvents = 0;
+
+        (float) $Intensity = (1 + $F) * $Molecules_Brightness;
+
+        (float) $InvI = 1.0 / $Intensity;
+        (float) $PreviousEvent = 0;  //% For Brownian motion 
+        (float) $CurrentEvent = 0;   //% For Brownian motion
+
+        (float) $CurrIntensity = 0.0;
+        (float) $StartTime = $this->startTime;
+        (float) $EndTime = $this->endTime;
+
+        //(float) $BB = B_function(0.0, 0.0, 0.0, $w0, $z0);
+        for ($k = 0; $k < $Molecules_Count; $k++) {
+            var_dump($k);
+            (float) $Molecules_X = (2.0 * (float) rand() / (float) getrandmax() - 1.0) * $R_Xb;
+            (float) $Molecules_Y = (2.0 * (float) rand() / (float) getrandmax() - 1.0) * $R_Yb;
+            (float) $Molecules_Z = (2.0 * (float) rand() / (float) getrandmax() - 1.0) * $R_Zb;
+
+            $PreviousEvent = $StartTime;  //  % Start generation from this moment of time
+            $CurrentEvent = $PreviousEvent - $InvI * log((float) rand() / (float) getrandmax());  //% The first event of the flow
+            // State
+            if ($Pa > (float) rand() / (float) getrandmax()) {
+                $State = 'A';
             } else {
-                $state = 'B';
+                $State = 'B';
             }
 
-            $CurTau = 0;
-            ///
-            if ($currentEvent < $this->endTime) {
-                while (true) {
-                    $previousEvent = $currentEvent;
-                    $currentEvent = $previousEvent - $this->invIntensity * log((float)rand()/(float)getrandmax());
+            (float) $CurTau = 0.0;
+            if ($CurrentEvent < $EndTime) {
 
-                    if ($currentEvent > $this->endTime) {
+                while (true) {
+                    $PreviousEvent = $CurrentEvent;
+                    $CurrentEvent = $PreviousEvent - $InvI * log((float) rand() / (float) getrandmax());
+
+                    if ($CurrentEvent > $EndTime) {
                         break;
                     }
+                    $BB = B_function($Molecules_X, $Molecules_Y, $Molecules_Z, $w0, $z0);
+                    $CurrIntensity = (1 + $F) * $Molecules_Brightness * $BB;
+//  % Decimation of the flow
 
-                    $currentIntensity = $this->molecules->Brightness * $this->Bfunction(
-                                    $this->molecules->X, $this->molecules->Y, $this->molecules->Z, $this->w0, $this->z0
-                    );
-
-                    if ((float)rand()/(float)getrandmax() * $this->intensity < $currentIntensity) {
-                        $flag = true;
-                        while ($flag) {
-                            if ($state == 'A') {
-                                if ($previousEvent < $CurTau) {
-                                    $numberOfEvents = $numberOfEvents + 1;
-                                    fwrite($fp, $previousEvent . "\n");
-                                    $flag = false;
+                    if ((float) rand() / (float) getrandmax() * $Intensity < $CurrIntensity) {
+                        if ($Kab > 0 && $Kba > 0) {
+                            (bool) $flag = true;
+                            while ($flag) {
+                                if ($State == 'A') {
+                                    if ($PreviousEvent < $CurTau) {
+                                        $NumberOfEvents = $NumberOfEvents + 1;
+                                        var_dump($PreviousEvent);
+                                        fwrite($fp, $PreviousEvent . "\n");
+                                        $flag = false;
+                                    } else {
+                                        $CurTau += -$Tb * log((float) rand() / (float) getrandmax());
+                                        $State = 'B';
+                                    }
                                 } else {
-                                    $CurTau += -$tB * log((float)rand()/(float)getrandmax());
-                                    $state = 'B';
-                                }
-                            } else {
-                                if ($previousEvent > $CurTau) {
-                                    $CurTau += -$tA * log((float)rand()/(float)getrandmax());
-                                    $state = 'A';
-                                } else {
-                                    $flag = false;
+                                    if ($PreviousEvent > $CurTau) {
+                                        $CurTau += -$Ta * log((float) rand() / (float) getrandmax());
+                                        $State = 'A';
+                                    } else {
+                                        $flag = false;
+                                    }
                                 }
                             }
+                        } else {
+                            $NumberOfEvents = $NumberOfEvents + 1;
+                            $Events[$NumberOfEvents] = $PreviousEvent;
+                            var_dump($PreviousEvent);
+                            fwrite($fp, $PreviousEvent . "\n");
                         }
                     }
-                    $sigma = sqrt(2 * $this->molecules->diffusion * ($currentEvent - $previousEvent));
+// % Brownian Movement of a molecule
 
-                    $this->molecules->X = gauss_ms($this->molecules->X, $sigma);
-                    $this->molecules->Y = gauss_ms($this->molecules->Y, $sigma);
-                    $this->molecules->Y = gauss_ms($this->molecules->Z, $sigma);
+                    (float) $Sigma = sqrt(2 * $Molecules_Diffusion * ($CurrentEvent - $PreviousEvent));
 
-                    $this->molecules->X = $this->periodicBoundTest($this->molecules->X, $this->RXb);
-                    $this->molecules->Y = $this->periodicBoundTest($this->molecules->Y, $this->RYb);
-                    $this->molecules->Z = $this->periodicBoundTest($this->molecules->Z, $this->RZb);
+                    $Molecules_X = normrnd($Molecules_X, $Sigma);
+                    $Molecules_Y = normrnd($Molecules_Y, $Sigma);
+                    $Molecules_Z = normrnd($Molecules_Z, $Sigma);
+
+
+// %  Periodic boundary conditions    
+                    $Molecules_X = PeriodicBoundTest($Molecules_X, $R_Xb);
+                    $Molecules_Y = PeriodicBoundTest($Molecules_Y, $R_Yb);
+                    $Molecules_Z = PeriodicBoundTest($Molecules_Z, $R_Zb);
                 }
             }
         }
+
+        if ($F > 0) {
+            $Intensity = $Molecules_Neff * $Molecules_Brightness * $F / ((1 + $F) * sqrt(8));
+            $InvI = 1 / $Intensity;
+
+            $PreviousEvent = $StartTime;
+            $CurrentEvent = $PreviousEvent - $InvI * log((float) rand() / (float) getrandmax());
+
+            if ($CurrentEvent < $EndTime)
+                while (true) {
+
+                    $PreviousEvent = $CurrentEvent;
+                    $CurrentEvent = $PreviousEvent - $InvI * log((float) rand() / (float) getrandmax());
+
+                    if ($CurrentEvent > $EndTime) {
+                        break;
+                    }
+                    $NumberOfEvents = $NumberOfEvents + 1;
+                    $Events[$NumberOfEvents] = $PreviousEvent;
+                    $FNumberOfEvents = $FNumberOfEvents + 1;
+                    var_dump($PreviousEvent."  F factor");
+                    fwrite($fp, $PreviousEvent . "\n");
+                }
+        }
         fclose($fp);
-        exec("sort -g /home/vladislav/web/flow.local/data/" . $flowName . " -o /home/vladislav/web/flow.local/data/" . $flowName . "");
+        exec("sort -g /home/vladislav/web/flow.local/data/" . $flowName . ".txt -o /home/vladislav/web/flow.local/data/" . $flowName . ".txt");
         $dataUrl = $this->fileUploadDir . $flowName . ".txt";
         return $dataUrl;
+//        var_dump($Events);
     }
 
-    //Triplets + Diffusion + outfocus
-    function simu4()
-    {
-        return $dataUrl = $this->simu2($this->simu3());
-    }
-    //Diffusion+outfocus
-    function simu5()
-    {
-        $dataUrl = $this->simu();
-        $dataUrl2 = $this->simu2();
-        exec("sort -g -m " . $dataUrl . " ".$dataUrl2." " .$dataUrl. "");
-//        return $dataUrl = $this->simu2($this->simu());
-    }
 }
+?>

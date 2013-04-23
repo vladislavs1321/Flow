@@ -3,7 +3,7 @@ require_once __DIR__ . '/checkCookie.php';
 
 $user = checkCookie();
 if(is_object($user)){
-    if(true === $user->generateFlow($_GET['f1'],$_GET['f2'])){
+    if(true === $user->generateFlow()){
         $responce=array(
             "success" => true
         );
