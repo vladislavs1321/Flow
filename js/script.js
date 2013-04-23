@@ -80,10 +80,8 @@ $(document).ready(function() {
             $('body').on('click', 'a.view', function(event){
                 event.preventDefault();
                 var number = $(this).attr('data-number');
-                
-                console.log(this);
-                console.log(storage[number]);
-                console.log(number);
+                var d = JSON.parse(storage[number]);
+                console.log(d);
                 if($('.description-container').find('.description').length === 0){
                     $('.description-container').append('<div class="description" data-state="open" style="display: none;" >\n\
                                               <ul>\n\
@@ -92,13 +90,13 @@ $(document).ready(function() {
                                                   </fieldset>\n\
                                                   <fieldset class="generation-parametres">\n\
                                                       <legend><span>Parametrs of Generation</span></legend>\n\
-                                                      <li><span class="varaible">w0</span><span class="value w0" ></span>\n\
-                                                      <li><span class="varaible">z0</span><span class="value z0" ></span>\n\
-                                                      <li><span class="varaible">StartTime</span><span class="value startTime" ></span>\n\
-                                                      <li><span class="varaible">EndTime</span><span class="value endTime" ></span>\n\
-                                                      <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" ></span>\n\
-                                                      <li><span class="varaible">Brightness</span><span class="value Brightness" ></span>\n\
-                                                      <li><span class="varaible">Neff</span><span class="value Neff" ></span>\n\
+                                                      <li><span class="varaible">w0</span><span class="value w0" >'+d.w0+'</span>\n\
+                                                      <li><span class="varaible">z0</span><span class="value z0" >'+d.z0+'</span>\n\
+                                                      <li><span class="varaible">StartTime</span><span class="value startTime" >'+d.startTime+'</span>\n\
+                                                      <li><span class="varaible">EndTime</span><span class="value endTime" >'+d.endTime+'</span>\n\
+                                                      <li><span class="varaible">Molecules Diffusion</span><span class="value diffusion" >'+d.Intensity+'</span>\n\
+                                                      <li><span class="varaible">Brightness</span><span class="value Brightness" >'+d.Brightness+'</span>\n\
+                                                      <li><span class="varaible">Neff</span><span class="value Neff" >'+d.Neff+'</span>\n\
                                                   </fieldset>\n\
                                               </ul>\n\
                                               </div>\n\
