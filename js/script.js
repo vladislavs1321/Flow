@@ -52,35 +52,38 @@ $(document).ready(function() {
             $('.block-2').append('<div id="history" class="history" style="display: none;"><ul></ul></div>\n\
                 <div  class="description-container"></div>\n\
             ');
-            $('.history').show('fold');
             
             if($('#history').length){
-            var storage = window.localStorage;
-    //        storage.clear();
-            $.getJSON(
-                'http://flow.local/user/viewHistory.php',
-                function(responce){ 
-                    for(i in responce){
-                        var reg = /[0-9]+/i;
-                        var time = reg.exec(responce[i].data_url.valueOf());
-                        var date = new Date(time[0]*1000);
-                        $('.history').find('ul').append('<li class="row">\n\
-                            <span class="date-of-creating-flow">'+ date.toUTCString() +'</span>\n\
-                            <span class="description-link"><a class="view" href="#" title="view description">view description</a></span>\n\
-                            <span class="download"><a href="'+responce[i].data_url+'"><img src="../images/arrow_down.png"/></a></span></li>'
-                        );
-                        storage.setItem(i,responce[i].description_url.valueOf());
+                var storage = window.localStorage;
+        //        storage.clear();
+                $.getJSON(
+                    'http://flow.local/user/viewHistory.php',
+                    function(responce){ 
+                        for(i in responce){
+                            var reg = /[0-9]+/i;
+                            var time = reg.exec(responce[i].data_url.valueOf());
+                            var date = new Date(time[0]*1000);
+                            $('.history').find('ul').append('<li class="row">\n\
+                                <span class="date-of-creating-flow">'+ date.toUTCString() +'</span>\n\
+                                <span class="description-link"><a data-number="'+i+'"class="view" href="#" title="view description">view description</a></span>\n\
+                                <span class="download"><a  href="data/'+time+'.txt.zip"><img src="../images/arrow_down.png"/></a></span></li>'
+                            );
+                            
+                            storage.setItem(i,responce[i].description_url.valueOf());
+                        }
+                        $('.history').show('fold').mCustomScrollbar({scrollButtons: {enable: true}});
                     }
-                },
-                'json'
-            );}
+                );
+            }
             
-            $(window).load(function(){
-                $(".history").mCustomScrollbar({scrollButtons: {enable: true}});
-            });
-            
+            console.log(storage);
             $('body').on('click', 'a.view', function(event){
                 event.preventDefault();
+                var number = $(this).attr('data-number');
+                
+                console.log(this);
+                console.log(storage[number]);
+                console.log(number);
                 if($('.description-container').find('.description').length === 0){
                     $('.description-container').append('<div class="description" data-state="open" style="display: none;" >\n\
                                               <ul>\n\

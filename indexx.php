@@ -50,7 +50,7 @@ function PeriodicBoundTest($X, $L) {
 function s() {
     (float) $w0 = 3e-7;    // in meters
     (float) $z0 = 9e-7;    // in meters
-    (float) $F = 0.0;
+    (float) $F = 0.2;
 
     //% Modelling area
     (float) $R_Xb = 10 * $w0;
@@ -83,8 +83,8 @@ function s() {
     (float) $CurrentEvent = 0;   //% For Brownian motion
 
     (float) $CurrIntensity = 0.0;
-    (float) $StartTime = 0.0;
-    (float) $EndTime = 1;
+    (float) $StartTime = 2;
+    (float) $EndTime = 2.5;
 
     //(float) $BB = B_function(0.0, 0.0, 0.0, $w0, $z0);
     for ($k = 0; $k < $Molecules_Count; $k++) {
