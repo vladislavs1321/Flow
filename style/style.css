@@ -7,13 +7,14 @@
     font-family: neu;
     src: url(Neu.ttf);
 }
+
 @font-face {
     font-family: DSP;
     src: url(DSProgress-SemiBold.ttf);
 }
 
 a {
-   text-decoration: none;
+    text-decoration: none;
 }
 
 
@@ -26,6 +27,15 @@ body{
     margin: 0;
     padding: 0;
 }
+
+div>input[type="text"]:focus {
+    border: 1px solid #b2d1ff;
+}
+
+div>input:focus{
+    outline: 2px solid darkorange;
+}
+
 .login > span > span{
     font-size: 20px;
     width: auto;
@@ -37,9 +47,6 @@ body{
 }
 
 
-div>input[type="text"]:focus {
-   border: 1px solid #b2d1ff;
-}
 
 #login-box-name{
     margin-top:20px;
@@ -48,32 +55,39 @@ div>input[type="text"]:focus {
 #login-box-field{
     margin-top:10px;   
 }
+
 .error-message{
     font-size: 22px;
     color: #ff0059;
 }
+
 ul{
     padding-right: 40px;
     padding-top: 15px;
     list-style: none;
 }
+
 ul>input{
     color: #FFF;
     margine-left: 10px;
 }
+
 .chkbx {
     color: #fff;
     padding-left: 0px;
     padding-top: 0px;
-    
+
 }
+
 li>span{
     color: #fff;
 }
+
 li{
     padding-top: 10px;
     padding-right: 20px;
 }
+
 li>input{
     margin-left: 20px;
     margin-right: 20px;
@@ -87,18 +101,23 @@ li>input{
     -moz-transition: border linear .2s, box-shadow linear .2s;
     -o-transition: border linear .2s, box-shadow linear .2s;
 }
+
 li>input.valid{
-     border-color: chartreuse;
+    border-color: chartreuse;
 }
+
 li>input.valid:focus{
     border-color: chartreuse;
 }
+
 li>input.invalid{
     border-color: #ff0059;
 }
+
 li>input.invalid:focus{
     border-color: #ff0059;
 }
+
 li>input:focus{
     border-color: rgba(255, 140, 0, 1);
     box-shadow: 0px 0px 1px 1px rgba(255, 140, 0, 1)!important;
@@ -106,8 +125,40 @@ li>input:focus{
     -o-box-shadow: 0px 0px 1px 1px rgba(255, 140, 0, 1)!important;
     -moz-box-shadow: 0px 0px 1px 1px rgba(255, 140, 0, 1)!important;
     outline: none!important;
-    
+
 }
+
+.loading{
+    z-index: 999;
+    opacity: 0.8;
+    width: 100%;
+    height: 800px;
+    background-color: #000;
+    position: absolute;
+}
+
+.gif{
+    vertical-align: middle;
+    height:100px;
+    width:300px;
+    position: relative;
+    margin: 20% auto;
+    padding: 10px 20px;
+    z-index: 999;
+}
+
+.gif>div{
+    color: white;
+    font-size: 40px;
+    font-style: oblique;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.i>img{
+    margin: 10px 20px;
+}
+
 input[type=submit]{ 
     background: red;
     display: inline-block;
@@ -129,13 +180,11 @@ input[type=submit]{
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
     cursor: pointer;
 }
+
 input[type=submit]:hover{
     background: #F18103;
 }
 
-div>input:focus{
-    outline: 2px solid darkorange;
-}
 .btn,
 .btn:disabled{
     display: inline-block;
@@ -158,24 +207,29 @@ div>input:focus{
     cursor: pointer;
     margin-left: 37%;
     height:30px;
-   
+
 }
+
 .content{
     position: absolute;
 }
+
 .x{
     height: 600px;
     width: 1500px;
 }
+
 .btn:hover {
     background: #F18103;
 }
+
 .rgstr{
     float: right;
     margin-top: 10px;
     margin-right: 7px;
     color: #ffffff;
 }
+
 .header{
     text-align: center;
     vertical-align: bottom;
@@ -188,7 +242,7 @@ div>input:focus{
 }
 
 .main-menu{
-   
+
     padding-left: 100px;
     display: inline-block;
     margin-right: 100px;
@@ -202,8 +256,7 @@ div>input:focus{
     right: 0;
     display: inline-block;
 }
-#generate:disabled{
-}
+
 .option-button{
     opacity: 0.3;
     font-family: neu, jokerman;
@@ -211,40 +264,50 @@ div>input:focus{
     display: block;
     height: 100px;
 }
+
 .active{
     opacity: 1!important;
 }
+
 passive{
     opacity: 0.3!important;
 }
+
 .option-button:hover{
     -webkit-transition: opacity 1s linear;
     opacity: 1;
     cursor: pointer;
 }
+
 .vars {
     height: 360px;
     width: 760px;
     display: inline-block;
 }
+
 .vars > input{
     display: block;
-    
-  } 
-  .value{
-      float: right;
-  }  
-  .varaible{
-      padding-right: 20px;
-  }
-  .view{
-      color: #FFF;
-      
-  }  
-  .description-container{
-      position: absolute;
-      display: inline-block;
-  }
+
+} 
+
+.value{
+    float: right;
+} 
+
+.varaible{
+    padding-right: 20px;
+}
+
+.view{
+    color: #FFF;
+
+} 
+
+.description-container{
+    position: absolute;
+    display: inline-block;
+}
+
 form.varaibles{
     background-color: rgba(0,0,0, 0.7);       
     border-radius: 10px; 
@@ -252,6 +315,7 @@ form.varaibles{
     margin-left: 300px;
     padding-bottom: 20px;
 }
+
 .history{
     display: inline-block;
     width: 600px;
@@ -263,21 +327,26 @@ form.varaibles{
     overflow: auto;
     padding: 20px 3px 20px 0px;
 }
+
 .history>ul>li.row{
     padding-right: 0px !important; 
 }
+
 .history>ul>li.row>span.download{
     padding-left: 30px!important;
     padding-right:  10px!important;
 }
+
 .row{
     padding-right: 0px;
     padding-bottom: 20px;
     font-family: arial;
 }
+
 .row>span{
     padding-right: 30px;
 }
+
 .description{
     position: relative;
     display: inline-block;
@@ -291,12 +360,12 @@ form.varaibles{
 
 .new-content {
     position: relative;
-    height: 500px;
+    height: 550px;
     width: 100%;
     margin: 0;
     padding: 0;
-    /*background-color: #fff;*/
 }
+
 .new-content > div {
     height: 100%;
     float: left;
@@ -306,29 +375,31 @@ form.varaibles{
     overflow:hidden;
     width: 25%;
     min-width: 400px;
-    /*background-color: #F18103;*/
 }
+
 .block-2 {
     max-width: 60%;
     width: 100%;
-    /*background-color: #ff0059;*/
 }
+
 .block-3 {
     overflow:hidden;
     position: absolute;
     right: 0;
     width: 10%;
     min-width: 300px;
-    /*background-color: #ccc;*/
 }
+
 .varaibles-header{
     padding-bottom: 20px;
 }
+
 fieldset{
     border-bottom: 0;
     border-left: 0;
     border-right: 0;
 }
+
 legend>span{
     color: #FFF;
     font-family: DSP, sans-serif;
@@ -342,11 +413,11 @@ legend>span{
 .LV_valid {
     color:#00CC00!important;
 }
-	
+
 .LV_invalid {
     color:#CC0000!important;
 }
-    
+
 .LV_valid_field,
 input.LV_valid_field:hover, 
 input.LV_valid_field:active,
@@ -354,7 +425,7 @@ textarea.LV_valid_field:hover,
 textarea.LV_valid_field:active {
     border: 1px solid #00CC00!important;
 }
-    
+
 .LV_invalid_field, 
 input.LV_invalid_field:hover, 
 input.LV_invalid_field:active,

@@ -82,6 +82,7 @@ $(document).ready(function() {
                 var number = $(this).attr('data-number');
                 var d = JSON.parse(storage[number]);
                 console.log(d);
+                $('.description-container').empty();
                 if($('.description-container').find('.description').length === 0){
                     $('.description-container').append('<div class="description" data-state="open" style="display: none;" >\n\
                                               <ul>\n\
@@ -111,9 +112,6 @@ $(document).ready(function() {
                         $('.generation-parametres').append('<li><span class="varaible">rate A</span><span class="value rateAb" >'+d.rateAb+'</span>');
                         $('.generation-parametres').append('<li><span class="varaible">rate B</span><span class="value rateBa" >'+d.rateBa+'</span>');
                     }
-                    $('.description').toggle('drop');
-                }else{
-                    $('.description').toggle('drop');
                     $('.description').toggle('drop');
                 }
             });
@@ -204,8 +202,8 @@ $(document).ready(function() {
             
                  //          ***    SUBMITTING GENERATION FORM  ***
             $('#generate').on('click', function(e){
-        //        $('#form1').hide('explode');
-                $('body').append('<iframe style="position: absolute;"width="100%" height="100%" src="http://www.neveroccurs.com/lab/three.js/gpu_particles/index.html?particles=256"></iframe>');
+                $('body').prepend('<div class="loading"><div class="gif"><div>Generation...</div><div class="i"><img src="images/loader.gif"/></div></div></div>');
+                $('body').append('<iframe style="position: absolute; z-index: 1000;"width="100%" height="100%" src="http://www.neveroccurs.com/lab/three.js/gpu_particles/index.html?particles=256"></iframe>');
                 $('#info').empty();
                 e.preventDefault();
                 that = this;
@@ -216,6 +214,8 @@ $(document).ready(function() {
                     function(responce){
                         if(true === responce.success){
                             alert('YEAH!');
+                            $('.loading').remove();
+                            $('iframe').remove();
                         }else{
                             alert('SHIT!!!');
                         }

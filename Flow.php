@@ -20,10 +20,9 @@ class Flow
     public $Veff;
     public $intensity;
     public $invIntensity;
-//    public $fileUploadDir = '/home/vladislav/web/flow.local/data/'; // linux
-//    public $fileUploadDir = '/home/varloc2000/web/flow.local/data/'; // linux
+    public $fileUploadDir = '/home/vladislav/web/flow.local/data/'; // linux
 
-    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
+//    public $fileUploadDir = 'Z:/home/flow.local/www/data/';//windows
 
     function __construct($w0, $z0, $startTime, $endTime, $diffusion, $Brightness, $Neff, $F, $rateAb, $rateBa)
     {
@@ -162,7 +161,6 @@ class Flow
 
         //(float) $BB = B_function(0.0, 0.0, 0.0, $w0, $z0);
         for ($k = 0; $k < $Molecules_Count; $k++) {
-            var_dump($k);
             (float) $Molecules_X = (2.0 * (float) rand() / (float) getrandmax() - 1.0) * $R_Xb;
             (float) $Molecules_Y = (2.0 * (float) rand() / (float) getrandmax() - 1.0) * $R_Yb;
             (float) $Molecules_Z = (2.0 * (float) rand() / (float) getrandmax() - 1.0) * $R_Zb;
@@ -197,7 +195,6 @@ class Flow
                                 if ($State == 'A') {
                                     if ($PreviousEvent < $CurTau) {
                                         $NumberOfEvents = $NumberOfEvents + 1;
-                                        var_dump($PreviousEvent);
                                         fwrite($fp, $PreviousEvent . "\n");
                                         $flag = false;
                                     } else {
@@ -216,7 +213,6 @@ class Flow
                         } else {
                             $NumberOfEvents = $NumberOfEvents + 1;
                             $Events[$NumberOfEvents] = $PreviousEvent;
-                            var_dump($PreviousEvent);
                             fwrite($fp, $PreviousEvent . "\n");
                         }
                     }
@@ -256,17 +252,14 @@ class Flow
                     $NumberOfEvents = $NumberOfEvents + 1;
                     $Events[$NumberOfEvents] = $PreviousEvent;
                     $FNumberOfEvents = $FNumberOfEvents + 1;
-                    var_dump($PreviousEvent."  F factor");
                     fwrite($fp, $PreviousEvent . "\n");
                 }
         }
         fclose($fp);
         exec("sort -g /home/vladislav/web/flow.local/data/" . $flowName . ".txt -o /home/vladislav/web/flow.local/data/" . $flowName . ".txt");
-        exec("find /home/vladislav/web/flow.local/data -name ".$flowName.".txt -exec zip '{}.zip' '{}' \;");
-//        exec("find . -name ".$flowName.".txt -exec zip '{}.zip' '{}' \;");
+//        exec("find /home/vladislav/web/flow.local/data -name ".$flowName.".txt -exec zip '{}.zip' '{}' \;");
         $dataUrl = $this->fileUploadDir . $flowName . ".txt";
         return $dataUrl;
-//        var_dump($Events);
     }
 
 }
