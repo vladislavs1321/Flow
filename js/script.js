@@ -83,7 +83,7 @@ $(document).ready(function() {
                             );
                         }
                         
-//            console.log(storage);
+            console.log(storage);
             $('body').on('click', 'a.view', function(event){
                             event.preventDefault();
                             var number = $(this).attr('data-number');
@@ -207,7 +207,7 @@ $(document).ready(function() {
                             validators.push(liveValidation("z0").add(Validate.Numericality, {minimum: 0.0000001, maximum: 10}));
                         }
                         if ($('#startTime').length) {
-                            validators.push(liveValidation("startTime").add(Validate.Numericality, {minimum: 0, maximum: 3600, onlyInteger: true}));
+                            validators.push(liveValidation("startTime").add(Validate.Numericality, {minimum: 0, maximum: 3600}));
                         }
                         if ($('#endTime').length) {
                             validators.push(liveValidation("endTime").add(Validate.Numericality, {minimum: 0, maximum: 3600}));

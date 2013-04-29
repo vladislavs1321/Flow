@@ -1,4 +1,5 @@
 <?php
+$start_time = microtime (true);
 ini_set('display_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 //require_once './gauss.php';
@@ -50,7 +51,7 @@ function PeriodicBoundTest($X, $L) {
 function s() {
     (float) $w0 = 3e-7;    // in meters
     (float) $z0 = 9e-7;    // in meters
-    (float) $F = 0.2;
+    (float) $F = 0.1;
 
     //% Modelling area
     (float) $R_Xb = 10 * $w0;
@@ -83,8 +84,22 @@ function s() {
     (float) $CurrentEvent = 0;   //% For Brownian motion
 
     (float) $CurrIntensity = 0.0;
-    (float) $StartTime = 2;
-    (float) $EndTime = 2.5;
+    (float) $StartTime = 0;
+    (float) $EndTime = 1;
+    
+    (float) $Kab = 1500000; //in Hz
+    (float) $Kba = 490000;
+//    (float) $Kab = 1500000; //in Hz
+//    (float) $Kba = 490000;
+
+    (float) $Ta = 1 / $Kab;
+    (float) $Tb = 1 / $Kba;
+
+    (float) $Pa = $Kba / ($Kab + $Kba);
+    (float) $Pb = $Kab / ($Kab + $Kba);
+
+    (float) $CurTau = 0.0;
+    (bool) $flag = false;
 
     //(float) $BB = B_function(0.0, 0.0, 0.0, $w0, $z0);
     for ($k = 0; $k < $Molecules_Count; $k++) {
@@ -95,7 +110,15 @@ function s() {
 
         $PreviousEvent = $StartTime;  //  % Start generation from this moment of time
         $CurrentEvent = $PreviousEvent - $InvI * log((float) rand() / (float) getrandmax());  //% The first event of the flow
+        
+        if ($Pa > (float) rand() / (float) getrandmax()) {
+                $State = 'A';
+            } else {
+                $State = 'B';
+            }
 
+        (float) $CurTau = 0.0;
+        
         if ($CurrentEvent < $EndTime) {
 
             while (true) {
@@ -110,9 +133,32 @@ function s() {
 //  % Decimation of the flow
 
                 if ((float) rand() / (float) getrandmax() * $Intensity < $CurrIntensity) {
-                    $NumberOfEvents = $NumberOfEvents + 1;
-                    $Events[$NumberOfEvents] = $PreviousEvent;
-                    var_dump($PreviousEvent);
+                    if ($Kab > 0 && $Kba > 0) {
+                            (bool) $flag = true;
+                            while ($flag) {
+                                if ($State == 'A') {
+                                    if ($PreviousEvent < $CurTau) {
+                                        $NumberOfEvents = $NumberOfEvents + 1;
+                                        var_dump($PreviousEvent);
+                                        $flag = false;
+                                    } else {
+                                        $CurTau += -$Tb * log((float) rand() / (float) getrandmax());
+                                        $State = 'B';
+                                    }
+                                } else {
+                                    if ($PreviousEvent > $CurTau) {
+                                        $CurTau += -$Ta * log((float) rand() / (float) getrandmax());
+                                        $State = 'A';
+                                    } else {
+                                        $flag = false;
+                                    }
+                                }
+                            }
+                        } else {
+                            $NumberOfEvents = $NumberOfEvents + 1;
+                            $Events[$NumberOfEvents] = $PreviousEvent;
+                            var_dump($PreviousEvent);
+                        }
                 }
 // % Brownian Movement of a molecule
 
@@ -130,7 +176,31 @@ function s() {
             }
         }
     }
-    var_dump($Events);
+    
+    if ($F > 0) {
+            $Intensity = $Molecules_Neff * $Molecules_Brightness * $F / ((1 + $F) * sqrt(8));
+            $InvI = 1 / $Intensity;
+
+            $PreviousEvent = $StartTime;
+            $CurrentEvent = $PreviousEvent - $InvI * log((float) rand() / (float) getrandmax());
+
+            if ($CurrentEvent < $EndTime)
+                while (true) {
+
+                    $PreviousEvent = $CurrentEvent;
+                    $CurrentEvent = $PreviousEvent - $InvI * log((float) rand() / (float) getrandmax());
+
+                    if ($CurrentEvent > $EndTime) {
+                        break;
+                    }
+                    $NumberOfEvents = $NumberOfEvents + 1;
+                    $Events[$NumberOfEvents] = $PreviousEvent;
+                    $FNumberOfEvents = $FNumberOfEvents + 1;
+                    var_dump($PreviousEvent);
+                }
+    }
+//    var_dump($Events);
 }
 s();
+echo ("'Время работы (сек): '" . round (microtime (true) - $start_time, 4)."'\n'");
 ?>

@@ -4,10 +4,6 @@ error_reporting(E_ALL & ~E_NOTICE);
 require_once './user/checkCookie.php';
 require_once './Flow.php';
 require_once './user/User.php';
-//$f = new Flow(3e-7, 9e-7, 0, 1, 2.8e-10, 100000, 0.01, 0.4, 1100000, 490000);
-//$f = new Flow(3e-7, 9e-7, 0, 1, 2.8e-10, 100000, 0.01, 0.4, 0, 0);
-//var_dump($f);
-//$f->s();
 $user = checkCookie();
 if (is_object($user)){
     $username = $user->getUsername();

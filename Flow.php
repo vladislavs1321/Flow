@@ -212,7 +212,6 @@ class Flow
                             }
                         } else {
                             $NumberOfEvents = $NumberOfEvents + 1;
-                            $Events[$NumberOfEvents] = $PreviousEvent;
                             fwrite($fp, $PreviousEvent . "\n");
                         }
                     }
@@ -250,14 +249,13 @@ class Flow
                         break;
                     }
                     $NumberOfEvents = $NumberOfEvents + 1;
-                    $Events[$NumberOfEvents] = $PreviousEvent;
                     $FNumberOfEvents = $FNumberOfEvents + 1;
                     fwrite($fp, $PreviousEvent . "\n");
                 }
         }
         fclose($fp);
         exec("sort -g /home/vladislav/web/flow.local/data/" . $flowName . ".txt -o /home/vladislav/web/flow.local/data/" . $flowName . ".txt");
-//        exec("find /home/vladislav/web/flow.local/data -name ".$flowName.".txt -exec zip '{}.zip' '{}' \;");
+        exec("find /home/vladislav/web/flow.local/data -name ".$flowName.".txt -exec zip '{}.zip' '{}' \;");
         $dataUrl = $this->fileUploadDir . $flowName . ".txt";
         return $dataUrl;
     }

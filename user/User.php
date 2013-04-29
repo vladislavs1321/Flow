@@ -37,9 +37,9 @@ class User extends AbstractUser
         );
         if (false === $dataUrl = $flow->s()) {
                 return false;
-            }
+        }
         if (false === $this->insertFlowData($dataUrl)) {
-            return false;
+            return false; 
         }
         return true;
     }
