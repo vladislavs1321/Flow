@@ -115,12 +115,3 @@ if (is_object($user)){
         <script type="text/javascript" src="js/script.js"></script>
     </body>
 </html>
-
-
-<?php
-
-//$f->s();
-//    for($i;$i<10;$i++){
-//$f->simu();
-//}
-?>

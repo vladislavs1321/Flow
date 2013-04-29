@@ -7,9 +7,17 @@ if(is_object($user)){
         
         echo(json_encode($responce));
     }else{
-        var_dump("fail");
+        $responce = array(
+            "success" => false,
+        );
+        echo (json_encode($responce));
+//        var_dump("fail");
     }
 }else{
-    var_dump("need AUTH");
+    $responce = array(
+            "success" => false,
+    );
+    echo (json_encode($responce));
+//    var_dump("need AUTH");
 }
 ?>
